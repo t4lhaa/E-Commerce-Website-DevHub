@@ -1,0 +1,1827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - Brand E-commerce</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
+
+    <aside class="ui-side-nav-mobile" id="ui-side-nav">
+      <div class="ui-nav-user-header">
+        <button id="ui-close-btn" class="ui-close-btn" aria-label="Close Menu">
+          ✕
+        </button>
+        <div class="ui-avatar-circle">
+          <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
+        </div>
+        <div class="ui-auth-text">Sign in | Register</div>
+      </div>
+      <ul class="ui-nav-links">
+        <li>
+          <a href="home.html"><span class="ui-nav-icon">🏠</span> Home</a>
+        </li>
+        <li>
+          <a href="products.html?category=All category"
+            ><span class="ui-nav-icon">📋</span> Categories</a
+          >
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">📦</span> My orders</a>
+        </li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links">
+        <li>
+          <a href="#"><span class="ui-nav-icon">🌐</span> English | USD</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">🎧</span> Contact us</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">🏢</span> About</a>
+        </li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links ui-no-icon">
+        <li><a href="#">User agreement</a></li>
+        <li><a href="#">Partnership</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </aside>
+
+    <header class="ui-page-header ui-container">
+      <div class="ui-header-top-row">
+        <div class="ui-logo-area">
+          <button
+            id="ui-menu-btn"
+            class="ui-menu-btn ui-mobile-only"
+            aria-label="Open Menu"
+            style="
+              background: transparent;
+              border: none;
+              padding: 0;
+              display: flex;
+              color: #1c1c1c;
+              cursor: pointer;
+            "
+          >
+            <i class="ph ph-list" style="font-size: 26px"></i>
+          </button>
+
+          <a href="home.html" class="ui-logo-wrapper">
+            <img
+              src="Assets/Brand/logo-symbol.svg"
+              alt="Brand Logo"
+              class="ui-brand-logo-img"
+            />
+            <div class="ui-logo-text">Brand</div>
+          </a>
+        </div>
+
+        <form
+          class="ui-search-form ui-desktop-only-flex"
+          action="products.html"
+          method="GET"
+        >
+          <input
+            type="search"
+            name="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <select class="ui-search-category-dropdown" name="category">
+            <option value="All category">All category</option>
+            <option value="Automobiles">Automobiles</option>
+            <option value="Clothes and wear">Clothes and wear</option>
+            <option value="Home and outdoor">Home and outdoor</option>
+            <option value="Computer and tech">Computer and tech</option>
+            <option value="Tools, equipments">Tools, equipments</option>
+            <option value="Sports and outdoor">Sports and outdoor</option>
+            <option value="Animal and pets">Animal and pets</option>
+            <option value="Machinery tools">Machinery tools</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Smartphones">Smartphones</option>
+            <option value="Mobile accessory">Mobile accessory</option>
+          </select>
+          <button type="submit" class="ui-button-search">Search</button>
+        </form>
+
+        <div class="ui-header-actions ui-desktop-only-flex">
+          <div class="ui-action-item">
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="ui-icon"
+              id="c1"
+            >
+              <path
+                d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+              /></svg
+            ><span class="ui-label">Profile</span>
+          </div>
+          <div class="ui-action-item">
+            <span class="ui-icon"
+              ><i
+                class="ph-fill ph-chat-teardrop-dots"
+                style="font-size: 24px"
+              ></i></span
+            ><span class="ui-label">Message</span>
+          </div>
+          <div class="ui-action-item">
+            <span class="ui-icon"
+              ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
+            ><span class="ui-label">Orders</span>
+          </div>
+          <a
+            href="cart.html"
+            class="ui-action-item"
+            style="text-decoration: none; color: inherit"
+            ><span class="ui-icon"
+              ><i
+                class="ph-fill ph-shopping-cart"
+                style="font-size: 24px"
+              ></i></span
+            ><span class="ui-label">My cart</span></a
+          >
+        </div>
+
+        <div class="ui-header-actions ui-mobile-only-flex">
+          <a href="cart.html" class="ui-icon ui-cart" style="color: inherit">
+            <i class="ph ph-shopping-cart" style="font-size: 24px"></i>
+          </a>
+          <a href="#" class="ui-icon ui-profile" style="color: inherit">
+            <i class="ph ph-user" style="font-size: 24px"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="ui-mobile-search-row ui-mobile-only">
+        <form class="ui-search-form-mobile" action="products.html" method="GET">
+          <span class="ui-search-icon-inline"
+            ><i class="ph-fill ph-magnifying-glass" style="font-size: 18px"></i
+          ></span>
+          <input
+            type="search"
+            name="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+      </div>
+
+      <div class="ui-mobile-category-pills ui-mobile-only-flex">
+        <button class="ui-pill">All category</button>
+        <button class="ui-pill">Clothes and wear</button>
+        <button class="ui-pill">Home and outdoor</button>
+        <button class="ui-pill">Mobile accessory</button>
+        <button class="ui-pill">Electronics</button>
+        <button class="ui-pill">Smartphones</button>
+        <button class="ui-pill">Computer and tech</button>
+      </div>
+    </header>
+
+    <nav class="ui-category-nav ui-desktop-only-flex">
+      <div class="ui-container ui-nav-container">
+        <ul class="ui-nav-main-links">
+          <li>
+            <a href="products.html?category=All category"
+              ><i class="ph ph-list" style="font-size: 18px"></i> All
+              category</a
+            >
+          </li>
+          <li><a href="#">Hot offers</a></li>
+          <li><a href="#">Gift boxes</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Menu item</a></li>
+          <li><a href="#">Help ▾</a></li>
+        </ul>
+        <div class="ui-nav-utils">
+          <div class="ui-dropdown-wrapper">
+            <span class="ui-language">English, USD ▾</span>
+            <ul class="ui-dropdown-menu">
+              <li><a href="#">English, USD</a></li>
+              <li><a href="#">German, EUR</a></li>
+              <li><a href="#">French, EUR</a></li>
+            </ul>
+          </div>
+          <div class="ui-dropdown-wrapper">
+            <span class="ui-shipping" style="display: flex; align-items: center"
+              >Ship to
+              <img
+                src="https://flagcdn.com/w20/de.png"
+                alt="DE"
+                class="ui-dropdown-flag"
+                style="margin-left: 6px; margin-right: 2px"
+              />
+              ▾</span
+            >
+            <ul class="ui-dropdown-menu">
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/de.png"
+                    alt="DE"
+                    class="ui-dropdown-flag"
+                  />
+                  Germany</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/us.png"
+                    alt="US"
+                    class="ui-dropdown-flag"
+                  />
+                  United States</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/gb.png"
+                    alt="GB"
+                    class="ui-dropdown-flag"
+                  />
+                  Great Britain</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/au.png"
+                    alt="AU"
+                    class="ui-dropdown-flag"
+                  />
+                  Australia</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="ui-container">
+      <div class="ui-breadcrumb ui-desktop-only-flex">
+        <a href="home.html">Home</a> <span class="ui-separator">&gt;</span>
+        <a href="products.html?category=All category">Categories</a>
+        <span class="ui-separator">&gt;</span>
+        <span class="ui-current" id="ui-breadcrumb-current">All Products</span>
+      </div>
+
+      <div class="ui-product-page-layout">
+        <aside class="ui-sidebar-filters" id="ui-sidebar-filters">
+          <div class="ui-filter-mobile-header ui-mobile-only-flex">
+            <h3>Filters</h3>
+            <button id="ui-close-filter-btn" class="ui-close-btn">✕</button>
+          </div>
+
+          <div class="ui-filter-group">
+            <div class="ui-filter-header">
+              Category <span class="ui-arrow">⌃</span>
+            </div>
+            <ul class="ui-filter-list">
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="All category"
+                  >All Categories</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="Clothes and wear"
+                  >Clothes and wear</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="Home and outdoor"
+                  >Home and outdoor</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="Mobile accessory"
+                  >Mobile accessory</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="Electronics"
+                  >Electronics</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="Smartphones"
+                  >Smartphones</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="ui-filter-category"
+                  data-category="Computer and tech"
+                  >Computer and tech</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="ui-filter-group">
+            <div class="ui-filter-header">
+              Brands <span class="ui-arrow">⌃</span>
+            </div>
+            <div class="ui-filter-options">
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-brand"
+                  value="Samsung"
+                />
+                Samsung</label
+              >
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-brand" value="Apple" />
+                Apple</label
+              >
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-brand"
+                  value="Huawei"
+                />
+                Huawei</label
+              >
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-brand"
+                  value="Lenovo"
+                />
+                Lenovo</label
+              >
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-brand" value="Pocco" />
+                Pocco</label
+              >
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-brand" value="Sony" />
+                Sony</label
+              >
+            </div>
+          </div>
+
+          <div class="ui-filter-group">
+            <div class="ui-filter-header">
+              Features <span class="ui-arrow">⌃</span>
+            </div>
+            <div class="ui-filter-options">
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-feature"
+                  value="Metallic"
+                />
+                Metallic</label
+              >
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-feature"
+                  value="Plastic cover"
+                />
+                Plastic cover</label
+              >
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-feature"
+                  value="8GB Ram"
+                />
+                8GB Ram</label
+              >
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-feature"
+                  value="Super power"
+                />
+                Super power</label
+              >
+              <label class="ui-checkbox-label"
+                ><input
+                  type="checkbox"
+                  class="ui-filter-feature"
+                  value="Large Memory"
+                />
+                Large Memory</label
+              >
+            </div>
+          </div>
+
+          <div class="ui-filter-group">
+            <div class="ui-filter-header">
+              Price range <span class="ui-arrow">⌃</span>
+            </div>
+            <div class="ui-price-slider-container">
+              <div class="ui-slider-track" id="ui-slider-track"></div>
+              <input
+                type="range"
+                id="ui-slider-min"
+                min="0"
+                max="3000"
+                value="0"
+              />
+              <input
+                type="range"
+                id="ui-slider-max"
+                min="0"
+                max="3000"
+                value="3000"
+              />
+            </div>
+            <div class="ui-price-inputs">
+              <div class="ui-input-box">
+                <label>Min</label
+                ><input
+                  type="number"
+                  id="ui-min-price"
+                  placeholder="0"
+                  value="0"
+                />
+              </div>
+              <div class="ui-input-box">
+                <label>Max</label
+                ><input
+                  type="number"
+                  id="ui-max-price"
+                  placeholder="3000"
+                  value="3000"
+                />
+              </div>
+            </div>
+            <button
+              class="ui-button-secondary ui-apply-btn"
+              id="ui-apply-price-btn"
+            >
+              Apply
+            </button>
+          </div>
+
+          <div class="ui-filter-group">
+            <div class="ui-filter-header">
+              Condition <span class="ui-arrow">⌃</span>
+            </div>
+            <div class="ui-filter-options">
+              <label class="ui-radio-label"
+                ><input type="radio" name="condition" value="Any" checked />
+                Any</label
+              >
+              <label class="ui-radio-label"
+                ><input type="radio" name="condition" value="Refurbished" />
+                Refurbished</label
+              >
+              <label class="ui-radio-label"
+                ><input type="radio" name="condition" value="Brand new" /> Brand
+                new</label
+              >
+            </div>
+          </div>
+
+          <div class="ui-filter-group ui-border-none">
+            <div class="ui-filter-header">
+              Ratings <span class="ui-arrow">⌃</span>
+            </div>
+            <div class="ui-filter-options">
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-rating" value="5" />
+                <span class="ui-stars">★★★★★</span></label
+              >
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-rating" value="4" />
+                <span class="ui-stars"
+                  >★★★★<span class="ui-half-star">★</span></span
+                >
+              </label>
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-rating" value="3" />
+                <span class="ui-stars"
+                  >★★★<span class="ui-half-star">★★</span></span
+                >
+              </label>
+              <label class="ui-checkbox-label"
+                ><input type="checkbox" class="ui-filter-rating" value="2" />
+                <span class="ui-stars"
+                  >★★<span class="ui-half-star">★★★</span></span
+                >
+              </label>
+            </div>
+          </div>
+        </aside>
+
+        <div class="ui-product-list-container">
+          <div class="ui-list-toolbar">
+            <div class="ui-list-count">
+              <span id="ui-list-count-num">0</span> items in
+              <strong id="ui-active-category-text">All Products</strong>
+            </div>
+            <div class="ui-list-controls">
+              <label
+                class="ui-checkbox-label ui-desktop-only-flex"
+                style="margin-right: 15px"
+                ><input type="checkbox" id="ui-verified-only" /> Verified
+                only</label
+              >
+
+              <button
+                id="ui-mobile-filter-btn"
+                class="ui-mobile-filter-btn ui-mobile-only-flex"
+              >
+                Filter <i class="ph ph-funnel" style="font-size: 16px"></i>
+              </button>
+
+              <select class="ui-sort-dropdown" id="ui-sort-dropdown">
+                <option value="Featured">Sort: Featured</option>
+                <option value="Price: Low to High">Price: Low to High</option>
+                <option value="Price: High to Low">Price: High to Low</option>
+              </select>
+              <div class="ui-view-toggles">
+                <button class="ui-view-btn ui-active" id="ui-view-grid">
+                  <i
+                    class="ph-fill ph-squares-four"
+                    style="font-size: 18px"
+                  ></i>
+                </button>
+                <button class="ui-view-btn" id="ui-view-list">
+                  <i class="ph-fill ph-list-dashes" style="font-size: 18px"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="ui-active-filters-container"
+            class="ui-active-filters-row"
+          ></div>
+
+          <div
+            class="ui-products-wrapper ui-grid-view"
+            id="ui-product-list-container"
+          ></div>
+
+          <div class="ui-pagination-row">
+            <div class="ui-show-rows">
+              <select id="ui-items-per-page">
+                <option value="9">Show 9</option>
+                <option value="18">Show 18</option>
+              </select>
+            </div>
+            <div class="ui-page-numbers" id="ui-pagination-numbers"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="ui-newsletter-wrapper">
+      <section class="ui-container ui-newsletter-block">
+        <h3>Subscribe on our newsletter</h3>
+        <p>
+          Get daily news on upcoming offers from many suppliers all over the
+          world
+        </p>
+        <form>
+          <div class="ui-input-with-icon">
+            <i
+              class="ph ph-envelope-simple"
+              style="font-size: 20px; color: #8b96a5"
+            ></i>
+            <input
+              type="email"
+              placeholder="Email"
+              aria-label="Email Address"
+            />
+          </div>
+          <button type="submit" class="ui-button-primary">Subscribe</button>
+        </form>
+      </section>
+    </div>
+
+    <footer class="ui-site-footer">
+      <div class="ui-container ui-footer-columns">
+        <div class="ui-col-main ui-logo">
+          <div class="ui-logo-wrapper" style="margin-bottom: 15px">
+            <img
+              src="Assets/Brand/logo-symbol.svg"
+              alt="Brand Logo"
+              class="ui-brand-logo-img"
+            />
+
+            <div class="ui-logo-text">Brand</div>
+          </div>
+
+          <p>
+            Best information about the company<br />goes here but now lorem
+            ipsum is
+          </p>
+          <div class="ui-social-links">
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-facebook-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-twitter-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-linkedin-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-instagram-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-youtube-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+          </div>
+        </div>
+        <div class="ui-col">
+          <strong>About</strong>
+          <ul>
+            <li>About Us</li>
+            <li>Find store</li>
+            <li>Categories</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>Partnership</strong>
+          <ul>
+            <li>About Us</li>
+            <li>Find store</li>
+            <li>Categories</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>Information</strong>
+          <ul>
+            <li>Help Center</li>
+            <li>Money Refund</li>
+            <li>Shipping</li>
+            <li>Contact us</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>For users</strong>
+          <ul>
+            <li>Login</li>
+            <li>Register</li>
+            <li>Settings</li>
+            <li>My Orders</li>
+          </ul>
+        </div>
+        <div class="ui-col-apps">
+          <strong>Get app</strong>
+          <img
+            src="Assets/playstore.png"
+            alt="Download on the App Store"
+            class="ui-app-badge"
+          />
+          <img
+            src="Assets/googleplay.png"
+            alt="Get it on Google Play"
+            class="ui-app-badge"
+          />
+        </div>
+      </div>
+      <div class="ui-footer-bottom">
+        <div class="ui-container ui-footer-bottom-inner">
+          <span>© 2023 Ecommerce.</span>
+
+          <div class="ui-dropdown-wrapper ui-footer-dropdown">
+            <span
+              class="ui-language"
+              style="display: flex; align-items: center; color: #1c1c1c"
+            >
+              <img
+                src="https://flagcdn.com/w20/us.png"
+                alt="US"
+                class="ui-dropdown-flag"
+                style="margin-right: 6px"
+              />
+              English ⌃
+            </span>
+            <ul class="ui-dropdown-menu ui-dropup-menu">
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/us.png"
+                    alt="US"
+                    class="ui-dropdown-flag"
+                  />
+                  English</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/es.png"
+                    alt="ES"
+                    class="ui-dropdown-flag"
+                  />
+                  Spanish</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/de.png"
+                    alt="DE"
+                    class="ui-dropdown-flag"
+                  />
+                  German</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Mobile Side Nav Logic ---
+        const menuBtn = document.getElementById("ui-menu-btn");
+        const closeBtn = document.getElementById("ui-close-btn");
+        const sideNav = document.getElementById("ui-side-nav");
+
+        // Create the dark overlay for the mobile menu
+        const overlay = document.createElement("div");
+        overlay.className = "ui-nav-overlay";
+        document.body.appendChild(overlay);
+
+        function openNav() {
+          sideNav.classList.add("ui-active");
+          overlay.classList.add("ui-active");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeNav() {
+          sideNav.classList.remove("ui-active");
+          overlay.classList.remove("ui-active");
+          document.body.style.overflow = "";
+        }
+
+        if (menuBtn) menuBtn.addEventListener("click", openNav);
+        if (closeBtn) closeBtn.addEventListener("click", closeNav);
+        overlay.addEventListener("click", closeNav);
+
+        // --- Desktop Sidebar Selection Logic ---
+        const sidebarItems = document.querySelectorAll(
+          ".ui-side-categories ul li",
+        );
+
+        sidebarItems.forEach((item) => {
+          item.addEventListener("click", function (e) {
+            if (this.querySelector("a").getAttribute("href") === "#") {
+              e.preventDefault();
+            }
+            sidebarItems.forEach((li) => li.classList.remove("ui-active"));
+            this.classList.add("ui-active");
+          });
+        });
+
+        // --- NEW: Mobile Pills Routing ---
+        const mobilePills = document.querySelectorAll(
+          ".ui-mobile-category-pills .ui-pill",
+        );
+        mobilePills.forEach((pill) => {
+          pill.addEventListener("click", function (e) {
+            e.preventDefault();
+            const categoryName = this.innerText.trim();
+            window.location.href = `products.html?category=${encodeURIComponent(categoryName)}`;
+          });
+        });
+        document.querySelectorAll(".ui-filter-header").forEach((header) => {
+          header.addEventListener("click", function () {
+            const group = this.closest(".ui-filter-group");
+            const arrow = this.querySelector(".ui-arrow");
+            const contents = group.querySelectorAll(
+              ".ui-filter-list, .ui-filter-options, .ui-price-slider-container, .ui-price-inputs, .ui-apply-btn",
+            );
+
+            const isOpen =
+              contents.length > 0 && contents[0].style.display !== "none";
+            contents.forEach((el) => {
+              el.style.display = isOpen ? "none" : "";
+            });
+            if (arrow) arrow.style.transform = isOpen ? "rotate(180deg)" : "";
+          });
+        });
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const productContainer = document.getElementById(
+          "ui-product-list-container",
+        );
+        if (!productContainer) return;
+
+        const productsDatabase = [
+          {
+            id: 1,
+            title: "Canon Camera EOS 2000, Black 10x zoom",
+            category: "Electronics",
+            brand: "Canon",
+            features: ["Plastic cover", "8GB Ram"],
+            condition: "Refurbished",
+            price: 74.0,
+            oldPrice: 110.0,
+            rating: 5,
+            verified: true,
+            orders: 230,
+            image: "Assets/Image/tech/cameras.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+
+          {
+            id: 4,
+            title: "iPhone 13 Pro Max - 256GB Blue",
+            category: "Smartphones",
+            brand: "Apple",
+            features: ["Metallic", "Large Memory"],
+            condition: "Brand new",
+            price: 949.0,
+            oldPrice: 1199.0,
+            rating: 5,
+            verified: false,
+            orders: 870,
+            image: "Assets/Image/tech/iphone.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 5,
+            title: "Lenovo ThinkPad X1 Carbon",
+            category: "Computer and tech",
+            brand: "Lenovo",
+            features: ["Plastic cover", "8GB Ram"],
+            condition: "Brand new",
+            price: 299.0,
+            oldPrice: 420.0,
+            rating: 3,
+            verified: false,
+            orders: 510,
+            image: "Assets/Image/tech/laptop.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 6,
+            title: "Sony Noise Cancelling Headphones",
+            category: "Mobile accessory",
+            brand: "Sony",
+            features: ["Plastic cover"],
+            condition: "Refurbished",
+            price: 14.5,
+            oldPrice: 28.0,
+            rating: 4,
+            verified: true,
+            orders: 1750,
+            image: "Assets/Image/tech/headphone.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 7,
+            title: "Smartwatch Silver Color Modern",
+            category: "Mobile accessory",
+            brand: "Other",
+            features: ["Metallic"],
+            condition: "Brand new",
+            price: 22.0,
+            oldPrice: 35.0,
+            rating: 4,
+            verified: false,
+            orders: 180,
+            image: "Assets/Image/tech/smartwatches.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 8,
+            title: "Gaming Headset with Mic",
+            category: "Mobile accessory",
+            brand: "Other",
+            features: ["Plastic cover"],
+            condition: "Brand new",
+            price: 12.49,
+            oldPrice: 19.0,
+            rating: 5,
+            verified: true,
+            orders: 640,
+            image: "Assets/Image/tech/gaming.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 9,
+            title: "10-inch Android Tablet",
+            category: "Electronics",
+            brand: "Samsung",
+            features: ["Large Memory"],
+            condition: "Refurbished",
+            price: 75.0,
+            oldPrice: 105.0,
+            rating: 3,
+            verified: true,
+            orders: 95,
+            image: "Assets/Image/tech/tablet.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 10,
+            title: "T-shirts with multiple colors, for men",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 8.99,
+            oldPrice: 13.0,
+            rating: 5,
+            verified: true,
+            orders: 720,
+            image: "Assets/Image/cloth/tshirt.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 11,
+            title: "Brown winter coat medium size",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 15.99,
+            oldPrice: 24.0,
+            rating: 4,
+            verified: true,
+            orders: 88,
+            image: "Assets/Image/cloth/jacket.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 12,
+            title: "Jeans shorts for men blue color",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 7.5,
+            oldPrice: 12.0,
+            rating: 4,
+            verified: false,
+            orders: 140,
+            image: "Assets/Image/cloth/shorts.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 13,
+            title: "Jeans bag for travel for men",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 28.0,
+            oldPrice: 42.0,
+            rating: 3,
+            verified: true,
+            orders: 310,
+            image: "Assets/Image/cloth/bag.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 14,
+            title: "Classic Leather Wallet",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 84.0,
+            oldPrice: 115.0,
+            rating: 4,
+            verified: true,
+            orders: 390,
+            image: "Assets/Image/cloth/wallet.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 15,
+            title: "Soft chairs Beige",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 14.0,
+            oldPrice: 26.0,
+            rating: 5,
+            verified: true,
+            orders: 60,
+            image: "Assets/Image/interior/softchair.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 16,
+            title: "Coffee maker in white color",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: ["Super power"],
+            condition: "Brand new",
+            price: 13.75,
+            oldPrice: null,
+            rating: 4,
+            verified: true,
+            orders: 270,
+            image: "Assets/Image/interior/coffee.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 17,
+            title: "Ceramic Kitchen Crockery Set",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 22.0,
+            oldPrice: 32.0,
+            rating: 5,
+            verified: false,
+            orders: 55,
+            image: "Assets/Image/interior/crockery.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 18,
+            title: "Modern Bedside Lamps",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 15.0,
+            oldPrice: 22.0,
+            rating: 3,
+            verified: true,
+            orders: 75,
+            image: "Assets/Image/interior/lamp.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 19,
+            title: "Kitchen Dishes Set",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 16.5,
+            oldPrice: 27.0,
+            rating: 4,
+            verified: false,
+            orders: 30,
+            image: "Assets/Image/interior/kitchen.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 20,
+            title: "Indoor Decorative Plants",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 85.0,
+            oldPrice: 110.0,
+            rating: 4,
+            verified: true,
+            orders: 155,
+            image: "Assets/Image/interior/plant.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 21,
+            title: "Electric Blenders",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: ["Super power"],
+            condition: "Brand new",
+            price: 33.0,
+            oldPrice: 48.0,
+            rating: 5,
+            verified: true,
+            orders: 410,
+            image: "Assets/Image/interior/blender.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 22,
+            title: "Travel Friendly Electric Kettle",
+            category: "Computer and tech",
+            brand: "Other",
+            features: ["Super power"],
+            condition: "Refurbished",
+            price: 69.95,
+            oldPrice: 95.0,
+            rating: 4,
+            verified: true,
+            orders: 880,
+            image: "Assets/Image/tech/kattle.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 23,
+            title: "General Home Appliance",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 24.0,
+            oldPrice: null,
+            rating: 3,
+            verified: false,
+            orders: 65,
+            image: "Assets/Image/interior/homeapp.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 24,
+            title: "iPhone 12 - Blue 128GB",
+            category: "Smartphones",
+            brand: "Apple",
+            features: ["Large Memory", "Super power"],
+            condition: "Refurbished",
+            price: 119.0,
+            oldPrice: 999.0,
+            rating: 4,
+            verified: true,
+            orders: 1320,
+            image: "Assets/Image/tech/Iphone2.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 25,
+            title: "Redmi Smartphone - Black",
+            category: "Smartphones",
+            brand: "Pocco",
+            features: ["Large Memory"],
+            condition: "Brand new",
+            price: 109.0,
+            oldPrice: null,
+            rating: 5,
+            verified: true,
+            orders: 960,
+            image: "Assets/Image/tech/redmi.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+
+          {
+            id: 27,
+            title: "Front Load Washing Machine",
+            category: "Home and outdoor",
+            brand: "Samsung",
+            features: ["Super power"],
+            condition: "Brand new",
+            price: 399.0,
+            oldPrice: 520.0,
+            rating: 3,
+            verified: true,
+            orders: 175,
+            image: "Assets/Image/interior/machine.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 28,
+            title: "Men's Blue Polo Shirt",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 14.0,
+            oldPrice: 22.0,
+            rating: 5,
+            verified: false,
+            orders: 480,
+            image: "Assets/Image/cloth/blueshirt.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 29,
+            title: "Men's Blue Suit Jacket",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 69.0,
+            oldPrice: 100.0,
+            rating: 4,
+            verified: true,
+            orders: 200,
+            image: "Assets/Image/cloth/coat.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+        ];
+
+        // --- 2. URL PARAMETERS ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialSearch = urlParams.get("search")
+          ? urlParams.get("search").toLowerCase()
+          : "";
+        const initialCategory = urlParams.get("category") || "All category";
+
+        // --- 3. STATE ---
+        let currentView = "list";
+        let filters = {
+          search: initialSearch,
+          category: initialCategory,
+          brands: [],
+          features: [],
+          minRating: 0,
+          minPrice: 0,
+          maxPrice: 3000,
+          condition: "Any",
+          verifiedOnly: document.getElementById("ui-verified-only")
+            ? document.getElementById("ui-verified-only").checked
+            : false,
+        };
+        let currentSort = "Featured";
+        let pagination = { currentPage: 1, itemsPerPage: 9 };
+
+        // --- 4. DOM ELEMENTS ---
+        const viewGridBtn = document.getElementById("ui-view-grid");
+        const viewListBtn = document.getElementById("ui-view-list");
+        const sortDropdown = document.getElementById("ui-sort-dropdown");
+        const itemsPerPageDropdown =
+          document.getElementById("ui-items-per-page");
+        const listCount = document.getElementById("ui-list-count-num");
+        const activeCategoryText = document.getElementById(
+          "ui-active-category-text",
+        );
+        const breadcrumbCurrent = document.getElementById(
+          "ui-breadcrumb-current",
+        );
+        const paginationNumbers = document.getElementById(
+          "ui-pagination-numbers",
+        );
+        const activeFiltersContainer = document.getElementById(
+          "ui-active-filters-container",
+        );
+
+        const filterCategories = document.querySelectorAll(
+          ".ui-filter-category",
+        );
+        const filterBrands = document.querySelectorAll(".ui-filter-brand");
+        const filterFeatures = document.querySelectorAll(".ui-filter-feature");
+        const filterRatings = document.querySelectorAll(".ui-filter-rating");
+        const filterConditions = document.querySelectorAll(
+          'input[name="condition"]',
+        );
+        const verifiedCheckbox = document.getElementById("ui-verified-only");
+
+        const minPriceInput = document.getElementById("ui-min-price");
+        const maxPriceInput = document.getElementById("ui-max-price");
+        const sliderMin = document.getElementById("ui-slider-min");
+        const sliderMax = document.getElementById("ui-slider-max");
+        const sliderTrack = document.getElementById("ui-slider-track");
+        const applyPriceBtn = document.getElementById("ui-apply-price-btn");
+
+        // Mobile Elements
+        const mobileFilterBtn = document.getElementById("ui-mobile-filter-btn");
+        const sidebarFilters = document.getElementById("ui-sidebar-filters");
+        const closeFilterBtn = document.getElementById("ui-close-filter-btn");
+        const filterOverlay = document.getElementById("ui-filter-overlay");
+
+        if (filters.search)
+          document
+            .querySelectorAll('input[type="search"]')
+            .forEach((input) => (input.value = filters.search));
+
+        // --- 5. MOBILE FILTER MENU LOGIC ---
+        function openFilters() {
+          sidebarFilters.classList.add("ui-active");
+          filterOverlay.classList.add("ui-active");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeFilters() {
+          sidebarFilters.classList.remove("ui-active");
+          filterOverlay.classList.remove("ui-active");
+          document.body.style.overflow = "";
+        }
+
+        if (mobileFilterBtn)
+          mobileFilterBtn.addEventListener("click", openFilters);
+        if (closeFilterBtn)
+          closeFilterBtn.addEventListener("click", closeFilters);
+        if (filterOverlay)
+          filterOverlay.addEventListener("click", closeFilters);
+
+        // --- 6. RENDER ACTIVE FILTERS (The Pills) ---
+        function renderActiveFilters() {
+          if (!activeFiltersContainer) return;
+          activeFiltersContainer.innerHTML = "";
+          let filterCount = 0;
+
+          filters.brands.forEach((b) => {
+            filterCount++;
+            activeFiltersContainer.innerHTML += `<span class="ui-filter-pill">${b} <button data-type="brand" data-val="${b}">✕</button></span>`;
+          });
+          filters.features.forEach((f) => {
+            filterCount++;
+            activeFiltersContainer.innerHTML += `<span class="ui-filter-pill">${f} <button data-type="feature" data-val="${f}">✕</button></span>`;
+          });
+          if (filters.minRating > 0) {
+            filterCount++;
+            activeFiltersContainer.innerHTML += `<span class="ui-filter-pill">${filters.minRating} star <button data-type="rating">✕</button></span>`;
+          }
+
+          if (filterCount > 0)
+            activeFiltersContainer.innerHTML += `<a href="#" class="ui-clear-all-filters" id="ui-clear-all-filters">Clear all filter</a>`;
+
+          if (mobileFilterBtn) {
+            mobileFilterBtn.innerHTML = `Filter ${filterCount > 0 ? `(${filterCount})` : ""} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>`;
+          }
+
+          activeFiltersContainer.querySelectorAll("button").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const type = e.target.getAttribute("data-type");
+              const val = e.target.getAttribute("data-val");
+              if (type === "brand") {
+                filters.brands = filters.brands.filter((b) => b !== val);
+                document.querySelector(
+                  `input.ui-filter-brand[value="${val}"]`,
+                ).checked = false;
+              }
+              if (type === "feature") {
+                filters.features = filters.features.filter((f) => f !== val);
+                document.querySelector(
+                  `input.ui-filter-feature[value="${val}"]`,
+                ).checked = false;
+              }
+              if (type === "rating") {
+                filters.minRating = 0;
+                document
+                  .querySelectorAll(".ui-filter-rating")
+                  .forEach((r) => (r.checked = false));
+              }
+              pagination.currentPage = 1;
+              updateUI();
+            });
+          });
+
+          const clearAll = document.getElementById("ui-clear-all-filters");
+          if (clearAll)
+            clearAll.addEventListener("click", (e) => {
+              e.preventDefault();
+              filters.brands = [];
+              filters.features = [];
+              filters.minRating = 0;
+              document
+                .querySelectorAll(
+                  ".ui-filter-brand, .ui-filter-feature, .ui-filter-rating",
+                )
+                .forEach((cb) => (cb.checked = false));
+              pagination.currentPage = 1;
+              updateUI();
+            });
+        }
+
+        // --- 7. RENDER PRODUCTS ---
+        function generateStars(rating) {
+          let starsHTML = "";
+          for (let i = 1; i <= 5; i++) {
+            if (i <= rating) starsHTML += "★";
+            else starsHTML += '<span class="ui-half-star">★</span>';
+          }
+          return starsHTML;
+        }
+
+        function renderProducts(productsToRender) {
+          productContainer.innerHTML = "";
+          if (currentView === "grid")
+            productContainer.classList.add("ui-grid-view");
+          else productContainer.classList.remove("ui-grid-view");
+
+          if (productsToRender.length === 0) {
+            productContainer.innerHTML = `<div style="padding: 40px; text-align: center; color: #8b96a5;"><h3>No products found.</h3><p>Try adjusting your search or filters.</p></div>`;
+            return;
+          }
+
+          productsToRender.forEach((product) => {
+            const oldPriceHTML = product.oldPrice
+              ? `<span class="ui-price-old">$${product.oldPrice.toFixed(2)}</span>`
+              : "";
+            const starsHTML = generateStars(product.rating);
+            const ratingNumberHTML =
+              product.rating % 1 === 0 ? product.rating + ".0" : product.rating;
+
+            // This is the URL that links to the specific product details
+            const detailUrl = `productDetail.html?id=${product.id}`;
+
+            const productCard = `
+                <article class="ui-product-list-card">
+                    <a href="${detailUrl}" class="ui-prod-img">
+                        <img src="${product.image}" alt="${product.title}">
+                    </a>
+                    <div class="ui-prod-details">
+                        <div class="ui-prod-title-row">
+                            <a href="${detailUrl}" style="text-decoration: none; color: inherit;">
+                                <h3>${product.title}</h3>
+                            </a>
+                            <button class="ui-fav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        </div>
+                        <div class="ui-prod-pricing"><span class="ui-price-current">$${product.price.toFixed(2)}</span> ${oldPriceHTML}</div>
+                        <div class="ui-prod-stats">
+                            <span class="ui-stars">${starsHTML} <span class="ui-rating-num">${ratingNumberHTML}</span></span>
+                            <span class="ui-dot">•</span> <span class="ui-orders">${product.orders} orders</span>
+                            <span class="ui-dot">•</span> <span class="ui-shipping-badge">Free Shipping</span>
+                        </div>
+                        <p class="ui-prod-desc">${product.desc}</p>
+                        <a href="${detailUrl}" class="ui-view-details-link">View details</a>
+                    </div>
+                </article>
+            `;
+            productContainer.innerHTML += productCard;
+          });
+          // Restore saved heart states
+          const saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+          productContainer
+            .querySelectorAll(".ui-product-list-card")
+            .forEach((card) => {
+              const link = card.querySelector("a[href]");
+              if (link) {
+                const id = parseInt(
+                  new URLSearchParams(link.href.split("?")[1]).get("id"),
+                );
+                if (saved.includes(id)) {
+                  card.querySelector(".ui-fav-btn")?.classList.add("ui-active");
+                }
+              }
+            });
+        }
+        function renderPagination(totalPages) {
+          if (!paginationNumbers) return;
+          paginationNumbers.innerHTML = "";
+          if (totalPages <= 1) return;
+
+          const prevBtn = document.createElement("button");
+          prevBtn.className = "ui-page-btn ui-nav-arrow";
+          prevBtn.innerText = "❮";
+          prevBtn.disabled = pagination.currentPage === 1;
+          prevBtn.addEventListener("click", () => {
+            pagination.currentPage--;
+            updateUI();
+          });
+          paginationNumbers.appendChild(prevBtn);
+
+          for (let i = 1; i <= totalPages; i++) {
+            const pageBtn = document.createElement("button");
+            pageBtn.className = `ui-page-btn ${i === pagination.currentPage ? "ui-active" : ""}`;
+            pageBtn.innerText = i;
+            pageBtn.addEventListener("click", () => {
+              pagination.currentPage = i;
+              updateUI();
+            });
+            paginationNumbers.appendChild(pageBtn);
+          }
+
+          const nextBtn = document.createElement("button");
+          nextBtn.className = "ui-page-btn ui-nav-arrow";
+          nextBtn.innerText = "❯";
+          nextBtn.disabled = pagination.currentPage === totalPages;
+          nextBtn.addEventListener("click", () => {
+            pagination.currentPage++;
+            updateUI();
+          });
+          paginationNumbers.appendChild(nextBtn);
+        }
+
+        // --- 8. FILTER, SORT, PAGINATE LOGIC ---
+        function updateUI() {
+          const searchWords = filters.search
+            .toLowerCase()
+            .split(" ")
+            .filter((w) => w)
+            .map((w) => (w.endsWith("s") ? w.slice(0, -1) : w));
+
+          let result = productsDatabase.filter((p) => {
+            let searchMatch =
+              searchWords.length === 0 ||
+              searchWords.every((word) => {
+                const searchFields = [
+                  p.title,
+                  p.brand,
+                  p.category,
+                  p.desc,
+                  ...(p.keywords || []),
+                ];
+                return searchFields.some(
+                  (field) => field && field.toLowerCase().includes(word),
+                );
+              });
+            let catMatch =
+              filters.category === "All category" ||
+              p.category === filters.category;
+            let brandMatch =
+              filters.brands.length === 0 || filters.brands.includes(p.brand);
+            let featureMatch =
+              filters.features.length === 0 ||
+              filters.features.some((f) => p.features.includes(f));
+            let ratingMatch = p.rating >= filters.minRating;
+            let priceMatch =
+              p.price >= filters.minPrice && p.price <= filters.maxPrice;
+            let conditionMatch =
+              filters.condition === "Any" || p.condition === filters.condition;
+            let verifiedMatch = !filters.verifiedOnly || p.verified === true;
+
+            return (
+              searchMatch &&
+              catMatch &&
+              brandMatch &&
+              featureMatch &&
+              ratingMatch &&
+              priceMatch &&
+              conditionMatch &&
+              verifiedMatch
+            );
+          });
+
+          if (currentSort === "Price: Low to High")
+            result.sort((a, b) => a.price - b.price);
+          else if (currentSort === "Price: High to Low")
+            result.sort((a, b) => b.price - a.price);
+          else result.sort((a, b) => b.rating - a.rating);
+
+          const totalItems = result.length;
+          const totalPages =
+            Math.ceil(totalItems / pagination.itemsPerPage) || 1;
+          if (pagination.currentPage > totalPages)
+            pagination.currentPage = totalPages > 0 ? totalPages : 1;
+
+          const startIndex =
+            (pagination.currentPage - 1) * pagination.itemsPerPage;
+          const paginatedResult = result.slice(
+            startIndex,
+            startIndex + pagination.itemsPerPage,
+          );
+
+          renderProducts(paginatedResult);
+          renderPagination(totalPages);
+          renderActiveFilters();
+
+          if (listCount) listCount.innerText = totalItems;
+          const displayName =
+            filters.category === "All category"
+              ? "All Products"
+              : filters.category;
+          if (activeCategoryText) activeCategoryText.innerText = displayName;
+          if (breadcrumbCurrent) breadcrumbCurrent.innerText = displayName;
+        }
+
+        // --- 9. PRICE SLIDER UI ---
+        function updatePriceSliderUI() {
+          let minVal = parseInt(sliderMin.value);
+          let maxVal = parseInt(sliderMax.value);
+
+          if (minVal >= maxVal - 10) {
+            sliderMin.value = maxVal - 10;
+            minVal = maxVal - 10;
+          }
+
+          minPriceInput.value = minVal;
+          maxPriceInput.value = maxVal;
+
+          const maxRange = parseInt(sliderMax.max);
+          const percentMin = (minVal / maxRange) * 100;
+          const percentMax = (maxVal / maxRange) * 100;
+
+          sliderTrack.style.left = percentMin + "%";
+          sliderTrack.style.width = percentMax - percentMin + "%";
+        }
+
+        if (sliderMin && sliderMax) {
+          sliderMin.addEventListener("input", updatePriceSliderUI);
+          sliderMax.addEventListener("input", updatePriceSliderUI);
+          minPriceInput.addEventListener("change", () => {
+            sliderMin.value = minPriceInput.value;
+            updatePriceSliderUI();
+          });
+          maxPriceInput.addEventListener("change", () => {
+            sliderMax.value = maxPriceInput.value;
+            updatePriceSliderUI();
+          });
+        }
+
+        // --- 10. EVENT LISTENERS ---
+        productContainer.addEventListener("click", (e) => {
+          const favBtn = e.target.closest(".ui-fav-btn");
+          if (favBtn) {
+            e.preventDefault();
+            const card = favBtn.closest(".ui-product-list-card");
+            const detailLink = card ? card.querySelector("a[href]") : null;
+            const productId = detailLink
+              ? parseInt(
+                  new URLSearchParams(detailLink.href.split("?")[1]).get("id"),
+                )
+              : null;
+
+            if (productId) {
+              let saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+              const alreadySaved = saved.includes(productId);
+
+              if (alreadySaved) {
+                saved = saved.filter((id) => id !== productId);
+                favBtn.classList.remove("ui-active");
+              } else {
+                saved.push(productId);
+                favBtn.classList.add("ui-active");
+              }
+
+              localStorage.setItem("savedItems", JSON.stringify(saved));
+            }
+          }
+        });
+
+        if (viewGridBtn && viewListBtn) {
+          viewGridBtn.addEventListener("click", () => {
+            currentView = "grid";
+            viewGridBtn.classList.add("ui-active");
+            viewListBtn.classList.remove("ui-active");
+            updateUI();
+          });
+          viewListBtn.addEventListener("click", () => {
+            currentView = "list";
+            viewListBtn.classList.add("ui-active");
+            viewGridBtn.classList.remove("ui-active");
+            updateUI();
+          });
+        }
+
+        if (sortDropdown)
+          sortDropdown.addEventListener("change", (e) => {
+            currentSort = e.target.value;
+            updateUI();
+          });
+        if (itemsPerPageDropdown)
+          itemsPerPageDropdown.addEventListener("change", (e) => {
+            pagination.itemsPerPage = parseInt(e.target.value);
+            pagination.currentPage = 1;
+            updateUI();
+          });
+        if (verifiedCheckbox)
+          verifiedCheckbox.addEventListener("change", (e) => {
+            filters.verifiedOnly = e.target.checked;
+            pagination.currentPage = 1;
+            updateUI();
+          });
+
+        filterCategories.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            filters.category = e.target.getAttribute("data-category");
+            filters.search = "";
+            pagination.currentPage = 1;
+            updateUI();
+            if (window.innerWidth <= 900) closeFilters(); // Close drawer on mobile
+          });
+        });
+
+        filterBrands.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            filters.brands = Array.from(filterBrands)
+              .filter((c) => c.checked)
+              .map((c) => c.value);
+            pagination.currentPage = 1;
+            updateUI();
+          });
+        });
+        filterFeatures.forEach((cb) => {
+          cb.addEventListener("change", () => {
+            filters.features = Array.from(filterFeatures)
+              .filter((c) => c.checked)
+              .map((c) => c.value);
+            pagination.currentPage = 1;
+            updateUI();
+          });
+        });
+
+        filterRatings.forEach((cb) => {
+          cb.addEventListener("change", (e) => {
+            if (e.target.checked) {
+              filterRatings.forEach((otherCb) => {
+                if (otherCb !== e.target) otherCb.checked = false;
+              });
+              filters.minRating = parseInt(e.target.value);
+            } else {
+              filters.minRating = 0;
+            }
+            pagination.currentPage = 1;
+            updateUI();
+          });
+        });
+
+        filterConditions.forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            filters.condition = e.target.value;
+            pagination.currentPage = 1;
+            updateUI();
+          });
+        });
+
+        if (applyPriceBtn) {
+          applyPriceBtn.addEventListener("click", () => {
+            filters.minPrice = parseFloat(minPriceInput.value) || 0;
+            filters.maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+            pagination.currentPage = 1;
+            updateUI();
+            if (window.innerWidth <= 900) closeFilters(); // Close drawer on mobile
+          });
+        }
+
+        // --- 11. MOBILE PILLS LOGIC ---
+        const mobilePills = document.querySelectorAll(
+          ".ui-mobile-category-pills .ui-pill",
+        );
+
+        // 1. Set the initial active pill based on the URL
+        mobilePills.forEach((pill) => {
+          if (pill.innerText.trim() === filters.category) {
+            pill.classList.add("ui-active");
+            // Scroll it into view
+            setTimeout(
+              () =>
+                pill.scrollIntoView({
+                  behavior: "smooth",
+                  block: "nearest",
+                  inline: "center",
+                }),
+              100,
+            );
+          }
+        });
+
+        // 2. Handle clicks to filter by category
+        mobilePills.forEach((pill) => {
+          pill.addEventListener("click", function (e) {
+            e.preventDefault();
+            mobilePills.forEach((p) => p.classList.remove("ui-active"));
+            this.classList.add("ui-active");
+
+            // Set the category (NOT search)
+            filters.category = this.innerText.trim();
+            filters.search = "";
+            document
+              .querySelectorAll('input[type="search"]')
+              .forEach((input) => (input.value = ""));
+
+            pagination.currentPage = 1;
+            updateUI();
+          });
+        });
+
+        // Init
+        updateUI();
+        if (window.innerWidth <= 900 && viewListBtn) {
+          viewListBtn.click();
+        } else if (viewGridBtn) {
+          viewGridBtn.click();
+        }
+        if (sliderMin) updatePriceSliderUI();
+      });
+    </script>
+  </body>
+</html>

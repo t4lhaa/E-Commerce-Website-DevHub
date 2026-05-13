@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brand E-commerce</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <aside class="ui-side-nav-mobile" id="ui-side-nav">
+      <div class="ui-nav-user-header">
+        <button id="ui-close-btn" class="ui-close-btn" aria-label="Close Menu">
+          ✕
+        </button>
+        <div class="ui-avatar-circle">
+          <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
+        </div>
+        <div class="ui-auth-text">Sign in | Register</div>
+      </div>
+      <ul class="ui-nav-links">
+        <li>
+          <a href="home.html"><span class="ui-nav-icon">🏠</span> Home</a>
+        </li>
+        <li>
+          <a href="products.html?category=All category"
+            ><span class="ui-nav-icon">📋</span> Categories</a
+          >
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">📦</span> My orders</a>
+        </li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links">
+        <li>
+          <a href="#"><span class="ui-nav-icon">🌐</span> English | USD</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">🎧</span> Contact us</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">🏢</span> About</a>
+        </li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links ui-no-icon">
+        <li><a href="#">User agreement</a></li>
+        <li><a href="#">Partnership</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </aside>
+
+    <header class="ui-page-header ui-container">
+      <div class="ui-header-top-row">
+        <div class="ui-logo-area">
+          <button
+            id="ui-menu-btn"
+            class="ui-menu-btn ui-mobile-only"
+            aria-label="Open Menu"
+            style="
+              background: transparent;
+              border: none;
+              padding: 0;
+              display: flex;
+              color: #1c1c1c;
+              cursor: pointer;
+            "
+          >
+            <i class="ph ph-list" style="font-size: 26px"></i>
+          </button>
+
+          <a href="home.html" class="ui-logo-wrapper">
+            <img
+              src="Assets/Brand/logo-symbol.svg"
+              alt="Brand Logo"
+              class="ui-brand-logo-img"
+            />
+            <div class="ui-logo-text">Brand</div>
+          </a>
+        </div>
+        <form
+          class="ui-search-form ui-desktop-only-flex"
+          action="products.html"
+          method="GET"
+        >
+          <input
+            type="search"
+            name="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <select class="ui-search-category-dropdown" name="category">
+            <option value="All category">All category</option>
+            <option value="Automobiles">Automobiles</option>
+            <option value="Clothes and wear">Clothes and wear</option>
+            <option value="Home and outdoor">Home and outdoor</option>
+            <option value="Computer and tech">Computer and tech</option>
+            <option value="Tools, equipments">Tools, equipments</option>
+            <option value="Sports and outdoor">Sports and outdoor</option>
+            <option value="Animal and pets">Animal and pets</option>
+            <option value="Machinery tools">Machinery tools</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Smartphones">Smartphones</option>
+            <option value="Mobile accessory">Mobile accessory</option>
+          </select>
+          <button type="submit" class="ui-button-search">Search</button>
+        </form>
+
+        <div class="ui-header-actions ui-desktop-only-flex">
+          <div class="ui-action-item">
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="ui-icon"
+              id="c1"
+            >
+              <path
+                d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+              /></svg
+            ><span class="ui-label">Profile</span>
+          </div>
+          <div class="ui-action-item">
+            <span class="ui-icon"
+              ><i
+                class="ph-fill ph-chat-teardrop-dots"
+                style="font-size: 24px"
+              ></i></span
+            ><span class="ui-label">Message</span>
+          </div>
+          <div class="ui-action-item">
+            <span class="ui-icon"
+              ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
+            ><span class="ui-label">Orders</span>
+          </div>
+          <a
+            href="cart.html"
+            class="ui-action-item"
+            style="text-decoration: none; color: inherit"
+            ><span class="ui-icon"
+              ><i
+                class="ph-fill ph-shopping-cart"
+                style="font-size: 24px"
+              ></i></span
+            ><span class="ui-label">My cart</span></a
+          >
+        </div>
+
+        <div class="ui-header-actions ui-mobile-only-flex">
+          <a href="cart.html" class="ui-icon ui-cart" style="color: inherit">
+            <i class="ph ph-shopping-cart" style="font-size: 24px"></i>
+          </a>
+          <a href="#" class="ui-icon ui-profile" style="color: inherit">
+            <i class="ph ph-user" style="font-size: 24px"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="ui-mobile-search-row ui-mobile-only">
+        <form class="ui-search-form-mobile" action="products.html" method="GET">
+          <span class="ui-search-icon-inline"
+            ><i class="ph-fill ph-magnifying-glass" style="font-size: 18px"></i
+          ></span>
+          <input
+            type="search"
+            name="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+      </div>
+
+      <div class="ui-mobile-category-pills ui-mobile-only-flex">
+        <button class="ui-pill">All category</button>
+        <button class="ui-pill">Clothes and wear</button>
+        <button class="ui-pill">Home and outdoor</button>
+        <button class="ui-pill">Mobile accessory</button>
+        <button class="ui-pill">Electronics</button>
+        <button class="ui-pill">Smartphones</button>
+        <button class="ui-pill">Computer and tech</button>
+      </div>
+    </header>
+
+    <nav class="ui-category-nav ui-desktop-only-flex">
+      <div class="ui-container ui-nav-container">
+        <ul class="ui-nav-main-links">
+          <li>
+            <a href="products.html?category=All category"
+              ><i class="ph ph-list" style="font-size: 18px"></i> All
+              category</a
+            >
+          </li>
+          <li><a href="#">Hot offers</a></li>
+          <li><a href="#">Gift boxes</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Menu item</a></li>
+          <li><a href="#">Help ▾</a></li>
+        </ul>
+        <div class="ui-nav-utils">
+          <div class="ui-dropdown-wrapper">
+            <span class="ui-language">English, USD ▾</span>
+            <ul class="ui-dropdown-menu">
+              <li><a href="#">English, USD</a></li>
+              <li><a href="#">German, EUR</a></li>
+              <li><a href="#">French, EUR</a></li>
+            </ul>
+          </div>
+          <div class="ui-dropdown-wrapper">
+            <span class="ui-shipping" style="display: flex; align-items: center"
+              >Ship to
+              <img
+                src="https://flagcdn.com/w20/de.png"
+                alt="DE"
+                class="ui-dropdown-flag"
+                style="margin-left: 6px; margin-right: 2px"
+              />
+              ▾</span
+            >
+            <ul class="ui-dropdown-menu">
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/de.png"
+                    alt="DE"
+                    class="ui-dropdown-flag"
+                  />
+                  Germany</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/us.png"
+                    alt="US"
+                    class="ui-dropdown-flag"
+                  />
+                  United States</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/gb.png"
+                    alt="GB"
+                    class="ui-dropdown-flag"
+                  />
+                  Great Britain</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/au.png"
+                    alt="AU"
+                    class="ui-dropdown-flag"
+                  />
+                  Australia</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="ui-container">
+      <section class="ui-hero-block">
+        <aside class="ui-side-categories ui-desktop-only">
+          <ul>
+            <li>
+              <a href="products.html?category=Automobiles">Automobiles</a>
+            </li>
+            <li>
+              <a href="products.html?category=Clothes%20and%20wear"
+                >Clothes and wear</a
+              >
+            </li>
+            <li>
+              <a href="products.html?category=Home%20and%20outdoor"
+                >Home and outdoor</a
+              >
+            </li>
+            <li>
+              <a href="products.html?category=Computer%20and%20tech"
+                >Computer and tech</a
+              >
+            </li>
+            <li>
+              <a href="products.html?category=Tools,%20equipments"
+                >Tools, equipments</a
+              >
+            </li>
+            <li>
+              <a href="products.html?category=Sports%20and%20outdoor"
+                >Sports and outdoor</a
+              >
+            </li>
+            <li>
+              <a href="products.html?category=Animal%20and%20pets"
+                >Animal and pets</a
+              >
+            </li>
+            <li>
+              <a href="products.html?category=Machinery%20tools"
+                >Machinery tools</a
+              >
+            </li>
+          </ul>
+        </aside>
+
+        <div class="ui-hero-banner">
+          <div class="ui-banner-content">
+            <h3>Latest trending</h3>
+            <h2>Electronic items</h2>
+            <a
+              href="products.html?category=Electronics"
+              class="ui-button-light"
+              style="text-decoration: none"
+              >Learn more</a
+            >
+          </div>
+          <img
+            src="Assets/banner.png"
+            alt="Electronic items banner"
+            class="ui-banner-bg-img"
+          />
+        </div>
+
+        <div class="ui-hero-user-cards ui-desktop-only-flex">
+          <div class="ui-card ui-card-login">
+            <div class="ui-user-header">
+              <div class="ui-user-avatar">
+                <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
+              </div>
+              <h4>
+                Hi, user <br />
+                let's get started
+              </h4>
+            </div>
+            <button class="ui-btn-join">Join now</button>
+            <button class="ui-btn-login">Log in</button>
+          </div>
+          <div class="ui-card ui-card-promo">
+            Get US $10 off <br />
+            with a new <br />
+            supplier
+          </div>
+          <div class="ui-card ui-card-quotes">
+            Send quotes with <br />
+            supplier <br />
+            preferences
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-deals-section">
+        <div class="ui-deals-left-panel">
+          <div class="ui-deals-title">
+            <h3>Deals and offers</h3>
+            <p class="ui-subtitle ui-mobile-only">Electronic equipments</p>
+            <p class="ui-subtitle ui-desktop-only">Hygiene equipments</p>
+          </div>
+          <div class="ui-countdown-blocks">
+            <div class="ui-time-block ui-desktop-only">
+              <span class="ui-num">04</span><span class="ui-lbl">Days</span>
+            </div>
+            <div class="ui-time-block">
+              <span class="ui-num" id="ui-cd-hours">13</span
+              ><span class="ui-lbl">Hour</span>
+            </div>
+            <div class="ui-time-block">
+              <span class="ui-num" id="ui-cd-mins">34</span
+              ><span class="ui-lbl">Min</span>
+            </div>
+            <div class="ui-time-block">
+              <span class="ui-num" id="ui-cd-secs">56</span
+              ><span class="ui-lbl">Sec</span>
+            </div>
+          </div>
+        </div>
+        <div class="ui-deals-carousel">
+          <div class="ui-product-tile">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/tech/smartwatches.jpg"
+                alt="Smart watches"
+              />
+            </div>
+            <p>Smart watches</p>
+            <span class="ui-discount">-25%</span>
+          </div>
+          <div class="ui-product-tile">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/tech/laptop.jpg" alt="Laptops" />
+            </div>
+            <p>Laptops</p>
+            <span class="ui-discount">-15%</span>
+          </div>
+          <div class="ui-product-tile">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/tech/cameras.jpg" alt="SmartPhones" />
+            </div>
+            <p>Cameras</p>
+            <span class="ui-discount">-20%</span>
+          </div>
+          <div class="ui-product-tile">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/tech/gaming.jpg" alt="Headphones" />
+            </div>
+            <p>Headphones</p>
+            <span class="ui-discount">-10%</span>
+          </div>
+          <div class="ui-product-tile">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/tech/redmi.jpg" alt="Canon cameras" />
+            </div>
+            <p>Smartphones</p>
+            <span class="ui-discount">-15%</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-category-block ui-home-outdoor">
+        <div class="ui-category-large-promo ui-hero-bg-1 ui-desktop-only">
+          <h4>Home and outdoor</h4>
+          <a href="products.html?category=Home%20and%20outdoor"
+            ><button class="ui-button-light">Source now</button></a
+          >
+        </div>
+        <h3 class="ui-mobile-section-title ui-mobile-only">Home and outdoor</h3>
+        <div class="ui-category-grid">
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Soft chairs</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img
+                src="Assets/Image/interior/softchair.jpg"
+                alt="Soft chairs"
+              />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Lamps</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/interior/lamp.jpg" alt="Lamps" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Kitchen dishes</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img
+                src="Assets/Image/interior/kitchen.jpg"
+                alt="Kitchen dishes"
+              />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Crockery</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/interior/crockery.jpg" alt="Crockery" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Plants</p>
+              <span class="ui-price-from">From<br />USD 100</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/interior/plant.jpg" alt="Plants" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Blenders</p>
+              <span class="ui-price-from">From<br />USD 39</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/interior/blender.jpg" alt="Blenders" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Home appliance</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img
+                src="Assets/Image/interior/homeapp.jpg"
+                alt="Home appliance"
+              />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Coffee maker</p>
+              <span class="ui-price-from">From<br />USD 10</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/interior/coffee.jpg" alt="Coffee maker" />
+            </div>
+          </div>
+        </div>
+        <a
+          href="products.html?category=Home%20and%20outdoor"
+          class="ui-mobile-source-link ui-mobile-only"
+          >Source now ➔</a
+        >
+      </section>
+
+      <section class="ui-category-block ui-electronics">
+        <div class="ui-category-large-promo ui-hero-bg-2 ui-desktop-only">
+          <h4>Consumer electronics and gadgets</h4>
+          <a href="products.html?category=Electronics"
+            ><button class="ui-button-light">Source now</button></a
+          >
+        </div>
+        <h3 class="ui-mobile-section-title ui-mobile-only">
+          Consumer electronics
+        </h3>
+        <div class="ui-category-grid">
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Smart watches</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img
+                src="Assets/Image/tech/smartwatches.jpg"
+                alt="Smart watches"
+              />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Cameras</p>
+              <span class="ui-price-from">From<br />USD 89</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/cameras.jpg" alt="Cameras" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Headphones</p>
+              <span class="ui-price-from">From<br />USD 10</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/headphone.jpg" alt="Headphones" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Tablets</p>
+              <span class="ui-price-from">From<br />USD 90</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/tablet.jpg" alt="Tablets" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Gaming set</p>
+              <span class="ui-price-from">From<br />USD 35</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/gaming.jpg" alt="Gaming set" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Laptops & PC</p>
+              <span class="ui-price-from">From<br />USD 340</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/laptop.jpg" alt="Laptops & PC" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Smartphones</p>
+              <span class="ui-price-from">From<br />USD 19</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/Iphone.jpg" alt="Smartphones" />
+            </div>
+          </div>
+          <div class="ui-sub-category-card">
+            <div class="ui-card-text">
+              <p>Electric kattle</p>
+              <span class="ui-price-from">From<br />USD 240</span>
+            </div>
+            <div class="ui-product-img-wrapper">
+              <img src="Assets/Image/tech/kattle.jpg" alt="Electric kettle" />
+            </div>
+          </div>
+        </div>
+        <a
+          href="products.html?category=Electronics"
+          class="ui-mobile-source-link ui-mobile-only"
+          >Source now ➔</a
+        >
+      </section>
+
+      <section class="ui-quote-request">
+        <div class="ui-quote-text">
+          <h2>An easy way to send requests to all suppliers</h2>
+          <p class="ui-desktop-only">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt.
+          </p>
+          <button
+            class="ui-button-primary ui-mobile-only"
+            style="margin-top: 15px; font-weight: 500"
+          >
+            Send inquiry
+          </button>
+        </div>
+        <div class="ui-quote-form-card ui-desktop-only">
+          <h3>Send quote to suppliers</h3>
+          <input type="text" placeholder="What item you need?" />
+          <textarea placeholder="Type more details" rows="3"></textarea>
+          <div class="ui-quantity-row">
+            <input type="text" placeholder="Quantity" />
+            <select>
+              <option>Pcs</option>
+              <option>Kg</option>
+              <option>Box</option>
+            </select>
+          </div>
+          <button class="ui-button-primary">Send inquiry</button>
+        </div>
+      </section>
+
+      <section class="ui-recommended-items">
+        <h3>Recommended items</h3>
+        <div class="ui-products-container ui-grid-recommended">
+          <a href="productDetail.html?id=10" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/cloth/tshirt.jpg"
+                alt="T-shirts with multiple colors"
+              />
+            </div>
+            <h4>$8.99</h4>
+            <p>T-shirts with multiple colors, for men</p>
+          </a>
+
+          <a href="productDetail.html?id=12" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/cloth/shorts.jpg"
+                alt="Jeans shorts for men"
+              />
+            </div>
+            <h4>$7.50</h4>
+            <p>Jeans shorts for men blue color</p>
+          </a>
+
+          <a href="productDetail.html?id=11" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/cloth/jacket.jpg"
+                alt="Brown winter coat medium"
+              />
+            </div>
+            <h4>$15.99</h4>
+            <p>Brown winter coat medium size</p>
+          </a>
+
+          <a href="productDetail.html?id=13" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/cloth/bag.jpg"
+                alt="Jeans bag for travel"
+              />
+            </div>
+            <h4>$28.00</h4>
+            <p>Jeans bag for travel for men</p>
+          </a>
+
+          <a href="productDetail.html?id=14" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/cloth/wallet.jpg" alt="Leather wallet" />
+            </div>
+            <h4>$84.00</h4>
+            <p>Leather wallet</p>
+          </a>
+
+          <a href="productDetail.html?id=24" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/tech/iphone.jpg" alt="SmartPhones" />
+            </div>
+            <h4>$949.00</h4>
+            <p>Iphone 12, Blue Color 128GB</p>
+          </a>
+
+          <a href="productDetail.html?id=8" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/tech/gaming.jpg"
+                alt="Headset for gaming"
+              />
+            </div>
+            <h4>$12.49</h4>
+            <p>Headset for gaming with mic</p>
+          </a>
+
+          <a href="productDetail.html?id=7" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img
+                src="Assets/Image/tech/smartwatches.jpg"
+                alt="Smartwatch silver color"
+              />
+            </div>
+            <h4>$22.00</h4>
+            <p>Smartwatch silver color modern</p>
+          </a>
+
+          <a href="productDetail.html?id=16" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/interior/coffee.jpg" alt="Coffee maker" />
+            </div>
+            <h4>$13.75</h4>
+            <p>Coffee maker in white color</p>
+          </a>
+
+          <a href="productDetail.html?id=22" class="ui-product-card">
+            <div class="ui-img-placeholder">
+              <img src="Assets/Image/tech/kattle.jpg" alt="Electric kettle" />
+            </div>
+            <h4>$69.95</h4>
+            <p>Electric kettle, travel friendly</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="ui-extra-services">
+        <h3>Our extra services</h3>
+        <div class="ui-services-grid">
+          <div class="ui-service-card">
+            <div class="ui-service-img-wrapper">
+              <img src="Assets/industry.jpg" alt="Industry Hubs" />
+            </div>
+            <div class="ui-service-info">
+              <p>Source from<br />Industry Hubs</p>
+            </div>
+            <div class="ui-service-badge">
+              <i class="ph ph-magnifying-glass" style="font-size: 20px"></i>
+            </div>
+          </div>
+          <div class="ui-service-card">
+            <div class="ui-service-img-wrapper">
+              <img src="Assets/color.jpg" alt="Customize Products" />
+            </div>
+            <div class="ui-service-info">
+              <p>Customize Your<br />Products</p>
+            </div>
+            <div class="ui-service-badge">
+              <i class="ph ph-archive-box" style="font-size: 20px"></i>
+            </div>
+          </div>
+          <div class="ui-service-card">
+            <div class="ui-service-img-wrapper">
+              <img src="Assets/plane.jpg" alt="Shipping and logistics" />
+            </div>
+            <div class="ui-service-info">
+              <p>Fast, reliable shipping<br />by ocean or air</p>
+            </div>
+            <div class="ui-service-badge">
+              <i class="ph ph-paper-plane-tilt" style="font-size: 20px"></i>
+            </div>
+          </div>
+          <div class="ui-service-card">
+            <div class="ui-service-img-wrapper">
+              <img
+                src="Assets/monitoring.jpg"
+                alt="Product monitoring and inspection"
+              />
+            </div>
+            <div class="ui-service-info">
+              <p>Product monitoring<br />and inspection</p>
+            </div>
+            <div class="ui-service-badge">
+              <i class="ph ph-shield-check" style="font-size: 20px"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ui-suppliers-region">
+        <h3>Suppliers by region</h3>
+        <div class="ui-suppliers-grid">
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/ae.png"
+              alt="AE"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Arabic Emirates</div>
+              <div class="ui-domain">shopname.ae</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/au.png"
+              alt="AU"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Australia</div>
+              <div class="ui-domain">shopname.ae</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/us.png"
+              alt="US"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">United States</div>
+              <div class="ui-domain">shopname.ae</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/ru.png"
+              alt="RU"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Russia</div>
+              <div class="ui-domain">shopname.ru</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/it.png"
+              alt="IT"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Italy</div>
+              <div class="ui-domain">shopname.it</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/dk.png"
+              alt="DK"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Denmark</div>
+              <div class="ui-domain">denmark.com.dk</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/fr.png"
+              alt="FR"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">France</div>
+              <div class="ui-domain">shopname.com.fr</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/ae.png"
+              alt="AE"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Arabic Emirates</div>
+              <div class="ui-domain">shopname.ae</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/cn.png"
+              alt="CN"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">China</div>
+              <div class="ui-domain">shopname.ae</div>
+            </div>
+          </div>
+          <div class="ui-supplier-item">
+            <img
+              src="https://flagcdn.com/w40/gb.png"
+              alt="GB"
+              class="ui-flag-img"
+            />
+            <div class="ui-supplier-info">
+              <div class="ui-country">Great Britain</div>
+              <div class="ui-domain">shopname.co.uk</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="ui-newsletter-wrapper">
+      <section class="ui-container ui-newsletter-block">
+        <h3>Subscribe on our newsletter</h3>
+        <p>
+          Get daily news on upcoming offers from many suppliers all over the
+          world
+        </p>
+        <form>
+          <div class="ui-input-with-icon">
+            <i
+              class="ph ph-envelope-simple"
+              style="font-size: 20px; color: #8b96a5"
+            ></i>
+            <input
+              type="email"
+              placeholder="Email"
+              aria-label="Email Address"
+            />
+          </div>
+          <button type="submit" class="ui-button-primary">Subscribe</button>
+        </form>
+      </section>
+    </div>
+
+    <footer class="ui-site-footer">
+      <div class="ui-container ui-footer-columns">
+        <div class="ui-col-main ui-logo">
+          <div class="ui-logo-wrapper" style="margin-bottom: 15px">
+            <img
+              src="Assets/Brand/logo-symbol.svg"
+              alt="Brand Logo"
+              class="ui-brand-logo-img"
+            />
+
+            <div class="ui-logo-text">Brand</div>
+          </div>
+
+          <p>
+            Best information about the company<br />goes here but now lorem
+            ipsum is
+          </p>
+          <div class="ui-social-links">
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-facebook-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-twitter-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-linkedin-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-instagram-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-youtube-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+          </div>
+        </div>
+        <div class="ui-col">
+          <strong>About</strong>
+          <ul>
+            <li>About Us</li>
+            <li>Find store</li>
+            <li>Categories</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>Partnership</strong>
+          <ul>
+            <li>About Us</li>
+            <li>Find store</li>
+            <li>Categories</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>Information</strong>
+          <ul>
+            <li>Help Center</li>
+            <li>Money Refund</li>
+            <li>Shipping</li>
+            <li>Contact us</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>For users</strong>
+          <ul>
+            <li>Login</li>
+            <li>Register</li>
+            <li>Settings</li>
+            <li>My Orders</li>
+          </ul>
+        </div>
+        <div class="ui-col-apps">
+          <strong>Get app</strong>
+          <img
+            src="Assets/playstore.png"
+            alt="Download on the App Store"
+            class="ui-app-badge"
+          />
+          <img
+            src="Assets/googleplay.png"
+            alt="Get it on Google Play"
+            class="ui-app-badge"
+          />
+        </div>
+      </div>
+      <div class="ui-footer-bottom">
+        <div class="ui-container ui-footer-bottom-inner">
+          <span>© 2023 Ecommerce.</span>
+
+          <div class="ui-dropdown-wrapper ui-footer-dropdown">
+            <span
+              class="ui-language"
+              style="display: flex; align-items: center; color: #1c1c1c"
+            >
+              <img
+                src="https://flagcdn.com/w20/us.png"
+                alt="US"
+                class="ui-dropdown-flag"
+                style="margin-right: 6px"
+              />
+              English ⌃
+            </span>
+            <ul class="ui-dropdown-menu ui-dropup-menu">
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/us.png"
+                    alt="US"
+                    class="ui-dropdown-flag"
+                  />
+                  English</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/es.png"
+                    alt="ES"
+                    class="ui-dropdown-flag"
+                  />
+                  Spanish</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/de.png"
+                    alt="DE"
+                    class="ui-dropdown-flag"
+                  />
+                  German</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Mobile Side Nav Logic ---
+        const menuBtn = document.getElementById("ui-menu-btn");
+        const closeBtn = document.getElementById("ui-close-btn");
+        const sideNav = document.getElementById("ui-side-nav");
+
+        // Create the dark overlay for the mobile menu
+        const overlay = document.createElement("div");
+        overlay.className = "ui-nav-overlay";
+        document.body.appendChild(overlay);
+
+        function openNav() {
+          sideNav.classList.add("ui-active");
+          overlay.classList.add("ui-active");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeNav() {
+          sideNav.classList.remove("ui-active");
+          overlay.classList.remove("ui-active");
+          document.body.style.overflow = "";
+        }
+
+        if (menuBtn) menuBtn.addEventListener("click", openNav);
+        if (closeBtn) closeBtn.addEventListener("click", closeNav);
+        overlay.addEventListener("click", closeNav);
+
+        // --- Deals Countdown Timer Logic ---
+        const hoursEl = document.getElementById("ui-cd-hours");
+        const minsEl = document.getElementById("ui-cd-mins");
+        const secsEl = document.getElementById("ui-cd-secs");
+
+        if (hoursEl && minsEl && secsEl) {
+          let timeInSeconds = 13 * 3600 + 34 * 60 + 56;
+
+          const timer = setInterval(() => {
+            timeInSeconds--;
+
+            const hours = Math.floor(timeInSeconds / 3600);
+            const minutes = Math.floor((timeInSeconds % 3600) / 60);
+            const seconds = timeInSeconds % 60;
+
+            // Update DOM
+            hoursEl.innerText = String(hours).padStart(2, "0");
+            minsEl.innerText = String(minutes).padStart(2, "0");
+            secsEl.innerText = String(seconds).padStart(2, "0");
+
+            if (timeInSeconds <= 0) {
+              clearInterval(timer);
+              hoursEl.innerText = "00";
+              minsEl.innerText = "00";
+              secsEl.innerText = "00";
+            }
+          }, 1000);
+        }
+
+        // --- Desktop Sidebar Selection Logic ---
+        const sidebarItems = document.querySelectorAll(
+          ".ui-side-categories ul li",
+        );
+
+        sidebarItems.forEach((item) => {
+          item.addEventListener("click", function (e) {
+            // Allows the link to actually route to products.html, but if it's #, stops jumping
+            if (this.querySelector("a").getAttribute("href") === "#") {
+              e.preventDefault();
+            }
+            sidebarItems.forEach((li) => li.classList.remove("ui-active"));
+            this.classList.add("ui-active");
+          });
+        });
+
+        // --- NEW: Mobile Pills Routing ---
+        const mobilePills = document.querySelectorAll(
+          ".ui-mobile-category-pills .ui-pill",
+        );
+        mobilePills.forEach((pill) => {
+          pill.addEventListener("click", function (e) {
+            e.preventDefault();
+            const categoryName = this.innerText.trim();
+            // Route to products page with the CATEGORY parameter
+            window.location.href = `products.html?category=${encodeURIComponent(categoryName)}`;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

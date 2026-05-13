@@ -1,0 +1,1409 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details - Brand E-commerce</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
+
+    <aside class="ui-side-nav-mobile" id="ui-side-nav">
+      <div class="ui-nav-user-header">
+        <button id="ui-close-btn" class="ui-close-btn" aria-label="Close Menu">
+          ✕
+        </button>
+        <div class="ui-avatar-circle">
+          <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
+        </div>
+        <div class="ui-auth-text">Sign in | Register</div>
+      </div>
+      <ul class="ui-nav-links">
+        <li>
+          <a href="home.html"><span class="ui-nav-icon">🏠</span> Home</a>
+        </li>
+        <li>
+          <a href="products.html?category=All category"
+            ><span class="ui-nav-icon">📋</span> Categories</a
+          >
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
+        </li>
+        <li>
+          <a href="cart.html"><span class="ui-nav-icon">📦</span> My orders</a>
+        </li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links">
+        <li>
+          <a href="#"><span class="ui-nav-icon">🌐</span> English | USD</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">🎧</span> Contact us</a>
+        </li>
+        <li>
+          <a href="#"><span class="ui-nav-icon">🏢</span> About</a>
+        </li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links ui-no-icon">
+        <li><a href="#">User agreement</a></li>
+        <li><a href="#">Partnership</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </aside>
+
+    <div class="ui-desktop-only">
+      <header class="ui-page-header ui-container">
+        <div class="ui-header-top-row">
+          <div class="ui-logo-area">
+            <button
+              id="ui-menu-btn"
+              class="ui-menu-btn ui-mobile-only"
+              aria-label="Open Menu"
+              style="
+                background: transparent;
+                border: none;
+                padding: 0;
+                display: flex;
+                color: #1c1c1c;
+                cursor: pointer;
+              "
+            >
+              <i class="ph ph-list" style="font-size: 26px"></i>
+            </button>
+
+            <a href="home.html" class="ui-logo-wrapper">
+              <img
+                src="Assets/Brand/logo-symbol.svg"
+                alt="Brand Logo"
+                class="ui-brand-logo-img"
+              />
+              <div class="ui-logo-text">Brand</div>
+            </a>
+          </div>
+
+          <form
+            class="ui-search-form ui-desktop-only-flex"
+            action="products.html"
+            method="GET"
+          >
+            <input
+              type="search"
+              name="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <select class="ui-search-category-dropdown" name="category">
+              <option value="All category">All category</option>
+              <option value="Automobiles">Automobiles</option>
+              <option value="Clothes and wear">Clothes and wear</option>
+              <option value="Home and outdoor">Home and outdoor</option>
+              <option value="Computer and tech">Computer and tech</option>
+              <option value="Tools, equipments">Tools, equipments</option>
+              <option value="Sports and outdoor">Sports and outdoor</option>
+              <option value="Animal and pets">Animal and pets</option>
+              <option value="Machinery tools">Machinery tools</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Smartphones">Smartphones</option>
+              <option value="Mobile accessory">Mobile accessory</option>
+            </select>
+            <button type="submit" class="ui-button-search">Search</button>
+          </form>
+
+          <div class="ui-header-actions ui-desktop-only-flex">
+            <div class="ui-action-item">
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="ui-icon"
+                id="c1"
+              >
+                <path
+                  d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
+                /></svg
+              ><span class="ui-label">Profile</span>
+            </div>
+            <div class="ui-action-item">
+              <span class="ui-icon"
+                ><i
+                  class="ph-fill ph-chat-teardrop-dots"
+                  style="font-size: 24px"
+                ></i></span
+              ><span class="ui-label">Message</span>
+            </div>
+            <div class="ui-action-item">
+              <span class="ui-icon"
+                ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
+              ><span class="ui-label">Orders</span>
+            </div>
+            <a
+              href="cart.html"
+              class="ui-action-item"
+              style="text-decoration: none; color: inherit"
+              ><span class="ui-icon"
+                ><i
+                  class="ph-fill ph-shopping-cart"
+                  style="font-size: 24px"
+                ></i></span
+              ><span class="ui-label">My cart</span></a
+            >
+          </div>
+        </div>
+      </header>
+
+      <nav class="ui-category-nav ui-desktop-only-flex">
+        <div class="ui-container ui-nav-container">
+          <ul class="ui-nav-main-links">
+            <li>
+              <a href="products.html?category=All category"
+                ><i class="ph ph-list" style="font-size: 18px"></i> All
+                category</a
+              >
+            </li>
+            <li><a href="#">Hot offers</a></li>
+            <li><a href="#">Gift boxes</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Menu item</a></li>
+            <li><a href="#">Help ▾</a></li>
+          </ul>
+          <div class="ui-nav-utils">
+            <div class="ui-dropdown-wrapper">
+              <span class="ui-language">English, USD ▾</span>
+              <ul class="ui-dropdown-menu">
+                <li><a href="#">English, USD</a></li>
+                <li><a href="#">German, EUR</a></li>
+                <li><a href="#">French, EUR</a></li>
+              </ul>
+            </div>
+            <div class="ui-dropdown-wrapper">
+              <span
+                class="ui-shipping"
+                style="display: flex; align-items: center"
+                >Ship to
+                <img
+                  src="https://flagcdn.com/w20/de.png"
+                  alt="DE"
+                  class="ui-dropdown-flag"
+                  style="margin-left: 6px; margin-right: 2px"
+                />
+                ▾</span
+              >
+              <ul class="ui-dropdown-menu">
+                <li>
+                  <a href="#"
+                    ><img
+                      src="https://flagcdn.com/w20/de.png"
+                      alt="DE"
+                      class="ui-dropdown-flag"
+                    />
+                    Germany</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img
+                      src="https://flagcdn.com/w20/us.png"
+                      alt="US"
+                      class="ui-dropdown-flag"
+                    />
+                    United States</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="ui-mobile-details-top-bar ui-mobile-only-flex">
+      <a href="products.html" class="ui-back-arrow"
+        ><i class="ph ph-arrow-left" style="font-size: 24px"></i
+      ></a>
+      <div class="ui-header-actions ui-mobile-only-flex">
+        <a href="cart.html" class="ui-icon ui-cart" style="color: inherit">
+          <i class="ph ph-shopping-cart" style="font-size: 24px"></i>
+        </a>
+        <a href="#" class="ui-icon ui-profile" style="color: inherit">
+          <i class="ph ph-user" style="font-size: 24px"></i>
+        </a>
+      </div>
+    </div>
+
+    <main class="ui-container">
+      <div class="ui-breadcrumb ui-desktop-only-flex">
+        <a href="home.html">Home</a> <span class="ui-separator">&gt;</span>
+        <a href="products.html" id="ui-bc-category">Category</a>
+        <span class="ui-separator">&gt;</span>
+        <span class="ui-current" id="ui-bc-title">Product Name</span>
+      </div>
+
+      <div class="ui-product-top-card">
+        <div class="ui-gallery-section">
+          <div class="ui-main-image-box">
+            <img id="ui-pd-main-img" src="" alt="Product Image" />
+            <div class="ui-mobile-gallery-arrows ui-mobile-only-flex">
+              <button>❮</button><button>❯</button>
+            </div>
+          </div>
+          <div class="ui-thumbnail-list ui-desktop-only-flex">
+            <div class="ui-thumb ui-active">
+              <img src="" class="ui-pd-thumb-img" alt="Thumb" />
+            </div>
+            <div class="ui-thumb">
+              <img src="" class="ui-pd-thumb-img" alt="Thumb" />
+            </div>
+            <div class="ui-thumb">
+              <img src="" class="ui-pd-thumb-img" alt="Thumb" />
+            </div>
+            <div class="ui-thumb">
+              <img src="" class="ui-pd-thumb-img" alt="Thumb" />
+            </div>
+            <div class="ui-thumb">
+              <img src="" class="ui-pd-thumb-img" alt="Thumb" />
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-info-section">
+          <div class="ui-stock-status ui-desktop-only">✓ In stock</div>
+
+          <div class="ui-rating-row">
+            <span class="ui-stars" id="ui-pd-stars"></span>
+            <span
+              class="ui-rating-num"
+              id="ui-pd-rating"
+              style="display: none"
+            ></span>
+            <span class="ui-dot ui-desktop-only">•</span>
+            <span class="ui-reviews-count" id="ui-pd-reviews"></span>
+            <span class="ui-dot">•</span>
+            <span class="ui-sold-count" id="ui-pd-orders"></span>
+          </div>
+
+          <h1 id="ui-pd-title">Product Title</h1>
+
+          <div class="ui-mobile-price-row ui-mobile-only-flex">
+            <span id="ui-mobile-price-main">$0.00</span>
+            <span class="ui-qty-label">(50-100 pcs)</span>
+          </div>
+
+          <div class="ui-pricing-tiers ui-desktop-only-flex">
+            <div class="ui-tier ui-tier-highlight">
+              <div class="ui-tier-price" id="ui-pd-price-1">$98.00</div>
+              <div class="ui-tier-qty">50-100 pcs</div>
+            </div>
+            <div class="ui-tier">
+              <div class="ui-tier-price" id="ui-pd-price-2">$90.00</div>
+              <div class="ui-tier-qty">100-700 pcs</div>
+            </div>
+            <div class="ui-tier">
+              <div class="ui-tier-price" id="ui-pd-price-3">$78.00</div>
+              <div class="ui-tier-qty">700+ pcs</div>
+            </div>
+          </div>
+
+          <div class="ui-mobile-action-row ui-mobile-only-flex">
+            <button class="ui-button-primary">Send inquiry</button>
+            <button class="ui-fav-btn-mobile">
+              <i class="ph ph-heart" style="font-size: 20px"></i>
+            </button>
+          </div>
+
+          <div class="ui-attributes-grid" id="ui-pd-attributes"></div>
+
+          <div class="ui-mobile-desc ui-mobile-only">
+            <p id="ui-mobile-desc-text"></p>
+            <a
+              href="javascript:void(0)"
+              class="ui-read-more"
+              id="ui-read-more-btn"
+              >Read more</a
+            >
+          </div>
+        </div>
+
+        <div class="ui-supplier-section">
+          <div class="ui-supplier-card">
+            <div class="ui-supplier-header">
+              <div class="ui-supplier-logo">R</div>
+              <div class="ui-supplier-name">
+                <span class="ui-title">Supplier</span><br />
+                Guanjoi Trading LLC
+              </div>
+            </div>
+            <ul class="ui-supplier-details">
+              <li>
+                <img
+                  src="https://flagcdn.com/w20/de.png"
+                  alt="DE"
+                  class="ui-s-icon"
+                />
+                Germany
+              </li>
+              <li><span class="ui-s-icon">✓</span> Verified</li>
+              <li><span class="ui-s-icon">🌐</span> Shipping</li>
+            </ul>
+            <button class="ui-button-primary ui-w-100 ui-mt-15 ui-desktop-only">
+              Send inquiry
+            </button>
+            <button
+              class="ui-button-secondary ui-w-100 ui-mt-10 ui-desktop-only"
+            >
+              Seller's profile
+            </button>
+          </div>
+          <div class="ui-save-later ui-desktop-only">
+            <button class="ui-save-btn">
+              <i
+                class="ph ph-heart"
+                style="font-size: 18px; margin-right: 6px"
+              ></i>
+              Save for later
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-product-bottom-layout ui-desktop-only">
+        <div class="ui-tabs-container">
+          <div class="ui-tabs-header">
+            <div class="ui-tab ui-active">Description</div>
+            <div class="ui-tab">Reviews</div>
+            <div class="ui-tab">Shipping</div>
+            <div class="ui-tab">About seller</div>
+          </div>
+          <div class="ui-tab-content">
+            <div class="ui-tab-pane" style="display: block">
+              <p id="ui-pd-desc">Lorem ipsum dolor sit amet...</p>
+              <table class="ui-specs-table" id="ui-pd-specs"></table>
+              <ul class="ui-feature-checks" id="ui-pd-features"></ul>
+            </div>
+
+            <div class="ui-tab-pane" style="display: none">
+              <p style="color: #505050; padding: 20px 0">
+                No written reviews yet for this product. Be the first to review!
+              </p>
+            </div>
+
+            <div class="ui-tab-pane" style="display: none">
+              <ul
+                style="
+                  color: #505050;
+                  line-height: 1.8;
+                  list-style-type: disc;
+                  margin-left: 20px;
+                "
+              >
+                <li><strong>Standard Shipping:</strong> 5-7 business days.</li>
+                <li><strong>Express Shipping:</strong> 2-3 business days.</li>
+                <li><strong>International:</strong> 10-15 business days.</li>
+              </ul>
+            </div>
+
+            <div class="ui-tab-pane" style="display: none">
+              <p style="color: #505050">
+                <strong>Guanjoi Trading LLC</strong><br />A verified seller from
+                Germany providing top-quality electronics, home goods, and
+                apparel since 2018.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="ui-you-may-like">
+          <h3>You may like</h3>
+          <div class="ui-yml-list" id="ui-yml-container"></div>
+        </aside>
+      </div>
+
+      <section class="ui-related-products-block">
+        <h3
+          class="ui-mobile-only"
+          style="font-size: 18px; margin-bottom: 15px; font-weight: 600"
+        >
+          Similar products
+        </h3>
+        <h3 class="ui-desktop-only">Related products</h3>
+
+        <div class="ui-related-grid" id="ui-related-container"></div>
+      </section>
+
+      <section class="ui-super-discount-banner ui-desktop-only-flex">
+        <div class="ui-banner-text">
+          <h2>Super discount on more than 100 USD</h2>
+          <p>Have you ever finally just write dummy info</p>
+        </div>
+        <button class="ui-btn-orange">Shop now</button>
+      </section>
+    </main>
+
+    <div class="ui-newsletter-wrapper">
+      <section class="ui-container ui-newsletter-block">
+        <h3>Subscribe on our newsletter</h3>
+        <p>
+          Get daily news on upcoming offers from many suppliers all over the
+          world
+        </p>
+        <form>
+          <div class="ui-input-with-icon">
+            <i
+              class="ph ph-envelope-simple"
+              style="font-size: 20px; color: #8b96a5"
+            ></i>
+            <input
+              type="email"
+              placeholder="Email"
+              aria-label="Email Address"
+            />
+          </div>
+          <button type="submit" class="ui-button-primary">Subscribe</button>
+        </form>
+      </section>
+    </div>
+
+    <footer class="ui-site-footer">
+      <div class="ui-container ui-footer-columns">
+        <div class="ui-col-main ui-logo">
+          <div class="ui-logo-wrapper" style="margin-bottom: 15px">
+            <img
+              src="Assets/Brand/logo-symbol.svg"
+              alt="Brand Logo"
+              class="ui-brand-logo-img"
+            />
+
+            <div class="ui-logo-text">Brand</div>
+          </div>
+
+          <p>
+            Best information about the company<br />goes here but now lorem
+            ipsum is
+          </p>
+          <div class="ui-social-links">
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-facebook-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-twitter-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-linkedin-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-instagram-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+            <a href="#" class="ui-social-circle"
+              ><i
+                class="ph-fill ph-youtube-logo"
+                style="color: white; font-size: 18px"
+              ></i
+            ></a>
+          </div>
+        </div>
+        <div class="ui-col">
+          <strong>About</strong>
+          <ul>
+            <li>About Us</li>
+            <li>Find store</li>
+            <li>Categories</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>Partnership</strong>
+          <ul>
+            <li>About Us</li>
+            <li>Find store</li>
+            <li>Categories</li>
+            <li>Blogs</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>Information</strong>
+          <ul>
+            <li>Help Center</li>
+            <li>Money Refund</li>
+            <li>Shipping</li>
+            <li>Contact us</li>
+          </ul>
+        </div>
+        <div class="ui-col">
+          <strong>For users</strong>
+          <ul>
+            <li>Login</li>
+            <li>Register</li>
+            <li>Settings</li>
+            <li>My Orders</li>
+          </ul>
+        </div>
+        <div class="ui-col-apps">
+          <strong>Get app</strong>
+          <img
+            src="Assets/playstore.png"
+            alt="Download on the App Store"
+            class="ui-app-badge"
+          />
+          <img
+            src="Assets/googleplay.png"
+            alt="Get it on Google Play"
+            class="ui-app-badge"
+          />
+        </div>
+      </div>
+      <div class="ui-footer-bottom">
+        <div class="ui-container ui-footer-bottom-inner">
+          <span>© 2023 Ecommerce.</span>
+
+          <div class="ui-dropdown-wrapper ui-footer-dropdown">
+            <span
+              class="ui-language"
+              style="display: flex; align-items: center; color: #1c1c1c"
+            >
+              <img
+                src="https://flagcdn.com/w20/us.png"
+                alt="US"
+                class="ui-dropdown-flag"
+                style="margin-right: 6px"
+              />
+              English ⌃
+            </span>
+            <ul class="ui-dropdown-menu ui-dropup-menu">
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/us.png"
+                    alt="US"
+                    class="ui-dropdown-flag"
+                  />
+                  English</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/es.png"
+                    alt="ES"
+                    class="ui-dropdown-flag"
+                  />
+                  Spanish</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><img
+                    src="https://flagcdn.com/w20/de.png"
+                    alt="DE"
+                    class="ui-dropdown-flag"
+                  />
+                  German</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Mobile Side Nav Logic ---
+        const menuBtn = document.getElementById("ui-menu-btn");
+        const closeBtn = document.getElementById("ui-close-btn");
+        const sideNav = document.getElementById("ui-side-nav");
+
+        const overlay = document.createElement("div");
+        overlay.className = "ui-nav-overlay";
+        document.body.appendChild(overlay);
+
+        function openNav() {
+          sideNav.classList.add("ui-active");
+          overlay.classList.add("ui-active");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeNav() {
+          sideNav.classList.remove("ui-active");
+          overlay.classList.remove("ui-active");
+          document.body.style.overflow = "";
+        }
+
+        if (menuBtn) menuBtn.addEventListener("click", openNav);
+        if (closeBtn) closeBtn.addEventListener("click", closeNav);
+        overlay.addEventListener("click", closeNav);
+
+        // --- Deals Countdown Timer Logic ---
+        const hoursEl = document.getElementById("ui-cd-hours");
+        const minsEl = document.getElementById("ui-cd-mins");
+        const secsEl = document.getElementById("ui-cd-secs");
+
+        if (hoursEl && minsEl && secsEl) {
+          let timeInSeconds = 13 * 3600 + 34 * 60 + 56;
+          const timer = setInterval(() => {
+            timeInSeconds--;
+            const hours = Math.floor(timeInSeconds / 3600);
+            const minutes = Math.floor((timeInSeconds % 3600) / 60);
+            const seconds = timeInSeconds % 60;
+
+            hoursEl.innerText = String(hours).padStart(2, "0");
+            minsEl.innerText = String(minutes).padStart(2, "0");
+            secsEl.innerText = String(seconds).padStart(2, "0");
+
+            if (timeInSeconds <= 0) {
+              clearInterval(timer);
+              hoursEl.innerText = "00";
+              minsEl.innerText = "00";
+              secsEl.innerText = "00";
+            }
+          }, 1000);
+        }
+
+        const sidebarItems = document.querySelectorAll(
+          ".ui-side-categories ul li",
+        );
+        sidebarItems.forEach((item) => {
+          item.addEventListener("click", function (e) {
+            if (this.querySelector("a").getAttribute("href") === "#") {
+              e.preventDefault();
+            }
+            sidebarItems.forEach((li) => li.classList.remove("ui-active"));
+            this.classList.add("ui-active");
+          });
+        });
+
+        const mobilePills = document.querySelectorAll(
+          ".ui-mobile-category-pills .ui-pill",
+        );
+        mobilePills.forEach((pill) => {
+          pill.addEventListener("click", function (e) {
+            e.preventDefault();
+            const categoryName = this.innerText.trim();
+            window.location.href = `products.html?category=${encodeURIComponent(categoryName)}`;
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. EXACT DATABASE PROVIDED
+        const productsDatabase = [
+          {
+            id: 1,
+            title: "Canon Camera EOS 2000, Black 10x zoom",
+            category: "Electronics",
+            brand: "Canon",
+            features: ["Plastic cover", "8GB Ram"],
+            condition: "Refurbished",
+            price: 74.0,
+            oldPrice: 110.0,
+            rating: 5,
+            verified: true,
+            orders: 230,
+            image: "Assets/Image/tech/cameras.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+
+          {
+            id: 4,
+            title: "iPhone 13 Pro Max - 256GB Blue",
+            category: "Smartphones",
+            brand: "Apple",
+            features: ["Metallic", "Large Memory"],
+            condition: "Brand new",
+            price: 949.0,
+            oldPrice: 1199.0,
+            rating: 5,
+            verified: false,
+            orders: 870,
+            image: "Assets/Image/tech/iphone.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 5,
+            title: "Lenovo ThinkPad X1 Carbon",
+            category: "Computer and tech",
+            brand: "Lenovo",
+            features: ["Plastic cover", "8GB Ram"],
+            condition: "Brand new",
+            price: 299.0,
+            oldPrice: 420.0,
+            rating: 3,
+            verified: false,
+            orders: 510,
+            image: "Assets/Image/tech/laptop.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 6,
+            title: "Sony Noise Cancelling Headphones",
+            category: "Mobile accessory",
+            brand: "Sony",
+            features: ["Plastic cover"],
+            condition: "Refurbished",
+            price: 14.5,
+            oldPrice: 28.0,
+            rating: 4,
+            verified: true,
+            orders: 1750,
+            image: "Assets/Image/tech/headphone.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 7,
+            title: "Smartwatch Silver Color Modern",
+            category: "Mobile accessory",
+            brand: "Other",
+            features: ["Metallic"],
+            condition: "Brand new",
+            price: 22.0,
+            oldPrice: 35.0,
+            rating: 4,
+            verified: false,
+            orders: 180,
+            image: "Assets/Image/tech/smartwatches.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 8,
+            title: "Gaming Headset with Mic",
+            category: "Mobile accessory",
+            brand: "Other",
+            features: ["Plastic cover"],
+            condition: "Brand new",
+            price: 12.49,
+            oldPrice: 19.0,
+            rating: 5,
+            verified: true,
+            orders: 640,
+            image: "Assets/Image/tech/gaming.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 9,
+            title: "10-inch Android Tablet",
+            category: "Electronics",
+            brand: "Samsung",
+            features: ["Large Memory"],
+            condition: "Refurbished",
+            price: 75.0,
+            oldPrice: 105.0,
+            rating: 3,
+            verified: true,
+            orders: 95,
+            image: "Assets/Image/tech/tablet.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 10,
+            title: "T-shirts with multiple colors, for men",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 8.99,
+            oldPrice: 13.0,
+            rating: 5,
+            verified: true,
+            orders: 720,
+            image: "Assets/Image/cloth/tshirt.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 11,
+            title: "Brown winter coat medium size",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 15.99,
+            oldPrice: 24.0,
+            rating: 4,
+            verified: true,
+            orders: 88,
+            image: "Assets/Image/cloth/jacket.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 12,
+            title: "Jeans shorts for men blue color",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 7.5,
+            oldPrice: 12.0,
+            rating: 4,
+            verified: false,
+            orders: 140,
+            image: "Assets/Image/cloth/shorts.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 13,
+            title: "Jeans bag for travel for men",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 28.0,
+            oldPrice: 42.0,
+            rating: 3,
+            verified: true,
+            orders: 310,
+            image: "Assets/Image/cloth/bag.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 14,
+            title: "Classic Leather Wallet",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 84.0,
+            oldPrice: 115.0,
+            rating: 4,
+            verified: true,
+            orders: 390,
+            image: "Assets/Image/cloth/wallet.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 15,
+            title: "Soft chairs Beige",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 14.0,
+            oldPrice: 26.0,
+            rating: 5,
+            verified: true,
+            orders: 60,
+            image: "Assets/Image/interior/softchair.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 16,
+            title: "Coffee maker in white color",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: ["Super power"],
+            condition: "Brand new",
+            price: 13.75,
+            oldPrice: null,
+            rating: 4,
+            verified: true,
+            orders: 270,
+            image: "Assets/Image/interior/coffee.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 17,
+            title: "Ceramic Kitchen Crockery Set",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 22.0,
+            oldPrice: 32.0,
+            rating: 5,
+            verified: false,
+            orders: 55,
+            image: "Assets/Image/interior/crockery.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 18,
+            title: "Modern Bedside Lamps",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 15.0,
+            oldPrice: 22.0,
+            rating: 3,
+            verified: true,
+            orders: 75,
+            image: "Assets/Image/interior/lamp.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 19,
+            title: "Kitchen Dishes Set",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 16.5,
+            oldPrice: 27.0,
+            rating: 4,
+            verified: false,
+            orders: 30,
+            image: "Assets/Image/interior/kitchen.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 20,
+            title: "Indoor Decorative Plants",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 85.0,
+            oldPrice: 110.0,
+            rating: 4,
+            verified: true,
+            orders: 155,
+            image: "Assets/Image/interior/plant.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 21,
+            title: "Electric Blenders",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: ["Super power"],
+            condition: "Brand new",
+            price: 33.0,
+            oldPrice: 48.0,
+            rating: 5,
+            verified: true,
+            orders: 410,
+            image: "Assets/Image/interior/blender.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 22,
+            title: "Travel Friendly Electric Kettle",
+            category: "Computer and tech",
+            brand: "Other",
+            features: ["Super power"],
+            condition: "Refurbished",
+            price: 69.95,
+            oldPrice: 95.0,
+            rating: 4,
+            verified: true,
+            orders: 880,
+            image: "Assets/Image/tech/kattle.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+          {
+            id: 23,
+            title: "General Home Appliance",
+            category: "Home and outdoor",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 24.0,
+            oldPrice: null,
+            rating: 3,
+            verified: false,
+            orders: 65,
+            image: "Assets/Image/interior/homeapp.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 24,
+            title: "iPhone 12 - Blue 128GB",
+            category: "Smartphones",
+            brand: "Apple",
+            features: ["Large Memory", "Super power"],
+            condition: "Refurbished",
+            price: 119.0,
+            oldPrice: 999.0,
+            rating: 4,
+            verified: true,
+            orders: 1320,
+            image: "Assets/Image/tech/Iphone2.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 25,
+            title: "Redmi Smartphone - Black",
+            category: "Smartphones",
+            brand: "Pocco",
+            features: ["Large Memory"],
+            condition: "Brand new",
+            price: 109.0,
+            oldPrice: null,
+            rating: 5,
+            verified: true,
+            orders: 960,
+            image: "Assets/Image/tech/redmi.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+
+          {
+            id: 27,
+            title: "Front Load Washing Machine",
+            category: "Home and outdoor",
+            brand: "Samsung",
+            features: ["Super power"],
+            condition: "Brand new",
+            price: 399.0,
+            oldPrice: 520.0,
+            rating: 3,
+            verified: true,
+            orders: 175,
+            image: "Assets/Image/interior/machine.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          },
+          {
+            id: 28,
+            title: "Men's Blue Polo Shirt",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Brand new",
+            price: 14.0,
+            oldPrice: 22.0,
+            rating: 5,
+            verified: false,
+            orders: 480,
+            image: "Assets/Image/cloth/blueshirt.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          },
+          {
+            id: 29,
+            title: "Men's Blue Suit Jacket",
+            category: "Clothes and wear",
+            brand: "Other",
+            features: [],
+            condition: "Refurbished",
+            price: 69.0,
+            oldPrice: 100.0,
+            rating: 4,
+            verified: true,
+            orders: 200,
+            image: "Assets/Image/cloth/coat.jpg",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          },
+        ];
+
+        // 2. DYNAMIC GENERATORS
+        function generateDynamicAttributes(product) {
+          let attrs = {
+            Condition: product.condition,
+            Brand: product.brand !== "Other" ? product.brand : "Generic",
+            "Price Type": "Negotiable",
+          };
+          if (
+            product.category === "Smartphones" ||
+            product.category === "Computer and tech" ||
+            product.category === "Electronics"
+          ) {
+            attrs["Material"] = product.features.includes("Metallic")
+              ? "Aluminum/Glass"
+              : "Polycarbonate";
+            attrs["Warranty"] = "1 Year Limited";
+            attrs["Protection"] = "Standard Electronics";
+          } else if (product.category === "Clothes and wear") {
+            attrs["Material"] = "Cotton/Polyester Blend";
+            attrs["Design"] = "Modern Fit";
+            attrs["Customization"] = "Available on request";
+          } else {
+            attrs["Material"] = "Mixed Materials";
+            attrs["Design"] = "Contemporary";
+            attrs["Warranty"] = "6 Months";
+          }
+          return attrs;
+        }
+
+        function generateDynamicSpecs(product) {
+          let specs = {
+            Model: `#${product.id}-${product.title.substring(0, 5).toUpperCase()}`,
+            Certificate: "ISO-898921212",
+          };
+          if (
+            product.category === "Smartphones" ||
+            product.category === "Computer and tech"
+          ) {
+            specs["Memory"] = product.features.includes("Large Memory")
+              ? "128GB+"
+              : "Standard";
+            specs["Style"] = "Tech Gadget";
+          } else if (product.category === "Clothes and wear") {
+            specs["Size"] = "M / L / XL";
+            specs["Style"] = "Classic style";
+          } else {
+            specs["Size"] = "Standard Dimensions";
+            specs["Style"] = "Home Decor/Utility";
+          }
+          return specs;
+        }
+
+        function generateStars(rating) {
+          let starsHTML = "";
+          for (let i = 1; i <= 5; i++) {
+            if (i <= rating) starsHTML += "★";
+            else starsHTML += '<span class="ui-half-star">★</span>';
+          }
+          return starsHTML;
+        }
+
+        // 3. GET URL ID & INITIALIZE PRODUCT
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get("id")) || 10;
+        const product =
+          productsDatabase.find((p) => p.id === productId) ||
+          productsDatabase[0];
+
+        const dynamicAttributes = generateDynamicAttributes(product);
+        const dynamicSpecs = generateDynamicSpecs(product);
+
+        // 4. POPULATE DOM
+        document.title = `${product.title} - Brand E-commerce`;
+
+        const setElemText = (id, text) => {
+          if (document.getElementById(id))
+            document.getElementById(id).innerText = text;
+        };
+        const setElemSrc = (id, src) => {
+          if (document.getElementById(id))
+            document.getElementById(id).src = src;
+        };
+
+        setElemText("ui-bc-category", product.category);
+        setElemText("ui-bc-title", product.title);
+        setElemSrc("ui-pd-main-img", product.image);
+        setElemText("ui-pd-title", product.title);
+        setElemText("ui-pd-desc", product.desc);
+
+        const starsContainer = document.getElementById("ui-pd-stars");
+        if (starsContainer)
+          starsContainer.innerHTML = generateStars(product.rating);
+        setElemText(
+          "ui-pd-rating",
+          product.rating % 1 === 0 ? product.rating + ".0" : product.rating,
+        );
+        setElemText(
+          "ui-pd-reviews",
+          `${Math.max(1, Math.floor(product.orders * 0.3))} reviews`,
+        );
+        setElemText("ui-pd-orders", `${product.orders} sold`);
+
+        setElemText("ui-pd-price-1", `$${product.price.toFixed(2)}`);
+        setElemText("ui-pd-price-2", `$${(product.price * 0.92).toFixed(2)}`);
+        setElemText("ui-pd-price-3", `$${(product.price * 0.8).toFixed(2)}`);
+        setElemText("ui-mobile-price-main", `$${product.price.toFixed(2)}`);
+
+        const mobileDescEl = document.getElementById("ui-mobile-desc-text");
+        const readMoreBtn = document.getElementById("ui-read-more-btn");
+        if (mobileDescEl && readMoreBtn) {
+          const fullDesc = product.desc;
+          const shortDesc =
+            fullDesc.length > 85 ? fullDesc.substring(0, 85) + "..." : fullDesc;
+          mobileDescEl.innerText = shortDesc;
+          if (fullDesc.length <= 85) readMoreBtn.style.display = "none";
+          readMoreBtn.addEventListener("click", function () {
+            if (this.innerText === "Read more") {
+              mobileDescEl.innerText = fullDesc;
+              this.innerText = "Read less";
+            } else {
+              mobileDescEl.innerText = shortDesc;
+              this.innerText = "Read more";
+            }
+          });
+        }
+
+        document.querySelectorAll(".ui-pd-thumb-img").forEach((img) => {
+          img.src = product.image;
+        });
+
+        const attrGrid = document.getElementById("ui-pd-attributes");
+        if (attrGrid) {
+          attrGrid.innerHTML = "";
+          let count = 0;
+          for (const [key, value] of Object.entries(dynamicAttributes)) {
+            attrGrid.innerHTML += `<div class="ui-attr-label">${key}:</div><div class="ui-attr-val">${value}</div>`;
+            count++;
+            if (
+              count % 2 === 0 &&
+              count < Object.keys(dynamicAttributes).length
+            )
+              attrGrid.innerHTML += `<div class="ui-attr-divider"></div><div class="ui-attr-divider"></div>`;
+          }
+        }
+
+        const specsTable = document.getElementById("ui-pd-specs");
+        if (specsTable) {
+          specsTable.innerHTML = "";
+          for (const [key, value] of Object.entries(dynamicSpecs))
+            specsTable.innerHTML += `<tr><td>${key}</td><td>${value}</td></tr>`;
+        }
+
+        const featuresList = document.getElementById("ui-pd-features");
+        if (featuresList) {
+          featuresList.innerHTML = "";
+          if (product.features && product.features.length > 0)
+            product.features.forEach(
+              (f) => (featuresList.innerHTML += `<li>✓ ${f}</li>`),
+            );
+          else
+            featuresList.innerHTML += `<li>✓ High quality material</li><li>✓ Satisfaction guaranteed</li>`;
+        }
+
+        // 5. "YOU MAY LIKE"
+        const ymlContainer = document.getElementById("ui-yml-container");
+        const sameCategoryProducts = productsDatabase
+          .filter((p) => p.category === product.category && p.id !== product.id)
+          .slice(0, 5);
+        const displayYml =
+          sameCategoryProducts.length > 0
+            ? sameCategoryProducts
+            : productsDatabase.slice(0, 5);
+        if (ymlContainer) {
+          ymlContainer.innerHTML = "";
+          displayYml.forEach((p) => {
+            ymlContainer.innerHTML += `
+                <a href="productDetail.html?id=${p.id}" class="ui-yml-item">
+                    <div class="ui-yml-img"><img src="${p.image}" alt="${p.title}"></div>
+                    <div class="ui-yml-info">
+                        <h4>${p.title}</h4>
+                        <span class="ui-price-range">$${p.price.toFixed(2)} - $${(p.price * 1.2).toFixed(2)}</span>
+                    </div>
+                </a>
+            `;
+          });
+        }
+
+        // 6. "RELATED PRODUCTS"
+        const relatedContainer = document.getElementById(
+          "ui-related-container",
+        );
+        const promotedProducts = productsDatabase
+          .filter((p) => p.id !== product.id)
+          .slice(5, 11);
+        if (relatedContainer) {
+          relatedContainer.innerHTML = "";
+          promotedProducts.forEach((p) => {
+            relatedContainer.innerHTML += `
+                <a href="productDetail.html?id=${p.id}" class="ui-related-card">
+                    <div class="ui-img-box"><img src="${p.image}" alt="${p.title}"></div>
+                    <h4>${p.title}</h4>
+                    <span class="ui-price">$${p.price.toFixed(2)} - $${(p.price * 1.2).toFixed(2)}</span>
+                </a>
+            `;
+          });
+        }
+
+        // 7. TABS LOGIC
+        const tabHeaders = document.querySelectorAll(".ui-tabs-header .ui-tab");
+        const tabPanes = document.querySelectorAll(
+          ".ui-tab-content .ui-tab-pane",
+        );
+        tabHeaders.forEach((tab, index) => {
+          tab.addEventListener("click", () => {
+            tabHeaders.forEach((t) => t.classList.remove("ui-active"));
+            tabPanes.forEach((p) => (p.style.display = "none"));
+            tab.classList.add("ui-active");
+            tabPanes[index].style.display = "block";
+          });
+        });
+
+        // 8. DYNAMIC MOBILE PILLS LOGIC
+        const mobilePills = document.querySelectorAll(
+          ".ui-mobile-category-pills .ui-pill",
+        );
+        mobilePills.forEach((pill) => {
+          if (pill.innerText.trim() === product.category) {
+            pill.classList.add("ui-active");
+            setTimeout(() => {
+              pill.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center",
+              });
+            }, 100);
+          }
+          pill.addEventListener("click", function (e) {
+            e.preventDefault();
+            const categoryName = this.innerText.trim();
+            window.location.href = `products.html?category=${encodeURIComponent(categoryName)}`;
+          });
+        });
+
+        // 9. ADD TO CART LOGIC
+        const primaryButtons = document.querySelectorAll(".ui-button-primary");
+
+        primaryButtons.forEach((btn) => {
+          if (
+            btn.innerText.includes("Send inquiry") ||
+            btn.innerText.includes("Add to cart")
+          ) {
+            btn.innerText = "Add to cart"; // Renames the button
+
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+
+              let cart = JSON.parse(localStorage.getItem("cart")) || [];
+              let existingItem = cart.find((item) => item.id === productId);
+
+              if (existingItem) {
+                existingItem.qty += 1;
+              } else {
+                cart.push({ id: productId, qty: 1 });
+              }
+
+              localStorage.setItem("cart", JSON.stringify(cart));
+
+              // Visual feedback for whichever button was clicked
+              btn.innerText = "✓ Added!";
+              btn.style.backgroundColor = "#00b517";
+              btn.style.borderColor = "#00b517";
+              btn.style.color = "#fff";
+
+              setTimeout(() => {
+                btn.innerText = "Add to cart";
+                btn.style.backgroundColor = "";
+                btn.style.borderColor = "";
+              }, 2000);
+            });
+          }
+        });
+
+        // 10. SAVE FOR LATER LOGIC
+        const saveBtns = document.querySelectorAll(
+          ".ui-save-btn, .ui-fav-btn-mobile",
+        );
+        saveBtns.forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            let saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+
+            if (!saved.includes(productId)) {
+              saved.push(productId);
+              localStorage.setItem("savedItems", JSON.stringify(saved));
+            }
+
+            // Visual Feedback
+            if (this.classList.contains("ui-save-btn")) {
+              this.innerHTML = `<i class="ph-fill ph-heart" style="font-size: 18px; margin-right: 6px; color: #fa3434;"></i> Saved`;
+            } else {
+              this.innerHTML = `<i class="ph-fill ph-heart" style="font-size: 20px; color: #fa3434;"></i>`;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
