@@ -10,6 +10,158 @@
     />
     <link rel="stylesheet" href="index.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
+    <style>
+      /* ── Inquiry modals ── */
+      .inq-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .inq-modal-overlay.open {
+        display: flex;
+      }
+      .inq-modal-box {
+        background: #fff;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+        animation: inqModalIn 0.2s ease;
+        font-family: Inter, sans-serif;
+        overflow: hidden;
+      }
+      @keyframes inqModalIn {
+        from {
+          transform: scale(0.95);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .inq-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px 14px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .inq-modal-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1c1c1c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .inq-modal-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #8b96a5;
+        line-height: 1;
+        padding: 2px 6px;
+        border-radius: 4px;
+        transition: background 0.15s;
+      }
+      .inq-modal-close:hover {
+        background: #f0f0f0;
+        color: #1c1c1c;
+      }
+      .inq-modal-body {
+        padding: 28px 24px 20px;
+        text-align: center;
+      }
+      .inq-modal-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 30px;
+      }
+      .inq-modal-icon.warning {
+        background: #fff3e0;
+      }
+      .inq-modal-icon.confirm {
+        background: #e3f0ff;
+      }
+      .inq-modal-icon.success {
+        background: #e8f9ed;
+      }
+      .inq-modal-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1c1c1c;
+        margin: 0 0 8px;
+      }
+      .inq-modal-subtitle {
+        font-size: 13px;
+        color: #8b96a5;
+        line-height: 1.6;
+        margin: 0;
+      }
+      .inq-modal-preview {
+        background: #f7fafc;
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin: 14px 0 4px;
+        font-size: 13px;
+        color: #505050;
+        text-align: left;
+        line-height: 1.7;
+      }
+      .inq-modal-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        padding: 4px 24px 22px;
+      }
+      .inq-modal-btn-primary {
+        background: #0d7dfa;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.15s;
+        font-family: Inter, sans-serif;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .inq-modal-btn-primary:hover {
+        background: #0b6cd8;
+      }
+      .inq-modal-btn-secondary {
+        background: #fff;
+        color: #1c1c1c;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 10px 22px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.15s;
+        font-family: Inter, sans-serif;
+      }
+      .inq-modal-btn-secondary:hover {
+        background: #f7fafc;
+      }
+    </style>
   </head>
   <body>
     <aside class="ui-side-nav-mobile" id="ui-side-nav">
@@ -35,7 +187,7 @@
           <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
         </li>
         <li>
-          <a href="#"><span class="ui-nav-icon">📦</span> My orders</a>
+          <a href="order.html"><span class="ui-nav-icon">📦</span> My orders</a>
         </li>
       </ul>
       <hr class="ui-nav-divider" />
@@ -76,7 +228,6 @@
           >
             <i class="ph ph-list" style="font-size: 26px"></i>
           </button>
-
           <a href="home.html" class="ui-logo-wrapper">
             <img
               src="Assets/Brand/logo-symbol.svg"
@@ -113,7 +264,6 @@
           </select>
           <button type="submit" class="ui-button-search">Search</button>
         </form>
-
         <div class="ui-header-actions ui-desktop-only-flex">
           <div class="ui-action-item">
             <svg
@@ -124,35 +274,44 @@
             >
               <path
                 d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"
-              /></svg
-            ><span class="ui-label">Profile</span>
+              />
+            </svg>
+            <span class="ui-label">Profile</span>
           </div>
-          <div class="ui-action-item">
+          <a
+            href="messages.html"
+            class="ui-action-item"
+            style="text-decoration: none; color: inherit"
+          >
             <span class="ui-icon"
               ><i
                 class="ph-fill ph-chat-teardrop-dots"
                 style="font-size: 24px"
-              ></i></span
-            ><span class="ui-label">Message</span>
-          </div>
-          <div class="ui-action-item">
+              ></i
+            ></span>
+            <span class="ui-label">Message</span>
+          </a>
+          <a
+            href="order.html"
+            class="ui-action-item"
+            style="text-decoration: none; color: inherit"
+          >
             <span class="ui-icon"
-              ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
-            ><span class="ui-label">Orders</span>
-          </div>
+              ><i class="ph-fill ph-heart" style="font-size: 24px"></i
+            ></span>
+            <span class="ui-label">Orders</span>
+          </a>
           <a
             href="cart.html"
             class="ui-action-item"
             style="text-decoration: none; color: inherit"
-            ><span class="ui-icon"
-              ><i
-                class="ph-fill ph-shopping-cart"
-                style="font-size: 24px"
-              ></i></span
-            ><span class="ui-label">My cart</span></a
           >
+            <span class="ui-icon"
+              ><i class="ph-fill ph-shopping-cart" style="font-size: 24px"></i
+            ></span>
+            <span class="ui-label">My cart</span>
+          </a>
         </div>
-
         <div class="ui-header-actions ui-mobile-only-flex">
           <a href="cart.html" class="ui-icon ui-cart" style="color: inherit">
             <i class="ph ph-shopping-cart" style="font-size: 24px"></i>
@@ -162,7 +321,6 @@
           </a>
         </div>
       </div>
-
       <div class="ui-mobile-search-row ui-mobile-only">
         <form class="ui-search-form-mobile" action="products.html" method="GET">
           <span class="ui-search-icon-inline"
@@ -176,7 +334,6 @@
           />
         </form>
       </div>
-
       <div class="ui-mobile-category-pills ui-mobile-only-flex">
         <button class="ui-pill">All category</button>
         <button class="ui-pill">Clothes and wear</button>
@@ -220,8 +377,7 @@
                 alt="DE"
                 class="ui-dropdown-flag"
                 style="margin-left: 6px; margin-right: 2px"
-              />
-              ▾</span
+              />▾</span
             >
             <ul class="ui-dropdown-menu">
               <li>
@@ -314,7 +470,6 @@
             </li>
           </ul>
         </aside>
-
         <div class="ui-hero-banner">
           <div class="ui-banner-content">
             <h3>Latest trending</h3>
@@ -332,30 +487,34 @@
             class="ui-banner-bg-img"
           />
         </div>
-
         <div class="ui-hero-user-cards ui-desktop-only-flex">
-          <div class="ui-card ui-card-login">
+          <div class="ui-card ui-card-login" id="hero-user-card">
             <div class="ui-user-header">
               <div class="ui-user-avatar">
                 <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
               </div>
-              <h4>
-                Hi, user <br />
-                let's get started
-              </h4>
+              <h4 id="hero-greeting">Hi, user <br />let's get started</h4>
             </div>
-            <button class="ui-btn-join">Join now</button>
-            <button class="ui-btn-login">Log in</button>
+            <button
+              class="ui-btn-join"
+              id="hero-join-btn"
+              onclick="openLoginModal('register')"
+            >
+              Join now
+            </button>
+            <button
+              class="ui-btn-login"
+              id="hero-login-btn"
+              onclick="openLoginModal('login')"
+            >
+              Log in
+            </button>
           </div>
           <div class="ui-card ui-card-promo">
-            Get US $10 off <br />
-            with a new <br />
-            supplier
+            Get US $10 off <br />with a new <br />supplier
           </div>
           <div class="ui-card ui-card-quotes">
-            Send quotes with <br />
-            supplier <br />
-            preferences
+            Send quotes with <br />supplier <br />preferences
           </div>
         </div>
       </section>
@@ -635,120 +794,121 @@
         </div>
         <div class="ui-quote-form-card ui-desktop-only">
           <h3>Send quote to suppliers</h3>
-          <input type="text" placeholder="What item you need?" />
-          <textarea placeholder="Type more details" rows="3"></textarea>
+          <input
+            type="text"
+            placeholder="What item you need?"
+            id="inquiry-item"
+          />
+          <textarea
+            id="inquiry-text"
+            placeholder="Type more details"
+            rows="3"
+          ></textarea>
           <div class="ui-quantity-row">
-            <input type="text" placeholder="Quantity" />
-            <select>
+            <input type="text" placeholder="Quantity" id="inquiry-qty" />
+            <select id="inquiry-unit">
               <option>Pcs</option>
               <option>Kg</option>
               <option>Box</option>
             </select>
           </div>
-          <button class="ui-button-primary">Send inquiry</button>
+          <button id="send-inquiry-btn" class="ui-button-primary">
+            Send inquiry
+          </button>
         </div>
       </section>
 
       <section class="ui-recommended-items">
         <h3>Recommended items</h3>
         <div class="ui-products-container ui-grid-recommended">
-          <a href="productDetail.html?id=10" class="ui-product-card">
-            <div class="ui-img-placeholder">
+          <a href="productDetail.html?id=10" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img
                 src="Assets/Image/cloth/tshirt.jpg"
                 alt="T-shirts with multiple colors"
               />
             </div>
             <h4>$8.99</h4>
-            <p>T-shirts with multiple colors, for men</p>
-          </a>
-
-          <a href="productDetail.html?id=12" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>T-shirts with multiple colors, for men</p></a
+          >
+          <a href="productDetail.html?id=12" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img
                 src="Assets/Image/cloth/shorts.jpg"
                 alt="Jeans shorts for men"
               />
             </div>
             <h4>$7.50</h4>
-            <p>Jeans shorts for men blue color</p>
-          </a>
-
-          <a href="productDetail.html?id=11" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Jeans shorts for men blue color</p></a
+          >
+          <a href="productDetail.html?id=11" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img
                 src="Assets/Image/cloth/jacket.jpg"
                 alt="Brown winter coat medium"
               />
             </div>
             <h4>$15.99</h4>
-            <p>Brown winter coat medium size</p>
-          </a>
-
-          <a href="productDetail.html?id=13" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Brown winter coat medium size</p></a
+          >
+          <a href="productDetail.html?id=13" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img
                 src="Assets/Image/cloth/bag.jpg"
                 alt="Jeans bag for travel"
               />
             </div>
             <h4>$28.00</h4>
-            <p>Jeans bag for travel for men</p>
-          </a>
-
-          <a href="productDetail.html?id=14" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Jeans bag for travel for men</p></a
+          >
+          <a href="productDetail.html?id=14" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img src="Assets/Image/cloth/wallet.jpg" alt="Leather wallet" />
             </div>
             <h4>$84.00</h4>
-            <p>Leather wallet</p>
-          </a>
-
-          <a href="productDetail.html?id=24" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Leather wallet</p></a
+          >
+          <a href="productDetail.html?id=24" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img src="Assets/Image/tech/iphone.jpg" alt="SmartPhones" />
             </div>
             <h4>$949.00</h4>
-            <p>Iphone 12, Blue Color 128GB</p>
-          </a>
-
-          <a href="productDetail.html?id=8" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Iphone 12, Blue Color 128GB</p></a
+          >
+          <a href="productDetail.html?id=8" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img
                 src="Assets/Image/tech/gaming.jpg"
                 alt="Headset for gaming"
               />
             </div>
             <h4>$12.49</h4>
-            <p>Headset for gaming with mic</p>
-          </a>
-
-          <a href="productDetail.html?id=7" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Headset for gaming with mic</p></a
+          >
+          <a href="productDetail.html?id=7" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img
                 src="Assets/Image/tech/smartwatches.jpg"
                 alt="Smartwatch silver color"
               />
             </div>
             <h4>$22.00</h4>
-            <p>Smartwatch silver color modern</p>
-          </a>
-
-          <a href="productDetail.html?id=16" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Smartwatch silver color modern</p></a
+          >
+          <a href="productDetail.html?id=16" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img src="Assets/Image/interior/coffee.jpg" alt="Coffee maker" />
             </div>
             <h4>$13.75</h4>
-            <p>Coffee maker in white color</p>
-          </a>
-
-          <a href="productDetail.html?id=22" class="ui-product-card">
-            <div class="ui-img-placeholder">
+            <p>Coffee maker in white color</p></a
+          >
+          <a href="productDetail.html?id=22" class="ui-product-card"
+            ><div class="ui-img-placeholder">
               <img src="Assets/Image/tech/kattle.jpg" alt="Electric kettle" />
             </div>
             <h4>$69.95</h4>
-            <p>Electric kettle, travel friendly</p>
-          </a>
+            <p>Electric kettle, travel friendly</p></a
+          >
         </div>
       </section>
 
@@ -955,10 +1115,8 @@
               alt="Brand Logo"
               class="ui-brand-logo-img"
             />
-
             <div class="ui-logo-text">Brand</div>
           </div>
-
           <p>
             Best information about the company<br />goes here but now lorem
             ipsum is
@@ -1049,7 +1207,6 @@
       <div class="ui-footer-bottom">
         <div class="ui-container ui-footer-bottom-inner">
           <span>© 2023 Ecommerce.</span>
-
           <div class="ui-dropdown-wrapper ui-footer-dropdown">
             <span
               class="ui-language"
@@ -1060,8 +1217,7 @@
                 alt="US"
                 class="ui-dropdown-flag"
                 style="margin-right: 6px"
-              />
-              English ⌃
+              />English ⌃
             </span>
             <ul class="ui-dropdown-menu ui-dropup-menu">
               <li>
@@ -1100,14 +1256,134 @@
       </div>
     </footer>
 
+    <!-- ═══════════════════════════════════════════
+         VALIDATION WARNING MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="inq-modal-overlay" id="inq-validation-modal">
+      <div class="inq-modal-box">
+        <div class="inq-modal-header">
+          <h3>
+            <i class="ph ph-warning" style="color: #ff9017"></i> Incomplete Form
+          </h3>
+          <button
+            class="inq-modal-close"
+            onclick="closeInqModal('inq-validation-modal')"
+          >
+            &#x2715;
+          </button>
+        </div>
+        <div class="inq-modal-body">
+          <div class="inq-modal-icon warning">
+            <i class="ph-fill ph-warning" style="color: #ff9017"></i>
+          </div>
+          <div class="inq-modal-title">Missing details</div>
+          <div class="inq-modal-subtitle">
+            Please fill out the item, details, and quantity before sending your
+            inquiry.
+          </div>
+        </div>
+        <div class="inq-modal-actions">
+          <button
+            class="inq-modal-btn-primary"
+            onclick="closeInqModal('inq-validation-modal')"
+          >
+            <i class="ph ph-pencil"></i> Fill Form
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         SEND CONFIRMATION MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="inq-modal-overlay" id="inq-confirm-modal">
+      <div class="inq-modal-box">
+        <div class="inq-modal-header">
+          <h3>
+            <i class="ph ph-paper-plane-tilt" style="color: #0d7dfa"></i>
+            Confirm Inquiry
+          </h3>
+          <button
+            class="inq-modal-close"
+            onclick="closeInqModal('inq-confirm-modal')"
+          >
+            &#x2715;
+          </button>
+        </div>
+        <div class="inq-modal-body">
+          <div class="inq-modal-icon confirm">
+            <i class="ph-fill ph-paper-plane-tilt" style="color: #0d7dfa"></i>
+          </div>
+          <div class="inq-modal-title">Send this inquiry?</div>
+          <div class="inq-modal-subtitle">
+            Review your inquiry before sending it to suppliers.
+          </div>
+          <div class="inq-modal-preview" id="inq-preview-text"></div>
+        </div>
+        <div class="inq-modal-actions">
+          <button class="inq-modal-btn-primary" id="inq-confirm-send-btn">
+            <i class="ph ph-paper-plane-tilt"></i> Yes, Send
+          </button>
+          <button
+            class="inq-modal-btn-secondary"
+            onclick="closeInqModal('inq-confirm-modal')"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         SUCCESS MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="inq-modal-overlay" id="inq-success-modal">
+      <div class="inq-modal-box">
+        <div class="inq-modal-header">
+          <h3>
+            <i class="ph ph-check-circle" style="color: #00b517"></i> Inquiry
+            Sent
+          </h3>
+          <button
+            class="inq-modal-close"
+            onclick="closeInqModal('inq-success-modal')"
+          >
+            &#x2715;
+          </button>
+        </div>
+        <div class="inq-modal-body">
+          <div class="inq-modal-icon success">
+            <i class="ph-fill ph-check-circle" style="color: #00b517"></i>
+          </div>
+          <div class="inq-modal-title">Message sent!</div>
+          <div class="inq-modal-subtitle">
+            Your inquiry has been saved. Check your Message Center to track its
+            status.
+          </div>
+        </div>
+        <div class="inq-modal-actions">
+          <a href="messages.html" class="inq-modal-btn-primary">
+            <i class="ph ph-chat-teardrop-dots"></i> View Messages
+          </a>
+          <button
+            class="inq-modal-btn-secondary"
+            onclick="closeInqModal('inq-success-modal')"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
+      // Stores the pending inquiry data until confirmed
+      let pendingInquiry = null;
+
       document.addEventListener("DOMContentLoaded", () => {
-        // --- Mobile Side Nav Logic ---
+        // --- Mobile Side Nav ---
         const menuBtn = document.getElementById("ui-menu-btn");
         const closeBtn = document.getElementById("ui-close-btn");
         const sideNav = document.getElementById("ui-side-nav");
-
-        // Create the dark overlay for the mobile menu
         const overlay = document.createElement("div");
         overlay.className = "ui-nav-overlay";
         document.body.appendChild(overlay);
@@ -1117,7 +1393,6 @@
           overlay.classList.add("ui-active");
           document.body.style.overflow = "hidden";
         }
-
         function closeNav() {
           sideNav.classList.remove("ui-active");
           overlay.classList.remove("ui-active");
@@ -1128,64 +1403,170 @@
         if (closeBtn) closeBtn.addEventListener("click", closeNav);
         overlay.addEventListener("click", closeNav);
 
-        // --- Deals Countdown Timer Logic ---
+        // --- Countdown Timer ---
         const hoursEl = document.getElementById("ui-cd-hours");
         const minsEl = document.getElementById("ui-cd-mins");
         const secsEl = document.getElementById("ui-cd-secs");
-
         if (hoursEl && minsEl && secsEl) {
           let timeInSeconds = 13 * 3600 + 34 * 60 + 56;
-
           const timer = setInterval(() => {
             timeInSeconds--;
-
-            const hours = Math.floor(timeInSeconds / 3600);
-            const minutes = Math.floor((timeInSeconds % 3600) / 60);
-            const seconds = timeInSeconds % 60;
-
-            // Update DOM
-            hoursEl.innerText = String(hours).padStart(2, "0");
-            minsEl.innerText = String(minutes).padStart(2, "0");
-            secsEl.innerText = String(seconds).padStart(2, "0");
-
+            hoursEl.innerText = String(
+              Math.floor(timeInSeconds / 3600),
+            ).padStart(2, "0");
+            minsEl.innerText = String(
+              Math.floor((timeInSeconds % 3600) / 60),
+            ).padStart(2, "0");
+            secsEl.innerText = String(timeInSeconds % 60).padStart(2, "0");
             if (timeInSeconds <= 0) {
               clearInterval(timer);
-              hoursEl.innerText = "00";
-              minsEl.innerText = "00";
-              secsEl.innerText = "00";
+              hoursEl.innerText = minsEl.innerText = secsEl.innerText = "00";
             }
           }, 1000);
         }
 
-        // --- Desktop Sidebar Selection Logic ---
-        const sidebarItems = document.querySelectorAll(
-          ".ui-side-categories ul li",
-        );
-
-        sidebarItems.forEach((item) => {
-          item.addEventListener("click", function (e) {
-            // Allows the link to actually route to products.html, but if it's #, stops jumping
-            if (this.querySelector("a").getAttribute("href") === "#") {
-              e.preventDefault();
-            }
-            sidebarItems.forEach((li) => li.classList.remove("ui-active"));
-            this.classList.add("ui-active");
+        // --- Sidebar selection ---
+        document
+          .querySelectorAll(".ui-side-categories ul li")
+          .forEach((item) => {
+            item.addEventListener("click", function (e) {
+              if (this.querySelector("a").getAttribute("href") === "#")
+                e.preventDefault();
+              document
+                .querySelectorAll(".ui-side-categories ul li")
+                .forEach((li) => li.classList.remove("ui-active"));
+              this.classList.add("ui-active");
+            });
           });
-        });
 
-        // --- NEW: Mobile Pills Routing ---
-        const mobilePills = document.querySelectorAll(
-          ".ui-mobile-category-pills .ui-pill",
-        );
-        mobilePills.forEach((pill) => {
-          pill.addEventListener("click", function (e) {
+        // --- Inquiry: Step 1 — validate & show confirm modal ---
+        const sendInquiryBtn = document.getElementById("send-inquiry-btn");
+        if (sendInquiryBtn) {
+          sendInquiryBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            const categoryName = this.innerText.trim();
-            // Route to products page with the CATEGORY parameter
-            window.location.href = `products.html?category=${encodeURIComponent(categoryName)}`;
+            const itemVal = document
+              .getElementById("inquiry-item")
+              .value.trim();
+            const detailsVal = document
+              .getElementById("inquiry-text")
+              .value.trim();
+            const qtyVal = document.getElementById("inquiry-qty").value.trim();
+            const unitVal = document
+              .getElementById("inquiry-unit")
+              .value.trim();
+
+            if (!itemVal || !detailsVal || !qtyVal) {
+              openInqModal("inq-validation-modal");
+              return;
+            }
+
+            // Store data and show a preview in the confirm modal
+            pendingInquiry = { itemVal, detailsVal, qtyVal, unitVal };
+            document.getElementById("inq-preview-text").innerHTML =
+              `<strong>Item:</strong> ${itemVal}<br><strong>Details:</strong> ${detailsVal}<br><strong>Quantity:</strong> ${qtyVal} ${unitVal}`;
+            openInqModal("inq-confirm-modal");
+          });
+        }
+
+        // --- Inquiry: Step 2 — confirmed, save & show success ---
+        document
+          .getElementById("inq-confirm-send-btn")
+          .addEventListener("click", () => {
+            if (!pendingInquiry) return;
+            const { itemVal, detailsVal, qtyVal, unitVal } = pendingInquiry;
+
+            const timestamp = new Date().toLocaleString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+            const newMessage = {
+              id: "MSG-" + Math.floor(1000 + Math.random() * 9000),
+              text: `Item needed: ${itemVal}<br>Details mentioned: ${detailsVal}<br>Quantity: ${qtyVal} ${unitVal}`,
+              date: timestamp,
+              status: "Sent",
+            };
+
+            let messages = AuthDB.getUserData("messages");
+            messages.unshift(newMessage);
+            AuthDB.setUserData("messages", messages);
+
+            // Clear form
+            document.getElementById("inquiry-item").value = "";
+            document.getElementById("inquiry-text").value = "";
+            document.getElementById("inquiry-qty").value = "";
+            document.getElementById("inquiry-unit").selectedIndex = 0;
+
+            pendingInquiry = null;
+            closeInqModal("inq-confirm-modal");
+            openInqModal("inq-success-modal");
+          });
+
+        // Backdrop click closes any inquiry modal
+        document.querySelectorAll(".inq-modal-overlay").forEach((el) => {
+          el.addEventListener("click", function (e) {
+            if (e.target === this) closeInqModal(this.id);
           });
         });
       });
+
+      function openInqModal(id) {
+        document.getElementById(id).classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeInqModal(id) {
+        if (id === "inq-confirm-modal") pendingInquiry = null;
+        document.getElementById(id).classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      // ── Hero card: update based on auth state ──
+      function updateHeroCard() {
+        const user = AuthDB.getCurrentUser();
+        const greeting = document.getElementById("hero-greeting");
+        const joinBtn = document.getElementById("hero-join-btn");
+        const loginBtn = document.getElementById("hero-login-btn");
+        if (!greeting) return;
+        if (user) {
+          greeting.innerHTML = `Hi, <strong>${user.name.split(" ")[0]}</strong><br/>Welcome back!`;
+          if (joinBtn) {
+            joinBtn.textContent = "My Orders";
+            joinBtn.onclick = () => (window.location.href = "order.html");
+          }
+          if (loginBtn) {
+            loginBtn.textContent = "Sign out";
+            loginBtn.onclick = () => {
+              AuthDB.logout();
+              location.reload();
+            };
+          }
+        }
+      }
+      document.addEventListener("DOMContentLoaded", updateHeroCard);
+
+      // ── Inquiry requires login ──
+      const _origSendBtn = document.getElementById("send-inquiry-btn");
+      if (_origSendBtn) {
+        _origSendBtn.addEventListener(
+          "click",
+          function (e) {
+            if (!AuthDB.getCurrentUser()) {
+              e.stopImmediatePropagation();
+              openLoginModal("login");
+            }
+          },
+          true,
+        ); // capture phase so it fires before the other listener
+      }
+
+      // Called by auth.js after successful login/register
+      function onAuthSuccess(user) {
+        updateHeroCard();
+        showAuthToast("Signed in as " + user.name);
+      }
     </script>
   </body>
 </html>
