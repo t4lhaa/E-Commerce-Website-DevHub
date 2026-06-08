@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="index.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
   </head>
   <body>
     <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
@@ -37,7 +38,7 @@
           <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
         </li>
         <li>
-          <a href="#"><span class="ui-nav-icon">📦</span> My orders</a>
+          <a href="order.html"><span class="ui-nav-icon">📦</span> My orders</a>
         </li>
       </ul>
       <hr class="ui-nav-divider" />
@@ -130,19 +131,14 @@
               /></svg
             ><span class="ui-label">Profile</span>
           </div>
-          <div class="ui-action-item">
-            <span class="ui-icon"
-              ><i
-                class="ph-fill ph-chat-teardrop-dots"
-                style="font-size: 24px"
-              ></i></span
-            ><span class="ui-label">Message</span>
-          </div>
-          <div class="ui-action-item">
-            <span class="ui-icon"
-              ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
-            ><span class="ui-label">Orders</span>
-          </div>
+          <a href="messages.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-chat-teardrop-dots" style="font-size: 24px;"></i></span>
+            <span class="ui-label"">Message</span>
+          </a>
+          <a href="order.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-heart" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Orders</span>
+          </a>
           <a
             href="cart.html"
             class="ui-action-item"
@@ -1478,7 +1474,7 @@
             productContainer.innerHTML += productCard;
           });
           // Restore saved heart states
-          const saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+          const saved = AuthDB.getUserData("savedItems");
           productContainer
             .querySelectorAll(".ui-product-list-card")
             .forEach((card) => {
@@ -1651,6 +1647,14 @@
           const favBtn = e.target.closest(".ui-fav-btn");
           if (favBtn) {
             e.preventDefault();
+
+            // ── Auth guard ──
+            if (!AuthDB.getCurrentUser()) {
+              showAuthToast('Sign in to save favourites');
+              openLoginModal('login');
+              return;
+            }
+
             const card = favBtn.closest(".ui-product-list-card");
             const detailLink = card ? card.querySelector("a[href]") : null;
             const productId = detailLink
@@ -1660,7 +1664,7 @@
               : null;
 
             if (productId) {
-              let saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+              let saved = AuthDB.getUserData("savedItems");
               const alreadySaved = saved.includes(productId);
 
               if (alreadySaved) {
@@ -1671,7 +1675,7 @@
                 favBtn.classList.add("ui-active");
               }
 
-              localStorage.setItem("savedItems", JSON.stringify(saved));
+              AuthDB.setUserData("savedItems", saved);
             }
           }
         });
