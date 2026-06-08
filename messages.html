@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Messages - Brand E-commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
+    <style>
+      /* ── Message modals ── */
+      .msg-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .msg-modal-overlay.open { display: flex; }
+      .msg-modal-box {
+        background: #fff;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+        animation: msgModalIn .2s ease;
+        font-family: Inter, sans-serif;
+        overflow: hidden;
+      }
+      @keyframes msgModalIn {
+        from { transform: scale(.95); opacity: 0; }
+        to   { transform: scale(1);  opacity: 1; }
+      }
+      .msg-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px 14px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .msg-modal-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1c1c1c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .msg-modal-close {
+        background: none; border: none; cursor: pointer;
+        font-size: 20px; color: #8b96a5; line-height: 1;
+        padding: 2px 6px; border-radius: 4px;
+        transition: background .15s;
+      }
+      .msg-modal-close:hover { background: #f0f0f0; color: #1c1c1c; }
+      .msg-modal-body {
+        padding: 28px 24px 20px;
+        text-align: center;
+      }
+      .msg-modal-icon {
+        width: 64px; height: 64px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 30px;
+        background: #fff0f0;
+      }
+      .msg-modal-title {
+        font-size: 18px; font-weight: 700;
+        color: #1c1c1c; margin: 0 0 8px;
+      }
+      .msg-modal-subtitle {
+        font-size: 13px; color: #8b96a5;
+        line-height: 1.6; margin: 0;
+      }
+      .msg-modal-actions {
+        display: flex; gap: 10px; justify-content: center;
+        padding: 4px 24px 22px;
+      }
+      .msg-modal-btn-danger {
+        background: #fa3434; color: #fff;
+        border: none; border-radius: 6px;
+        padding: 10px 22px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      .msg-modal-btn-danger:hover { background: #d42b2b; }
+      .msg-modal-btn-secondary {
+        background: #fff; color: #1c1c1c;
+        border: 1px solid #dee2e6; border-radius: 6px;
+        padding: 10px 22px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+      }
+      .msg-modal-btn-secondary:hover { background: #f7fafc; }
+    </style>
+  </head>
+  <body style="background: #f7fafc">
+    <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
+    
+    <aside class="ui-side-nav-mobile" id="ui-side-nav">
+      <div class="ui-nav-user-header">
+        <button id="ui-close-btn" class="ui-close-btn" aria-label="Close Menu">✕</button>
+        <div class="ui-avatar-circle">
+          <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
+        </div>
+        <div class="ui-auth-text">Sign in | Register</div>
+      </div>
+      <ul class="ui-nav-links">
+        <li><a href="home.html"><span class="ui-nav-icon">🏠</span> Home</a></li>
+        <li><a href="products.html?category=All category"><span class="ui-nav-icon">📋</span> Categories</a></li>
+        <li><a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a></li>
+        <li><a href="order.html"><span class="ui-nav-icon">📦</span> My orders</a></li>
+      </ul>
+    </aside>
+
+    <header class="ui-page-header ui-container ui-desktop-only" style="margin-top: 0px">
+      <div class="ui-header-top-row">
+        <div class="ui-logo-area">
+          <a href="home.html" class="ui-logo-wrapper">
+            <img src="Assets/Brand/logo-symbol.svg" alt="Brand Logo" class="ui-brand-logo-img" />
+            <div class="ui-logo-text">Brand</div>
+          </a>
+        </div>
+        <div class="ui-header-actions ui-desktop-only-flex">
+          <div class="ui-action-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="ui-icon" id="c1">
+              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            </svg>
+            <span class="ui-label">Profile</span>
+          </div>
+          <a href="messages.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-chat-teardrop-dots" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Message</span>
+          </a>
+          <a href="order.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-heart" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Orders</span>
+          </a>
+          <a href="cart.html" class="ui-action-item" style="text-decoration: none; color: inherit">
+            <span class="ui-icon"><i class="ph-fill ph-shopping-cart" style="font-size: 24px"></i></span>
+            <span class="ui-label">My cart</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ui-mobile-details-top-bar ui-mobile-only-flex" style="border-bottom: 1px solid #e3e8ee; padding: 15px 20px; background: #fff;">
+      <a href="home.html" class="ui-back-arrow" style="color: #1c1c1c; display: flex; align-items: center; gap: 15px; font-size: 18px; font-weight: 600; text-decoration: none;">
+        <i class="ph ph-arrow-left" style="font-size: 24px"></i> My Messages
+      </a>
+      <button id="ui-menu-btn" style="background: transparent; border: none; font-size: 24px; cursor: pointer;"><i class="ph ph-list"></i></button>
+    </div>
+
+    <main class="ui-container" style="margin-top: 30px; min-height: 50vh;">
+      <h2 class="ui-cart-card-header ui-desktop-only" style="margin-bottom: 20px">Message Center</h2>
+      <div class="ui-cart-layout">
+        <div class="ui-cart-main" style="width: 100%; max-width: 800px;">
+          <div id="ui-messages-container"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══════════════════════════════════════════
+         DELETE CONFIRM MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="msg-modal-overlay" id="delete-message-modal">
+      <div class="msg-modal-box">
+        <div class="msg-modal-header">
+          <h3><i class="ph ph-trash" style="color:#fa3434"></i> Delete Message</h3>
+          <button class="msg-modal-close" onclick="closeMsgModal()">&#x2715;</button>
+        </div>
+        <div class="msg-modal-body">
+          <div class="msg-modal-icon">
+            <i class="ph-fill ph-trash" style="color:#fa3434"></i>
+          </div>
+          <div class="msg-modal-title">Delete this message?</div>
+          <div class="msg-modal-subtitle">This action cannot be undone. The message will be permanently removed.</div>
+        </div>
+        <div class="msg-modal-actions">
+          <button class="msg-modal-btn-danger" id="confirm-delete-btn">
+            <i class="ph ph-trash"></i> Yes, Delete
+          </button>
+          <button class="msg-modal-btn-secondary" onclick="closeMsgModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+   <div class="ui-newsletter-wrapper">
+      <section class="ui-container ui-newsletter-block">
+        <h3>Subscribe on our newsletter</h3>
+        <p>Get daily news on upcoming offers from many suppliers all over the world</p>
+        <form>
+          <div class="ui-input-with-icon">
+            <i class="ph ph-envelope-simple" style="font-size: 20px; color: #8b96a5"></i>
+            <input type="email" placeholder="Email" aria-label="Email Address" />
+          </div>
+          <button type="submit" class="ui-button-primary">Subscribe</button>
+        </form>
+      </section>
+    </div>
+
+    <footer class="ui-site-footer">
+      <div class="ui-container ui-footer-columns">
+        <div class="ui-col-main ui-logo">
+          <div class="ui-logo-wrapper" style="margin-bottom: 15px">
+            <img src="Assets/Brand/logo-symbol.svg" alt="Brand Logo" class="ui-brand-logo-img" />
+            <div class="ui-logo-text">Brand</div>
+          </div>
+          <p>Best information about the company<br />goes here but now lorem ipsum is</p>
+          <div class="ui-social-links">
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-facebook-logo" style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-twitter-logo" style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-linkedin-logo" style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-instagram-logo" style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-youtube-logo" style="color: white; font-size: 18px"></i></a>
+          </div>
+        </div>
+        <div class="ui-col"><strong>About</strong><ul><li>About Us</li><li>Find store</li><li>Categories</li><li>Blogs</li></ul></div>
+        <div class="ui-col"><strong>Partnership</strong><ul><li>About Us</li><li>Find store</li><li>Categories</li><li>Blogs</li></ul></div>
+        <div class="ui-col"><strong>Information</strong><ul><li>Help Center</li><li>Money Refund</li><li>Shipping</li><li>Contact us</li></ul></div>
+        <div class="ui-col"><strong>For users</strong><ul><li>Login</li><li>Register</li><li>Settings</li><li>My Orders</li></ul></div>
+        <div class="ui-col-apps">
+          <strong>Get app</strong>
+          <img src="Assets/playstore.png" alt="Download on the App Store" class="ui-app-badge" />
+          <img src="Assets/googleplay.png" alt="Get it on Google Play" class="ui-app-badge" />
+        </div>
+      </div>
+      <div class="ui-footer-bottom">
+        <div class="ui-container ui-footer-bottom-inner">
+          <span>© 2023 Ecommerce.</span>
+          <div class="ui-dropdown-wrapper ui-footer-dropdown">
+            <span class="ui-language" style="display: flex; align-items: center; color: #1c1c1c">
+              <img src="https://flagcdn.com/w20/us.png" alt="US" class="ui-dropdown-flag" style="margin-right: 6px" />English ⌃
+            </span>
+            <ul class="ui-dropdown-menu ui-dropup-menu">
+              <li><a href="#"><img src="https://flagcdn.com/w20/us.png" alt="US" class="ui-dropdown-flag" /> English</a></li>
+              <li><a href="#"><img src="https://flagcdn.com/w20/es.png" alt="ES" class="ui-dropdown-flag" /> Spanish</a></li>
+              <li><a href="#"><img src="https://flagcdn.com/w20/de.png" alt="DE" class="ui-dropdown-flag" /> German</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let pendingDeleteIndex = null;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById("ui-menu-btn");
+        const closeBtn = document.getElementById("ui-close-btn");
+        const sideNav = document.getElementById("ui-side-nav");
+        const overlay = document.getElementById("ui-filter-overlay");
+
+        if(menuBtn) menuBtn.addEventListener("click", () => { sideNav.classList.add("ui-active"); overlay.classList.add("ui-active"); });
+        if(closeBtn) closeBtn.addEventListener("click", () => { sideNav.classList.remove("ui-active"); overlay.classList.remove("ui-active"); });
+        if(overlay) overlay.addEventListener("click", () => { sideNav.classList.remove("ui-active"); overlay.classList.remove("ui-active"); });
+
+        // ── Auth gate ──
+        if (!AuthDB.getCurrentUser()) {
+          const container = document.getElementById("ui-messages-container");
+          if (container) container.innerHTML = buildAuthGate(
+            'ph-chat-teardrop-dots',
+            'Sign in to view your messages',
+            'Your supplier inquiries and messages are linked to your account. Please sign in to access them.'
+          );
+          return;
+        }
+
+        // Confirm delete button
+        document.getElementById("confirm-delete-btn").addEventListener("click", () => {
+          if (pendingDeleteIndex === null) return;
+          let messages = AuthDB.getUserData("messages");
+          messages.splice(pendingDeleteIndex, 1);
+          AuthDB.setUserData("messages", messages);
+          pendingDeleteIndex = null;
+          closeMsgModal();
+          renderMessages();
+        });
+
+        // Close on backdrop click
+        document.getElementById("delete-message-modal").addEventListener("click", function(e) {
+          if (e.target === this) closeMsgModal();
+        });
+
+        renderMessages();
+      });
+
+      function onAuthSuccess(user) { location.reload(); }
+
+      function openDeleteModal(index) {
+        pendingDeleteIndex = index;
+        document.getElementById("delete-message-modal").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMsgModal() {
+        pendingDeleteIndex = null;
+        document.getElementById("delete-message-modal").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      function renderMessages() {
+        const container = document.getElementById("ui-messages-container");
+        let messages = AuthDB.getUserData("messages");
+        container.innerHTML = "";
+
+        if (messages.length === 0) {
+          container.innerHTML = `
+            <div class="ui-cart-card" style="text-align: center; padding: 40px 20px;">
+                <i class="ph ph-envelope-simple-open" style="font-size: 48px; color: #8b96a5; margin-bottom: 15px;"></i>
+                <h3 style="color: #1c1c1c; margin-bottom: 10px;">No messages yet</h3>
+                <p style="color: #8b96a5; margin-bottom: 20px;">When you send an inquiry, your sent messages will appear here.</p>
+                <a href="home.html" class="ui-button-primary" style="text-decoration: none;">Go to Home</a>
+            </div>`;
+          return;
+        }
+
+        messages.forEach((msg, index) => {
+          let currentStatus = msg.status || "Unread";
+          if (currentStatus === "Sent") currentStatus = "Unread";
+
+          let statusColor = "#fa3434";
+          if (currentStatus === "Read") statusColor = "#ff9017";
+          if (currentStatus === "Completed") statusColor = "#00b517";
+
+          container.innerHTML += `
+            <div class="ui-cart-card" style="margin-bottom: 20px; padding: 20px; position: relative;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #dee2e6; padding-bottom: 15px; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="background: #e3f0ff; color: #0d7dfa; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="ph-fill ph-paper-plane-tilt" style="font-size: 20px;"></i>
+                  </div>
+                  <div>
+                    <strong style="font-size: 16px; color: #1c1c1c;">Inquiry Sent</strong>
+                    <div style="color: #8b96a5; font-size: 13px; margin-top: 4px;">ID: ${msg.id}</div>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span style="color: #8b96a5; font-size: 13px; display: block; margin-bottom: 8px;">${msg.date}</span>
+                  <span style="background: ${statusColor}15; color: ${statusColor}; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid ${statusColor}40;">
+                    ${currentStatus}
+                  </span>
+                </div>
+              </div>
+              <div style="color: #505050; font-size: 15px; line-height: 1.6; background: #f7fafc; padding: 15px; border-radius: 6px;">
+                ${msg.text}
+              </div>
+              <div style="margin-top: 15px; display: flex; justify-content: flex-end; align-items: center; gap: 15px;">
+                <select onchange="updateMessageStatus(${index}, this.value)" style="padding: 6px 12px; border: 1px solid #e3e8ee; border-radius: 6px; font-size: 13px; color: #505050; background: #fff; cursor: pointer; outline: none; font-weight: 500;">
+                  <option value="Unread" ${currentStatus === 'Unread' ? 'selected' : ''}>Status: Unread</option>
+                  <option value="Read" ${currentStatus === 'Read' ? 'selected' : ''}>Status: Read</option>
+                  <option value="Completed" ${currentStatus === 'Completed' ? 'selected' : ''}>Status: Completed</option>
+                </select>
+                <button onclick="openDeleteModal(${index})" style="background: transparent; border: none; color: #fa3434; font-size: 14px; font-weight: 500; cursor: pointer; padding: 6px 10px;">
+                  <i class="ph-fill ph-trash" style="font-size: 16px; margin-right: 4px; vertical-align: middle;"></i>Delete
+                </button>
+              </div>
+            </div>`;
+        });
+      }
+
+      function updateMessageStatus(index, newStatus) {
+        let messages = AuthDB.getUserData("messages");
+        if (messages[index]) {
+          messages[index].status = newStatus;
+          AuthDB.setUserData("messages", messages);
+          renderMessages();
+        }
+      }
+    </script>
+  </body>
+</html>

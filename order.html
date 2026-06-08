@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders - Brand E-commerce</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
+
+    <style>
+      /* ── Modal Base ── */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal-box {
+        background: #fff;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 640px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        animation: modalIn .2s ease;
+      }
+      @keyframes modalIn {
+        from { transform: scale(.95); opacity: 0; }
+        to   { transform: scale(1);  opacity: 1; }
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .modal-header h3 { margin: 0; font-size: 18px; color: #1c1c1c; }
+      .modal-close {
+        background: none; border: none; cursor: pointer;
+        font-size: 22px; color: #8b96a5; line-height: 1;
+        padding: 2px 6px; border-radius: 4px;
+        transition: background .15s;
+      }
+      .modal-close:hover { background: #f0f0f0; color: #1c1c1c; }
+
+      /* ── Invoice styles ── */
+      .invoice-body { padding: 24px; }
+      .invoice-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .invoice-brand { font-size: 22px; font-weight: 700; color: #1c1c1c; }
+      .invoice-brand span { color: #0d7dfa; }
+      .invoice-meta-right { text-align: right; font-size: 13px; color: #555; line-height: 1.7; }
+      .invoice-divider { border: none; border-top: 1px solid #e9ecef; margin: 16px 0; }
+      .invoice-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+      }
+      .invoice-party h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #8b96a5; margin: 0 0 6px; }
+      .invoice-party p  { margin: 0; color: #1c1c1c; line-height: 1.6; }
+      .invoice-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px; }
+      .invoice-table th {
+        background: #f7fafc; text-align: left;
+        padding: 8px 12px; font-size: 11px;
+        text-transform: uppercase; letter-spacing: .05em;
+        color: #8b96a5; border-bottom: 1px solid #e9ecef;
+      }
+      .invoice-table td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; color: #1c1c1c; vertical-align: middle; }
+      .invoice-table tr:last-child td { border-bottom: none; }
+      .invoice-table td img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; }
+      .invoice-totals { margin-left: auto; width: 240px; font-size: 13px; }
+      .invoice-totals .row { display: flex; justify-content: space-between; padding: 5px 0; color: #555; }
+      .invoice-totals .row.total { font-weight: 700; font-size: 15px; color: #1c1c1c; border-top: 1px solid #e9ecef; padding-top: 10px; margin-top: 4px; }
+      .invoice-totals .row .green { color: #00b517; }
+      .invoice-totals .row .red   { color: #fa3434; }
+      .invoice-status-badge {
+        display: inline-block;
+        padding: 3px 8px; border-radius: 4px;
+        font-size: 12px; font-weight: 500;
+        background: #e3f0ff; color: #0d7dfa;
+      }
+      .invoice-footer-note {
+        margin-top: 20px; padding: 12px 16px;
+        background: #f7fafc; border-radius: 8px;
+        font-size: 12px; color: #8b96a5; text-align: center;
+      }
+      .invoice-actions {
+        display: flex; gap: 10px; justify-content: flex-end;
+        padding: 16px 24px; border-top: 1px solid #e9ecef;
+      }
+
+      /* ── Tracking styles ── */
+      .track-body { padding: 24px; }
+      .track-order-id { font-size: 13px; color: #8b96a5; margin-bottom: 20px; }
+      .track-order-id strong { color: #1c1c1c; }
+      .track-timeline { position: relative; padding-left: 32px; }
+      .track-timeline::before {
+        content: '';
+        position: absolute; left: 10px; top: 0; bottom: 0;
+        width: 2px; background: #e9ecef;
+      }
+      .track-step { position: relative; margin-bottom: 28px; }
+      .track-step:last-child { margin-bottom: 0; }
+      .track-dot {
+        position: absolute; left: -27px; top: 2px;
+        width: 18px; height: 18px; border-radius: 50%;
+        border: 2px solid #dee2e6; background: #fff;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 1;
+        transition: all .3s;
+      }
+      .track-dot.done   { background: #00b517; border-color: #00b517; }
+      .track-dot.active { background: #0d7dfa; border-color: #0d7dfa; animation: pulse 1.5s infinite; }
+      .track-dot.pending{ background: #fff; border-color: #dee2e6; }
+      @keyframes pulse {
+        0%,100% { box-shadow: 0 0 0 0 rgba(13,125,250,.4); }
+        50%      { box-shadow: 0 0 0 6px rgba(13,125,250,0); }
+      }
+      .track-dot i { font-size: 10px; color: #fff; }
+      .track-step-title {
+        font-size: 14px; font-weight: 600; color: #1c1c1c;
+        margin: 0 0 3px;
+      }
+      .track-step-title.pending { color: #8b96a5; }
+      .track-step-desc { font-size: 12px; color: #8b96a5; margin: 0 0 2px; }
+      .track-step-time { font-size: 11px; color: #b0b8c1; }
+      .track-summary-card {
+        background: #f7fafc; border-radius: 8px;
+        padding: 14px 16px; margin-bottom: 24px;
+        display: flex; gap: 16px; align-items: center;
+        font-size: 13px;
+      }
+      .track-summary-card i { font-size: 28px; color: #0d7dfa; }
+      .track-summary-card .eta { font-weight: 600; color: #1c1c1c; font-size: 15px; }
+      .track-summary-card .eta-sub { color: #8b96a5; font-size: 12px; }
+
+      /* ── Shared button styles ── */
+      .ui-button-primary {
+        background: #0d7dfa; color: #fff;
+        border: none; border-radius: 6px;
+        padding: 9px 18px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+      }
+      .ui-button-primary:hover { background: #0b6cd8; }
+      .ui-button-secondary {
+        background: #fff; color: #1c1c1c;
+        border: 1px solid #dee2e6; border-radius: 6px;
+        padding: 9px 18px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+      }
+      .ui-button-secondary:hover { background: #f7fafc; }
+
+      @media print {
+        body > *:not(#invoice-print-area) { display: none !important; }
+        #invoice-print-area { display: block !important; }
+        .invoice-actions { display: none !important; }
+        .modal-close { display: none !important; }
+      }
+    </style>
+  </head>
+  <body style="background: #f7fafc">
+    <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
+
+    <aside class="ui-side-nav-mobile" id="ui-side-nav">
+      <div class="ui-nav-user-header">
+        <button id="ui-close-btn" class="ui-close-btn" aria-label="Close Menu">✕</button>
+        <div class="ui-avatar-circle">
+          <img src="Assets/avatar=pic1.jpg" alt="User Profile" />
+        </div>
+        <div class="ui-auth-text">Sign in | Register</div>
+      </div>
+      <ul class="ui-nav-links">
+        <li><a href="home.html"><span class="ui-nav-icon">🏠</span> Home</a></li>
+        <li><a href="products.html?category=All category"><span class="ui-nav-icon">📋</span> Categories</a></li>
+        <li><a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a></li>
+        <li><a href="order.html"><span class="ui-nav-icon">📦</span> My orders</a></li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links">
+        <li><a href="#"><span class="ui-nav-icon">🌐</span> English | USD</a></li>
+        <li><a href="#"><span class="ui-nav-icon">🎧</span> Contact us</a></li>
+        <li><a href="#"><span class="ui-nav-icon">🏢</span> About</a></li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links ui-no-icon">
+        <li><a href="#">User agreement</a></li>
+        <li><a href="#">Partnership</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </aside>
+
+    <header class="ui-page-header ui-container ui-desktop-only" style="margin-top: 0px">
+      <div class="ui-header-top-row">
+        <div class="ui-logo-area">
+          <a href="home.html" class="ui-logo-wrapper">
+            <img src="Assets/Brand/logo-symbol.svg" alt="Brand Logo" class="ui-brand-logo-img" />
+            <div class="ui-logo-text">Brand</div>
+          </a>
+        </div>
+        <div class="ui-header-actions ui-desktop-only-flex">
+          <div class="ui-action-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="ui-icon" id="c1">
+              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            </svg>
+            <span class="ui-label">Profile</span>
+          </div>
+          <a href="messages.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-chat-teardrop-dots" style="font-size: 24px;"></i></span>
+            <span class="ui-label"">Message</span>
+          </a>
+          <a href="order.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-heart" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Orders</span>
+          </a>
+          <a href="cart.html" class="ui-action-item" style="text-decoration: none; color: inherit">
+            <span class="ui-icon"><i class="ph-fill ph-shopping-cart" style="font-size: 24px"></i></span>
+            <span class="ui-label">My cart</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ui-mobile-details-top-bar ui-mobile-only-flex" style="border-bottom: 1px solid #e3e8ee; padding: 15px 20px; background: #fff;">
+      <a href="home.html" class="ui-back-arrow" style="color: #1c1c1c; display: flex; align-items: center; gap: 15px; font-size: 18px; font-weight: 600; text-decoration: none;">
+        <i class="ph ph-arrow-left" style="font-size: 24px"></i> My Orders
+      </a>
+      <button id="ui-menu-btn" style="background: transparent; border: none; font-size: 24px; cursor: pointer;"><i class="ph ph-list"></i></button>
+    </div>
+
+    <main class="ui-container" style="margin-top: 30px; min-height: 50vh;">
+      <h2 class="ui-cart-card-header ui-desktop-only" style="margin-bottom: 20px">Order History</h2>
+      <div class="ui-cart-layout">
+        <div class="ui-cart-main" style="width: 100%; max-width: 800px;">
+          <div id="ui-orders-container"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══════════════════════════════════════════
+         INVOICE MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="invoice-modal">
+      <div class="modal-box" id="invoice-print-area">
+        <div class="modal-header">
+          <h3><i class="ph ph-receipt" style="margin-right:6px"></i>Invoice</h3>
+          <button class="modal-close" onclick="closeModal('invoice-modal')">✕</button>
+        </div>
+        <div class="invoice-body" id="invoice-body-content">
+          <!-- filled by JS -->
+        </div>
+        <div class="invoice-actions">
+          <button class="ui-button-secondary" onclick="printInvoice()">
+            <i class="ph ph-printer" style="margin-right:5px"></i>Print / Save PDF
+          </button>
+          <button class="ui-button-primary" onclick="closeModal('invoice-modal')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TRACK ORDER MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="track-modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3><i class="ph ph-map-pin" style="margin-right:6px"></i>Track Order</h3>
+          <button class="modal-close" onclick="closeModal('track-modal')">✕</button>
+        </div>
+        <div class="track-body" id="track-body-content">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <footer class="ui-site-footer" style="margin-top: 40px">
+      <div class="ui-container ui-footer-columns">
+        <div class="ui-col-main ui-logo">
+          <div class="ui-logo-wrapper" style="margin-bottom: 15px">
+            <img src="Assets/Brand/logo-symbol.svg" alt="Brand Logo" class="ui-brand-logo-img" />
+            <div class="ui-logo-text">Brand</div>
+          </div>
+          <p>Best information about the company<br />goes here but now lorem ipsum is</p>
+          <div class="ui-social-links">
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-facebook-logo" style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-twitter-logo"  style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-linkedin-logo"  style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-instagram-logo" style="color: white; font-size: 18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-youtube-logo"   style="color: white; font-size: 18px"></i></a>
+          </div>
+        </div>
+        <div class="ui-col"><strong>About</strong><ul><li>About Us</li><li>Find store</li><li>Categories</li><li>Blogs</li></ul></div>
+        <div class="ui-col"><strong>Partnership</strong><ul><li>About Us</li><li>Find store</li><li>Categories</li><li>Blogs</li></ul></div>
+        <div class="ui-col"><strong>Information</strong><ul><li>Help Center</li><li>Money Refund</li><li>Shipping</li><li>Contact us</li></ul></div>
+        <div class="ui-col"><strong>For users</strong><ul><li>Login</li><li>Register</li><li>Settings</li><li>My Orders</li></ul></div>
+        <div class="ui-col-apps">
+          <strong>Get app</strong>
+          <img src="Assets/playstore.png" alt="App Store" class="ui-app-badge" />
+          <img src="Assets/googleplay.png" alt="Google Play" class="ui-app-badge" />
+        </div>
+      </div>
+      <div class="ui-footer-bottom">
+        <div class="ui-container ui-footer-bottom-inner">
+          <span>© 2023 Ecommerce.</span>
+          <div class="ui-dropdown-wrapper ui-footer-dropdown">
+            <span class="ui-language" style="display: flex; align-items: center; color: #1c1c1c">
+              <img src="https://flagcdn.com/w20/us.png" alt="US" class="ui-dropdown-flag" style="margin-right: 6px" />English ⌃
+            </span>
+            <ul class="ui-dropdown-menu ui-dropup-menu">
+              <li><a href="#"><img src="https://flagcdn.com/w20/us.png" alt="US" class="ui-dropdown-flag" /> English</a></li>
+              <li><a href="#"><img src="https://flagcdn.com/w20/es.png" alt="ES" class="ui-dropdown-flag" /> Spanish</a></li>
+              <li><a href="#"><img src="https://flagcdn.com/w20/de.png" alt="DE" class="ui-dropdown-flag" /> German</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* ══════════════════════════════════════════════
+         PRODUCT DATABASE
+      ══════════════════════════════════════════════ */
+      const productsDatabase = [
+        { id: 1,  title: "Canon Camera EOS 2000, Black 10x zoom",  brand: "Canon",   price: 74.00,  image: "Assets/Image/tech/cameras.jpg" },
+        { id: 4,  title: "iPhone 13 Pro Max - 256GB Blue",          brand: "Apple",   price: 949.00, image: "Assets/Image/tech/iphone.jpg" },
+        { id: 5,  title: "Lenovo ThinkPad X1 Carbon",               brand: "Lenovo",  price: 299.00, image: "Assets/Image/tech/laptop.jpg" },
+        { id: 6,  title: "Sony Noise Cancelling Headphones",         brand: "Sony",    price: 14.50,  image: "Assets/Image/tech/headphone.jpg" },
+        { id: 7,  title: "Smartwatch Silver Color Modern",           brand: "Other",   price: 22.00,  image: "Assets/Image/tech/smartwatches.jpg" },
+        { id: 8,  title: "Gaming Headset with Mic",                  brand: "Other",   price: 12.49,  image: "Assets/Image/tech/gaming.jpg" },
+        { id: 9,  title: "10-inch Android Tablet",                   brand: "Samsung", price: 75.00,  image: "Assets/Image/tech/tablet.jpg" },
+        { id: 10, title: "T-shirts with multiple colors, for men",   brand: "Other",   price: 8.99,   image: "Assets/Image/cloth/tshirt.jpg" },
+        { id: 11, title: "Brown winter coat medium size",             brand: "Other",   price: 15.99,  image: "Assets/Image/cloth/jacket.jpg" },
+        { id: 12, title: "Jeans shorts for men blue color",           brand: "Other",   price: 7.50,   image: "Assets/Image/cloth/shorts.jpg" },
+        { id: 13, title: "Jeans bag for travel for men",              brand: "Other",   price: 28.00,  image: "Assets/Image/cloth/bag.jpg" },
+        { id: 14, title: "Classic Leather Wallet",                    brand: "Other",   price: 84.00,  image: "Assets/Image/cloth/wallet.jpg" },
+        { id: 15, title: "Soft chairs Beige",                         brand: "Other",   price: 14.00,  image: "Assets/Image/interior/softchair.jpg" },
+        { id: 16, title: "Coffee maker in white color",               brand: "Other",   price: 13.75,  image: "Assets/Image/interior/coffee.jpg" },
+        { id: 17, title: "Ceramic Kitchen Crockery Set",              brand: "Other",   price: 22.00,  image: "Assets/Image/interior/crockery.jpg" },
+        { id: 18, title: "Modern Bedside Lamps",                      brand: "Other",   price: 15.00,  image: "Assets/Image/interior/lamp.jpg" },
+        { id: 19, title: "Kitchen Dishes Set",                        brand: "Other",   price: 16.50,  image: "Assets/Image/interior/kitchen.jpg" },
+        { id: 20, title: "Indoor Decorative Plants",                  brand: "Other",   price: 85.00,  image: "Assets/Image/interior/plant.jpg" },
+        { id: 21, title: "Electric Blenders",                         brand: "Other",   price: 33.00,  image: "Assets/Image/interior/blender.jpg" },
+        { id: 22, title: "Travel Friendly Electric Kettle",           brand: "Other",   price: 69.95,  image: "Assets/Image/tech/kattle.jpg" },
+        { id: 23, title: "General Home Appliance",                    brand: "Other",   price: 24.00,  image: "Assets/Image/interior/homeapp.jpg" },
+        { id: 24, title: "iPhone 12 - Blue 128GB",                    brand: "Apple",   price: 119.00, image: "Assets/Image/tech/Iphone2.jpg" },
+        { id: 25, title: "Redmi Smartphone - Black",                  brand: "Pocco",   price: 109.00, image: "Assets/Image/tech/redmi.jpg" },
+        { id: 27, title: "Front Load Washing Machine",                brand: "Samsung", price: 399.00, image: "Assets/Image/interior/machine.jpg" },
+        { id: 28, title: "Men's Blue Polo Shirt",                     brand: "Other",   price: 14.00,  image: "Assets/Image/cloth/blueshirt.jpg" },
+        { id: 29, title: "Men's Blue Suit Jacket",                    brand: "Other",   price: 69.00,  image: "Assets/Image/cloth/coat.jpg" }
+      ];
+
+      /* ══════════════════════════════════════════════
+         INIT
+      ══════════════════════════════════════════════ */
+      document.addEventListener("DOMContentLoaded", () => {
+        // Mobile menu
+        const menuBtn  = document.getElementById("ui-menu-btn");
+        const closeBtn = document.getElementById("ui-close-btn");
+        const sideNav  = document.getElementById("ui-side-nav");
+        const overlay  = document.getElementById("ui-filter-overlay");
+        if (menuBtn)  menuBtn.addEventListener("click",  () => { sideNav.classList.add("ui-active");    overlay.classList.add("ui-active"); });
+        if (closeBtn) closeBtn.addEventListener("click", () => { sideNav.classList.remove("ui-active"); overlay.classList.remove("ui-active"); });
+        if (overlay)  overlay.addEventListener("click",  () => { sideNav.classList.remove("ui-active"); overlay.classList.remove("ui-active"); });
+
+        // ── Auth gate ──
+        if (!AuthDB.getCurrentUser()) {
+          const container = document.getElementById("ui-orders-container");
+          if (container) container.innerHTML = buildAuthGate(
+            'ph-package',
+            'Sign in to view your orders',
+            'Track your orders, view invoices, and manage your purchase history — all in one place. Sign in to get started.'
+          );
+          return;
+        }
+
+        renderOrders();
+      });
+
+      function onAuthSuccess(user) { location.reload(); }
+
+      /* ══════════════════════════════════════════════
+         RENDER ORDERS LIST
+      ══════════════════════════════════════════════ */
+      function renderOrders() {
+        const container = document.getElementById("ui-orders-container");
+        const orders = AuthDB.getUserData("orders");
+        container.innerHTML = "";
+
+        if (orders.length === 0) {
+          container.innerHTML = `
+            <div class="ui-cart-card" style="text-align:center; padding:40px 20px;">
+              <i class="ph ph-package" style="font-size:48px; color:#8b96a5; margin-bottom:15px;"></i>
+              <h3 style="color:#1c1c1c; margin-bottom:10px;">No orders found</h3>
+              <p style="color:#8b96a5; margin-bottom:20px;">Looks like you haven't placed an order yet.</p>
+              <a href="products.html?category=All category" class="ui-button-primary" style="text-decoration:none;">Start Shopping</a>
+            </div>`;
+          return;
+        }
+
+        orders.forEach((order, idx) => {
+          let itemsHTML = "";
+          order.items.forEach(item => {
+            const product = productsDatabase.find(p => p.id === item.id)
+              || { title: "Unknown Item", price: 0, image: "", brand: "Unknown" };
+            itemsHTML += `
+              <div class="ui-cart-item" style="padding:15px 0;">
+                <img src="${product.image}" class="ui-cart-item-img" alt="${product.title}" style="width:60px;height:60px;">
+                <div class="ui-cart-item-details">
+                  <h4 class="ui-cart-item-title" style="font-size:15px;">${product.title}</h4>
+                  <p class="ui-cart-item-specs">Seller: ${product.brand} | Qty: ${item.qty}</p>
+                </div>
+                <div class="ui-cart-item-pricing" style="font-size:15px;font-weight:600;">
+                  $${(product.price * item.qty).toFixed(2)}
+                </div>
+              </div>`;
+          });
+
+          container.innerHTML += `
+            <div class="ui-cart-card" style="margin-bottom:20px; padding:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #dee2e6; padding-bottom:15px; margin-bottom:5px;">
+                <div>
+                  <strong style="font-size:16px; color:#1c1c1c;">Order ${order.orderId}</strong>
+                  <div style="color:#8b96a5; font-size:13px; margin-top:4px;">Placed on ${order.date}</div>
+                </div>
+                <div style="text-align:right;">
+                  <span style="background:#e3f0ff; color:#0d7dfa; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:500;">${order.status}</span>
+                  <div style="font-weight:700; color:#1c1c1c; margin-top:8px; font-size:16px;">Total: $${order.total}</div>
+                </div>
+              </div>
+              <div>${itemsHTML}</div>
+              <div style="border-top:1px solid #dee2e6; padding-top:15px; text-align:right;">
+                <button class="ui-button-secondary" style="font-size:13px;" onclick="openInvoice(${idx})">
+                  <i class="ph ph-receipt" style="margin-right:4px"></i>View Invoice
+                </button>
+                <button class="ui-button-primary" style="font-size:13px; margin-left:10px;" onclick="openTracker(${idx})">
+                  <i class="ph ph-map-pin" style="margin-right:4px"></i>Track Order
+                </button>
+              </div>
+            </div>`;
+        });
+      }
+
+      /* ══════════════════════════════════════════════
+         INVOICE MODAL
+      ══════════════════════════════════════════════ */
+      function openInvoice(idx) {
+        const orders  = AuthDB.getUserData("orders");
+        const order   = orders[idx];
+        if (!order) return;
+
+        // Build precise timestamp from stored ISO string (or fall back to date string)
+        let invoiceTimestamp;
+        if (order.timestamp) {
+          const ts = new Date(order.timestamp);
+          const datePart = ts.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+          const timePart = ts.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+          const tzOffset = -ts.getTimezoneOffset();
+          const tzSign   = tzOffset >= 0 ? "+" : "-";
+          const tzHH     = String(Math.floor(Math.abs(tzOffset) / 60)).padStart(2, "0");
+          const tzMM     = String(Math.abs(tzOffset) % 60).padStart(2, "0");
+          const tzLabel  = tzOffset === 0 ? "UTC" : `UTC${tzSign}${tzHH}:${tzMM}`;
+          invoiceTimestamp = `${datePart} at ${timePart} (${tzLabel})`;
+        } else {
+          invoiceTimestamp = order.date; // legacy orders without timestamp
+        }
+
+        // Invoice number derived from order ID
+        const invoiceNumber = "INV-" + order.orderId.replace("ORD-", "");
+
+        // Recalculate line items
+        let subtotal = 0;
+        let rowsHTML = "";
+        order.items.forEach((item, i) => {
+          const product = productsDatabase.find(p => p.id === item.id)
+            || { title: "Unknown Item", price: 0, image: "", brand: "Unknown" };
+          const lineTotal = product.price * item.qty;
+          subtotal += lineTotal;
+          rowsHTML += `
+            <tr>
+              <td>${i + 1}</td>
+              <td>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <img src="${product.image}" alt="${product.title}">
+                  <div>
+                    <div style="font-weight:500; line-height:1.4;">${product.title}</div>
+                    <div style="color:#8b96a5; font-size:11px;">Seller: ${product.brand}</div>
+                  </div>
+                </div>
+              </td>
+              <td style="text-align:center;">${item.qty}</td>
+              <td style="text-align:right;">$${product.price.toFixed(2)}</td>
+              <td style="text-align:right; font-weight:600;">$${lineTotal.toFixed(2)}</td>
+            </tr>`;
+        });
+
+        const tax      = subtotal * 0.05;
+        const total    = parseFloat(order.total);
+        const discount = Math.max(0, subtotal + tax - total); // back-calculate discount
+
+        document.getElementById("invoice-body-content").innerHTML = `
+          <div class="invoice-meta">
+            <div>
+              <div class="invoice-brand">Brand<span>.</span></div>
+              <div style="font-size:12px; color:#8b96a5; margin-top:4px; line-height:1.7;">
+                123 Commerce Street<br>
+                New York, NY 10001<br>
+                billing@brand.store
+              </div>
+            </div>
+            <div class="invoice-meta-right">
+              <div style="font-size:18px; font-weight:700; color:#1c1c1c;">${invoiceNumber}</div>
+              <div><strong>Order:</strong> ${order.orderId}</div>
+              <div><strong>Date:</strong> ${invoiceTimestamp}</div>
+              <div><strong>Status:</strong> <span class="invoice-status-badge">${order.status}</span></div>
+            </div>
+          </div>
+          <hr class="invoice-divider">
+          <div class="invoice-parties">
+            <div class="invoice-party">
+              <h4>Bill To</h4>
+              <p>Customer Account<br>— address on file —</p>
+            </div>
+            <div class="invoice-party" style="text-align:right;">
+              <h4>Ship To</h4>
+              <p>Same as billing address<br>Standard Shipping</p>
+            </div>
+          </div>
+          <table class="invoice-table">
+            <thead>
+              <tr>
+                <th style="width:30px;">#</th>
+                <th>Item</th>
+                <th style="text-align:center; width:50px;">Qty</th>
+                <th style="text-align:right; width:80px;">Unit Price</th>
+                <th style="text-align:right; width:90px;">Total</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHTML}</tbody>
+          </table>
+          <div style="display:flex; justify-content:flex-end;">
+            <div class="invoice-totals">
+              <div class="row"><span>Subtotal</span><span>$${subtotal.toFixed(2)}</span></div>
+              ${discount > 0 ? `<div class="row"><span>Discount</span><span class="red">- $${discount.toFixed(2)}</span></div>` : ""}
+              <div class="row"><span>Tax (5%)</span><span class="green">+ $${tax.toFixed(2)}</span></div>
+              <div class="row total"><span>Total</span><span>$${total.toFixed(2)}</span></div>
+            </div>
+          </div>
+          <div class="invoice-footer-note">
+            Thank you for shopping with Brand! This is a computer-generated invoice and does not require a signature.
+            For queries, contact support@brand.store
+          </div>`;
+
+        openModal("invoice-modal");
+      }
+
+      function printInvoice() {
+        window.print();
+      }
+
+      /* ══════════════════════════════════════════════
+         TRACK ORDER MODAL
+      ══════════════════════════════════════════════ */
+      function openTracker(idx) {
+        const orders = AuthDB.getUserData("orders");
+        const order  = orders[idx];
+        if (!order) return;
+
+        // Determine progress based on order date (simulate real-world timeline)
+        const orderDate   = new Date(order.date);
+        const now         = new Date();
+        const daysPassed  = Math.floor((now - orderDate) / (1000 * 60 * 60 * 24));
+
+        // Timeline steps with how many days after order each step triggers
+        const steps = [
+          {
+            key: "placed",
+            icon: "ph-check-circle",
+            title: "Order Placed",
+            desc: "Your order has been received and confirmed.",
+            triggerDay: 0
+          },
+          {
+            key: "confirmed",
+            icon: "ph-seal-check",
+            title: "Payment Confirmed",
+            desc: "Payment verified. Your order is being prepared.",
+            triggerDay: 0
+          },
+          {
+            key: "processing",
+            icon: "ph-package",
+            title: "Processing & Packing",
+            desc: "Items are being picked, packed and labelled.",
+            triggerDay: 1
+          },
+          {
+            key: "shipped",
+            icon: "ph-truck",
+            title: "Shipped",
+            desc: "Your package is on its way.",
+            triggerDay: 2
+          },
+          {
+            key: "out",
+            icon: "ph-map-pin",
+            title: "Out for Delivery",
+            desc: "Your package is with the delivery agent.",
+            triggerDay: 4
+          },
+          {
+            key: "delivered",
+            icon: "ph-house-line",
+            title: "Delivered",
+            desc: "Package delivered successfully.",
+            triggerDay: 5
+          }
+        ];
+
+        // Calculate step dates from orderDate
+        function addDays(date, d) {
+          const r = new Date(date);
+          r.setDate(r.getDate() + d);
+          return r;
+        }
+        function fmtDate(d) {
+          return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+        }
+        function fmtTime(d) {
+          return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+        }
+
+        // Find which step we're currently on
+        let activeStepIdx = -1;
+        for (let i = steps.length - 1; i >= 0; i--) {
+          if (daysPassed >= steps[i].triggerDay) {
+            activeStepIdx = i;
+            break;
+          }
+        }
+        const isDelivered = activeStepIdx >= steps.length - 1;
+
+        // ETA display
+        const etaDate = addDays(orderDate, 5);
+        const etaStr  = fmtDate(etaDate);
+        let etaSummary, etaIcon;
+        if (isDelivered) {
+          etaSummary = "Delivered on " + etaStr;
+          etaIcon    = "ph-check-circle";
+        } else {
+          etaSummary = "Estimated delivery: " + etaStr;
+          etaIcon    = "ph-clock";
+        }
+
+        // Build timeline HTML
+        let timelineHTML = "";
+        steps.forEach((step, i) => {
+          const stepDate  = addDays(orderDate, step.triggerDay);
+          // Use a deterministic time so it looks realistic
+          const h = ((parseInt(order.orderId.replace(/\D/g,"")) * (i+3)) % 12 + 8).toString().padStart(2,"0");
+          const m = ((parseInt(order.orderId.replace(/\D/g,"")) * (i+7)) % 60).toString().padStart(2,"0");
+          const timeStr   = `${h}:${m} ${parseInt(h) < 12 ? "AM" : "PM"}`;
+
+          let dotClass, titleClass, timeDisplay;
+          if (i < activeStepIdx) {
+            dotClass   = "done";
+            titleClass = "";
+            timeDisplay = `${fmtDate(stepDate)} · ${timeStr}`;
+          } else if (i === activeStepIdx) {
+            dotClass   = "active";
+            titleClass = "";
+            timeDisplay = `${fmtDate(stepDate)} · ${timeStr}`;
+          } else {
+            dotClass   = "pending";
+            titleClass = "pending";
+            timeDisplay = "Pending";
+          }
+
+          const iconHTML = i < activeStepIdx
+            ? `<i class="ph-fill ph-check" style="font-size:9px;color:#fff;"></i>`
+            : "";
+
+          timelineHTML += `
+            <div class="track-step">
+              <div class="track-dot ${dotClass}">${iconHTML}</div>
+              <p class="track-step-title ${titleClass}">${step.title}</p>
+              <p class="track-step-desc">${step.desc}</p>
+              <p class="track-step-time">${timeDisplay}</p>
+            </div>`;
+        });
+
+        document.getElementById("track-body-content").innerHTML = `
+          <div class="track-order-id">
+            Tracking <strong>${order.orderId}</strong> &nbsp;·&nbsp; Placed on ${order.date}
+          </div>
+          <div class="track-summary-card">
+            <i class="ph-fill ph-${isDelivered ? "check-circle" : "truck"}" style="color:${isDelivered ? "#00b517" : "#0d7dfa"}; font-size:32px;"></i>
+            <div>
+              <div class="eta">${etaSummary}</div>
+              <div class="eta-sub">
+                ${isDelivered
+                  ? "Your order has been delivered. Enjoy your purchase!"
+                  : steps[activeStepIdx >= 0 ? activeStepIdx : 0].title + " — check below for full status"}
+              </div>
+            </div>
+          </div>
+          <div class="track-timeline">${timelineHTML}</div>
+          <div style="text-align:right; margin-top:24px;">
+            <button class="ui-button-primary" onclick="closeModal('track-modal')">Done</button>
+          </div>`;
+
+        openModal("track-modal");
+      }
+
+      /* ══════════════════════════════════════════════
+         MODAL HELPERS
+      ══════════════════════════════════════════════ */
+      function openModal(id) {
+        document.getElementById(id).classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      // Close on backdrop click
+      document.querySelectorAll(".modal-overlay").forEach(el => {
+        el.addEventListener("click", e => {
+          if (e.target === el) closeModal(el.id);
+        });
+      });
+    </script>
+  </body>
+</html>

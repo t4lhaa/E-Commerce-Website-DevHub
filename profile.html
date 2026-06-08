@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - Brand E-commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
+    <style>
+      .prof-container { max-width: 860px; margin: 36px auto 60px; padding: 0 20px; }
+      .prof-page-title { font-size: 22px; font-weight: 700; color: #1c1c1c; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+      .prof-hero { background: linear-gradient(135deg,#e3f0ff 0%,#f0f7ff 100%); border: 1px solid #d0e4ff; border-radius: 16px; padding: 32px 36px; display: flex; align-items: center; gap: 28px; margin-bottom: 24px; position: relative; }
+      .prof-avatar { width: 88px; height: 88px; border-radius: 50%; background: #0d7dfa; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 700; color: #fff; flex-shrink: 0; letter-spacing: -1px; box-shadow: 0 4px 16px rgba(13,125,250,0.3); }
+      .prof-hero-info h2 { font-size: 22px; font-weight: 700; color: #1c1c1c; margin-bottom: 4px; }
+      .prof-hero-info p { font-size: 14px; color: #8b96a5; }
+      .prof-member-badge { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid #d0e4ff; color: #0d7dfa; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-top: 8px; }
+      .prof-edit-hero-btn { position: absolute; top: 20px; right: 20px; background: #fff; border: 1.5px solid #dee2e6; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600; color: #1c1c1c; cursor: pointer; display: flex; align-items: center; gap: 6px; font-family: Inter,sans-serif; transition: all .15s; }
+      .prof-edit-hero-btn:hover { border-color: #0d7dfa; color: #0d7dfa; background: #f0f7ff; }
+      .prof-edit-hero-btn.active { background: #0d7dfa; color: #fff; border-color: #0d7dfa; }
+      .prof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      .prof-card { background: #fff; border: 1px solid #e3e8ee; border-radius: 14px; padding: 24px 26px; }
+      .prof-card.full-width { grid-column: 1 / -1; }
+      .prof-card-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #8b96a5; margin-bottom: 18px; display: flex; align-items: center; gap: 7px; }
+      .prof-field { display: flex; flex-direction: column; margin-bottom: 16px; }
+      .prof-field:last-child { margin-bottom: 0; }
+      .prof-field label { font-size: 12px; font-weight: 500; color: #8b96a5; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .04em; }
+      .prof-field-value { font-size: 15px; font-weight: 500; color: #1c1c1c; padding: 10px 0; border-bottom: 1.5px solid #f0f0f0; min-height: 40px; display: flex; align-items: center; }
+      .prof-field-value.empty { color: #c0c8d2; font-style: italic; font-weight: 400; font-size: 14px; }
+      .prof-field-value.password-dots { font-size: 20px; letter-spacing: 3px; color: #505050; }
+      .prof-input { width: 100%; padding: 10px 13px; border: 1.5px solid #e3e8ee; border-radius: 8px; font-size: 14px; font-family: Inter,sans-serif; color: #1c1c1c; outline: none; transition: border-color .15s; background: #fff; }
+      .prof-input:focus { border-color: #0d7dfa; box-shadow: 0 0 0 3px rgba(13,125,250,.1); }
+      .prof-input:disabled { background: #f7fafc; color: #8b96a5; cursor: not-allowed; }
+      .prof-input.readonly-styled { background: #f7fafc; color: #505050; cursor: default; border-color: #e3e8ee; }
+      select.prof-input { appearance: none; -webkit-appearance: none; background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b96a5' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 12px center; background-size: 14px; padding-right: 36px; cursor: pointer; }
+      select.prof-input:disabled { background-color: #f7fafc; cursor: not-allowed; }
+      .prof-password-group { position: relative; }
+      .prof-pw-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #8b96a5; font-size: 18px; padding: 0; line-height: 1; }
+      .prof-pw-toggle:hover { color: #1c1c1c; }
+      .prof-action-bar { display: none; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 24px; padding: 20px 26px; background: #fff; border: 1px solid #e3e8ee; border-radius: 14px; }
+      .prof-action-bar.visible { display: flex; }
+      .prof-btn-save { background: #0d7dfa; color: #fff; border: none; border-radius: 8px; padding: 11px 28px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: Inter,sans-serif; transition: background .15s; display: flex; align-items: center; gap: 7px; }
+      .prof-btn-save:hover { background: #0b6cd8; }
+      .prof-btn-cancel { background: #fff; color: #505050; border: 1.5px solid #dee2e6; border-radius: 8px; padding: 11px 24px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: Inter,sans-serif; transition: background .15s; }
+      .prof-btn-cancel:hover { background: #f7fafc; }
+      .prof-alert { display: none; padding: 12px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; margin-bottom: 16px; align-items: center; gap: 8px; }
+      .prof-alert.success { display: flex; background: #e8f9ed; color: #00873f; border: 1px solid #b8eecb; }
+      .prof-alert.error   { display: flex; background: #fff3f3; color: #c62828; border: 1px solid #ffcdd2; }
+      .prof-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 24px; }
+      .prof-stat-card { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 18px 20px; text-align: center; }
+      .prof-stat-num { font-size: 26px; font-weight: 700; color: #0d7dfa; line-height: 1; margin-bottom: 4px; }
+      .prof-stat-label { font-size: 12px; color: #8b96a5; font-weight: 500; }
+      .prof-danger { border-color: #ffe0e0; background: #fffafa; }
+      .prof-danger .prof-card-title { color: #e53935; }
+      .prof-btn-danger { background: #fff; color: #e53935; border: 1.5px solid #ffcdd2; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Inter,sans-serif; transition: all .15s; display: inline-flex; align-items: center; gap: 6px; }
+      .prof-btn-danger:hover { background: #fff3f3; border-color: #e53935; }
+      .prof-gate-wrap { max-width: 500px; margin: 80px auto; }
+      @media (max-width: 700px) {
+        .prof-grid { grid-template-columns: 1fr; }
+        .prof-card.full-width { grid-column: 1; }
+        .prof-hero { flex-direction: column; text-align: center; padding: 28px 20px 70px; }
+        .prof-stats { grid-template-columns: repeat(3,1fr); gap: 10px; }
+        .prof-stat-num { font-size: 20px; }
+      }
+
+      /* ── Confirm modals ── */
+      .prof-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .prof-modal-overlay.open { display: flex; }
+      .prof-modal-box {
+        background: #fff;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+        animation: profModalIn .2s ease;
+        font-family: Inter, sans-serif;
+        overflow: hidden;
+      }
+      @keyframes profModalIn {
+        from { transform: scale(.95); opacity: 0; }
+        to   { transform: scale(1);  opacity: 1; }
+      }
+      .prof-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px 14px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .prof-modal-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1c1c1c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .prof-modal-close {
+        background: none; border: none; cursor: pointer;
+        font-size: 20px; color: #8b96a5; line-height: 1;
+        padding: 2px 6px; border-radius: 4px;
+        transition: background .15s;
+      }
+      .prof-modal-close:hover { background: #f0f0f0; color: #1c1c1c; }
+      .prof-modal-body {
+        padding: 28px 24px 20px;
+        text-align: center;
+      }
+      .prof-modal-icon {
+        width: 64px; height: 64px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 30px;
+        background: #fff0f0;
+      }
+      .prof-modal-title {
+        font-size: 18px; font-weight: 700;
+        color: #1c1c1c; margin: 0 0 8px;
+      }
+      .prof-modal-subtitle {
+        font-size: 13px; color: #8b96a5;
+        line-height: 1.6; margin: 0;
+      }
+      .prof-modal-actions {
+        display: flex; gap: 10px; justify-content: center;
+        padding: 4px 24px 22px;
+      }
+      .prof-modal-btn-danger {
+        background: #fa3434; color: #fff;
+        border: none; border-radius: 6px;
+        padding: 10px 22px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      .prof-modal-btn-danger:hover { background: #d42b2b; }
+      .prof-modal-btn-secondary {
+        background: #fff; color: #1c1c1c;
+        border: 1px solid #dee2e6; border-radius: 6px;
+        padding: 10px 22px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+      }
+      .prof-modal-btn-secondary:hover { background: #f7fafc; }
+    </style>
+  </head>
+  <body style="background:#f7fafc">
+    <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
+
+    <!-- Sign Out Confirm Modal -->
+    <div class="prof-modal-overlay" id="prof-signout-modal">
+      <div class="prof-modal-box">
+        <div class="prof-modal-header">
+          <h3><i class="ph-fill ph-sign-out" style="color:#fa3434"></i> Sign Out</h3>
+          <button class="prof-modal-close" onclick="closeProfModal('prof-signout-modal')">&#x2715;</button>
+        </div>
+        <div class="prof-modal-body">
+          <div class="prof-modal-icon">
+            <i class="ph-fill ph-sign-out" style="color:#fa3434"></i>
+          </div>
+          <p class="prof-modal-title">Sign out of your account?</p>
+          <p class="prof-modal-subtitle">You'll need to sign in again to access your orders, messages, and saved items.</p>
+        </div>
+        <div class="prof-modal-actions">
+          <button class="prof-modal-btn-secondary" onclick="closeProfModal('prof-signout-modal')">Cancel</button>
+          <button class="prof-modal-btn-danger" onclick="confirmSignOut()"><i class="ph ph-sign-out"></i> Sign out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Account Confirm Modal -->
+    <div class="prof-modal-overlay" id="prof-delete-modal">
+      <div class="prof-modal-box">
+        <div class="prof-modal-header">
+          <h3><i class="ph-fill ph-warning" style="color:#fa3434"></i> Delete Account</h3>
+          <button class="prof-modal-close" onclick="closeProfModal('prof-delete-modal')">&#x2715;</button>
+        </div>
+        <div class="prof-modal-body">
+          <div class="prof-modal-icon">
+            <i class="ph-fill ph-trash" style="color:#fa3434"></i>
+          </div>
+          <p class="prof-modal-title">Permanently delete your account?</p>
+          <p class="prof-modal-subtitle">All your data — orders, messages, and saved items — will be permanently removed. This action cannot be undone.</p>
+        </div>
+        <div class="prof-modal-actions">
+          <button class="prof-modal-btn-secondary" onclick="closeProfModal('prof-delete-modal')">Cancel</button>
+          <button class="prof-modal-btn-danger" onclick="confirmDeleteAccount()"><i class="ph ph-trash"></i> Delete account</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="ui-side-nav-mobile" id="ui-side-nav">
+      <div class="ui-nav-user-header">
+        <button id="ui-close-btn" class="ui-close-btn" aria-label="Close Menu">&#x2715;</button>
+        <div class="ui-avatar-circle"><img src="Assets/avatar=pic1.jpg" alt="User Profile" /></div>
+        <div class="ui-auth-text">Sign in | Register</div>
+      </div>
+      <ul class="ui-nav-links">
+        <li><a href="home.html"><span class="ui-nav-icon">&#x1F3E0;</span> Home</a></li>
+        <li><a href="products.html?category=All category"><span class="ui-nav-icon">&#x1F4CB;</span> Categories</a></li>
+        <li><a href="#"><span class="ui-nav-icon">&#x2764;&#xFE0F;</span> Favourites</a></li>
+        <li><a href="order.html"><span class="ui-nav-icon">&#x1F4E6;</span> My orders</a></li>
+        <li><a href="profile.html"><span class="ui-nav-icon">&#x1F464;</span> My profile</a></li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links">
+        <li><a href="#"><span class="ui-nav-icon">&#x1F310;</span> English | USD</a></li>
+        <li><a href="#"><span class="ui-nav-icon">&#x1F3A7;</span> Contact us</a></li>
+        <li><a href="#"><span class="ui-nav-icon">&#x1F3E2;</span> About</a></li>
+      </ul>
+      <hr class="ui-nav-divider" />
+      <ul class="ui-nav-links ui-no-icon">
+        <li><a href="#">User agreement</a></li>
+        <li><a href="#">Partnership</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </aside>
+
+    <header class="ui-page-header ui-container ui-desktop-only" style="margin-top:0">
+      <div class="ui-header-top-row">
+        <div class="ui-logo-area">
+          <a href="home.html" class="ui-logo-wrapper">
+            <img src="Assets/Brand/logo-symbol.svg" alt="Brand Logo" class="ui-brand-logo-img" />
+            <div class="ui-logo-text">Brand</div>
+          </a>
+        </div>
+        <div class="ui-header-actions ui-desktop-only-flex">
+          <div class="ui-action-item" id="header-profile-btn" style="cursor:pointer">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="ui-icon" id="c1">
+              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            </svg>
+            <span class="ui-label">Profile</span>
+          </div>
+          <a href="messages.html" class="ui-action-item" style="text-decoration:none;color:inherit">
+            <span class="ui-icon"><i class="ph-fill ph-chat-teardrop-dots" style="font-size:24px"></i></span>
+            <span class="ui-label">Message</span>
+          </a>
+          <a href="order.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-heart" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Orders</span>
+          </a>
+          <a href="cart.html" class="ui-action-item" style="text-decoration:none;color:inherit">
+            <span class="ui-icon"><i class="ph-fill ph-shopping-cart" style="font-size:24px"></i></span>
+            <span class="ui-label">My cart</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ui-mobile-details-top-bar ui-mobile-only-flex" style="border-bottom:1px solid #e3e8ee;padding:15px 20px;background:#fff;">
+      <a href="home.html" class="ui-back-arrow" style="color:#1c1c1c;display:flex;align-items:center;gap:15px;font-size:18px;font-weight:600;text-decoration:none;">
+        <i class="ph ph-arrow-left" style="font-size:24px"></i> My Profile
+      </a>
+      <button id="ui-menu-btn" style="background:transparent;border:none;font-size:24px;cursor:pointer;"><i class="ph ph-list"></i></button>
+    </div>
+
+    <main id="prof-main"></main>
+
+    <footer class="ui-site-footer" style="margin-top:40px">
+      <div class="ui-container ui-footer-columns">
+        <div class="ui-col-main ui-logo">
+          <div class="ui-logo-wrapper" style="margin-bottom:15px">
+            <img src="Assets/Brand/logo-symbol.svg" alt="Brand Logo" class="ui-brand-logo-img" />
+            <div class="ui-logo-text">Brand</div>
+          </div>
+          <p>Best information about the company<br/>goes here but now lorem ipsum is</p>
+          <div class="ui-social-links">
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-facebook-logo" style="color:white;font-size:18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-twitter-logo" style="color:white;font-size:18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-linkedin-logo" style="color:white;font-size:18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-instagram-logo" style="color:white;font-size:18px"></i></a>
+            <a href="#" class="ui-social-circle"><i class="ph-fill ph-youtube-logo" style="color:white;font-size:18px"></i></a>
+          </div>
+        </div>
+        <div class="ui-col"><strong>About</strong><ul><li>About Us</li><li>Find store</li><li>Categories</li><li>Blogs</li></ul></div>
+        <div class="ui-col"><strong>Partnership</strong><ul><li>About Us</li><li>Find store</li><li>Categories</li><li>Blogs</li></ul></div>
+        <div class="ui-col"><strong>Information</strong><ul><li>Help Center</li><li>Money Refund</li><li>Shipping</li><li>Contact us</li></ul></div>
+        <div class="ui-col"><strong>For users</strong><ul><li>Login</li><li>Register</li><li>Settings</li><li>My Orders</li></ul></div>
+        <div class="ui-col-apps">
+          <strong>Get app</strong>
+          <img src="Assets/playstore.png" alt="App Store" class="ui-app-badge" />
+          <img src="Assets/googleplay.png" alt="Google Play" class="ui-app-badge" />
+        </div>
+      </div>
+      <div class="ui-footer-bottom">
+        <div class="ui-container ui-footer-bottom-inner">
+          <span>&#169; 2023 Ecommerce.</span>
+          <div class="ui-dropdown-wrapper ui-footer-dropdown">
+            <span class="ui-language" style="display:flex;align-items:center;color:#1c1c1c">
+              <img src="https://flagcdn.com/w20/us.png" alt="US" class="ui-dropdown-flag" style="margin-right:6px" />English &#x2303;
+            </span>
+            <ul class="ui-dropdown-menu ui-dropup-menu">
+              <li><a href="#"><img src="https://flagcdn.com/w20/us.png" alt="US" class="ui-dropdown-flag" /> English</a></li>
+              <li><a href="#"><img src="https://flagcdn.com/w20/es.png" alt="ES" class="ui-dropdown-flag" /> Spanish</a></li>
+              <li><a href="#"><img src="https://flagcdn.com/w20/de.png" alt="DE" class="ui-dropdown-flag" /> German</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn  = document.getElementById('ui-menu-btn');
+      const closeBtn = document.getElementById('ui-close-btn');
+      const sideNav  = document.getElementById('ui-side-nav');
+      const navOv    = document.getElementById('ui-filter-overlay');
+      if (menuBtn)  menuBtn.addEventListener('click',  () => { sideNav.classList.add('ui-active');    navOv.classList.add('ui-active'); });
+      if (closeBtn) closeBtn.addEventListener('click', () => { sideNav.classList.remove('ui-active'); navOv.classList.remove('ui-active'); });
+      if (navOv)    navOv.addEventListener('click',    () => { sideNav.classList.remove('ui-active'); navOv.classList.remove('ui-active'); });
+
+      const hpBtn = document.getElementById('header-profile-btn');
+      if (hpBtn) hpBtn.onclick = () => {
+        if (AuthDB.getCurrentUser()) window.location.href = 'profile.html';
+        else openLoginModal('login');
+      };
+
+      const user = AuthDB.getCurrentUser();
+      if (!user) {
+        document.getElementById('prof-main').innerHTML =
+          '<div class="prof-gate-wrap">' +
+          buildAuthGate('ph-user-circle','Sign in to view your profile',
+            'Access your account details, manage your address, contact info, and account settings.') +
+          '</div>';
+        return;
+      }
+      renderProfilePage(user);
+    });
+
+    /* ══ RENDER ══ */
+    function renderProfilePage(user) {
+      const orders   = AuthDB.getUserData('orders');
+      const messages = AuthDB.getUserData('messages');
+      const saved    = AuthDB.getUserData('savedItems');
+      const initials = user.name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+      const memberSince = new Date(user.createdAt).toLocaleDateString('en-US',{month:'long',year:'numeric'});
+
+      function val(v) {
+        return v ? '<span>' + escHtml(v) + '</span>'
+                 : '<span class="empty">Not set</span>';
+      }
+
+      document.getElementById('prof-main').innerHTML =
+        '<div class="prof-container">' +
+        '<div class="prof-page-title"><i class="ph-fill ph-user-circle" style="font-size:26px;color:#0d7dfa"></i> My Profile</div>' +
+        '<div class="prof-alert" id="prof-alert"></div>' +
+
+        /* Hero */
+        '<div class="prof-hero">' +
+          '<div class="prof-avatar" id="prof-avatar">' + escHtml(initials) + '</div>' +
+          '<div class="prof-hero-info">' +
+            '<h2 id="prof-hero-name">' + escHtml(user.name) + '</h2>' +
+            '<p id="prof-hero-email">' + escHtml(user.email) + '</p>' +
+            '<div class="prof-member-badge"><i class="ph-fill ph-seal-check"></i> Member since ' + memberSince + '</div>' +
+          '</div>' +
+          '<button class="prof-edit-hero-btn" id="prof-edit-toggle-btn" onclick="toggleEditMode()">' +
+            '<i class="ph ph-pencil-simple" style="font-size:15px"></i> Edit profile' +
+          '</button>' +
+        '</div>' +
+
+        /* Stats */
+        '<div class="prof-stats">' +
+          '<div class="prof-stat-card"><div class="prof-stat-num">' + orders.length + '</div><div class="prof-stat-label">Orders</div></div>' +
+          '<div class="prof-stat-card"><div class="prof-stat-num">' + messages.length + '</div><div class="prof-stat-label">Messages</div></div>' +
+          '<div class="prof-stat-card"><div class="prof-stat-num">' + saved.length + '</div><div class="prof-stat-label">Saved Items</div></div>' +
+        '</div>' +
+
+        '<div class="prof-grid">' +
+
+        /* Personal */
+        '<div class="prof-card">' +
+          '<div class="prof-card-title"><i class="ph-fill ph-user"></i> Personal Information</div>' +
+          field('Full Name',      'name',     val(user.name),     '<input class="prof-input" id="edit-name"     type="text"  value="' + escAttr(user.name)   + '" placeholder="Full name" />') +
+          field('Email Address',  'email',    val(user.email),    '<input class="prof-input readonly-styled" id="edit-email" type="email" value="' + escAttr(user.email) + '" disabled title="Email cannot be changed" />') +
+          field('Date of Birth',  'dob',      val(user.dob),      '<input class="prof-input" id="edit-dob"      type="date"  value="' + escAttr(user.dob||'') + '" />') +
+          field('Gender',         'gender',   val(user.gender),   genderSelect(user.gender)) +
+        '</div>' +
+
+        /* Contact */
+        '<div class="prof-card">' +
+          '<div class="prof-card-title"><i class="ph-fill ph-phone"></i> Contact Details</div>' +
+          field('Phone Number',   'phone',    val(user.phone),    '<input class="prof-input" id="edit-phone"    type="tel"  value="' + escAttr(user.phone||'')    + '" placeholder="+1 234 567 8900" />') +
+          field('WhatsApp',       'whatsapp', val(user.whatsapp), '<input class="prof-input" id="edit-whatsapp" type="tel"  value="' + escAttr(user.whatsapp||'') + '" placeholder="+1 234 567 8900" />') +
+          field('Website / Social','website', val(user.website),  '<input class="prof-input" id="edit-website"  type="url"  value="' + escAttr(user.website||'')  + '" placeholder="https://yoursite.com" />') +
+        '</div>' +
+
+        /* Address */
+        '<div class="prof-card">' +
+          '<div class="prof-card-title"><i class="ph-fill ph-map-pin"></i> Address</div>' +
+          field('Country',        'country',  val(user.country),  countrySelect(user.country)) +
+          field('City',           'city',     val(user.city),     '<input class="prof-input" id="edit-city"    type="text" value="' + escAttr(user.city||'')    + '" placeholder="Your city" />') +
+          field('Street Address', 'address',  val(user.address),  '<input class="prof-input" id="edit-address" type="text" value="' + escAttr(user.address||'') + '" placeholder="123 Main Street" />') +
+          field('ZIP / Postal',   'zip',      val(user.zip),      '<input class="prof-input" id="edit-zip"     type="text" value="' + escAttr(user.zip||'')     + '" placeholder="10001" />') +
+        '</div>' +
+
+        /* Security */
+        '<div class="prof-card">' +
+          '<div class="prof-card-title"><i class="ph-fill ph-lock-key"></i> Password &amp; Security</div>' +
+          '<div class="prof-field">' +
+            '<label>Current Password</label>' +
+            '<div class="prof-field-value password-dots" id="view-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>' +
+            '<div class="prof-password-group" style="display:none" id="edit-pw-current-wrap">' +
+              '<input class="prof-input" id="edit-pw-current" type="password" placeholder="Enter current password" />' +
+              '<button class="prof-pw-toggle" type="button" onclick="togglePw(\'edit-pw-current\',this)"><i class="ph ph-eye"></i></button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="prof-field" id="new-pw-field" style="display:none">' +
+            '<label>New Password</label>' +
+            '<div class="prof-password-group">' +
+              '<input class="prof-input" id="edit-pw-new" type="password" placeholder="New password (min 6 chars)" />' +
+              '<button class="prof-pw-toggle" type="button" onclick="togglePw(\'edit-pw-new\',this)"><i class="ph ph-eye"></i></button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="prof-field" id="confirm-pw-field" style="display:none">' +
+            '<label>Confirm New Password</label>' +
+            '<div class="prof-password-group">' +
+              '<input class="prof-input" id="edit-pw-confirm" type="password" placeholder="Repeat new password" />' +
+              '<button class="prof-pw-toggle" type="button" onclick="togglePw(\'edit-pw-confirm\',this)"><i class="ph ph-eye"></i></button>' +
+            '</div>' +
+          '</div>' +
+          '<p style="font-size:12px;color:#8b96a5;margin-top:8px" id="pw-hint">To change your password, click <strong>Edit profile</strong> above.</p>' +
+        '</div>' +
+
+        /* Danger */
+        '<div class="prof-card prof-danger full-width">' +
+          '<div class="prof-card-title"><i class="ph-fill ph-warning"></i> Danger Zone</div>' +
+          '<p style="font-size:13px;color:#505050;margin-bottom:4px">Sign out of your account or permanently delete it.</p>' +
+          '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">' +
+            '<button class="prof-btn-danger" onclick="handleSignOut()"><i class="ph ph-sign-out"></i> Sign out</button>' +
+            '<button class="prof-btn-danger" onclick="handleDeleteAccount()" style="border-color:#e53935;background:#fff3f3"><i class="ph ph-trash"></i> Delete account</button>' +
+          '</div>' +
+        '</div>' +
+
+        '</div>' + /* /prof-grid */
+
+        '<div class="prof-action-bar" id="prof-action-bar">' +
+          '<button class="prof-btn-cancel" onclick="cancelEdit()">Cancel</button>' +
+          '<button class="prof-btn-save" onclick="saveProfile()"><i class="ph ph-floppy-disk"></i> Save changes</button>' +
+        '</div>' +
+
+        '</div>'; /* /prof-container */
+    }
+
+    /* ── Field builder ── */
+    function field(label, key, viewHtml, editHtml) {
+      return '<div class="prof-field">' +
+        '<label>' + label + '</label>' +
+        '<div class="prof-field-value" id="view-' + key + '">' + viewHtml + '</div>' +
+        '<div id="edit-' + key + '-wrap" style="display:none">' + editHtml + '</div>' +
+      '</div>';
+    }
+
+    function genderSelect(selected) {
+      var opts = ['','Male','Female','Other','Prefer not to say'];
+      var labels = ['Select gender','Male','Female','Other','Prefer not to say'];
+      return '<select class="prof-input" id="edit-gender">' +
+        opts.map(function(o,i){ return '<option value="' + o + '"' + (selected===o?' selected':'') + '>' + labels[i] + '</option>'; }).join('') +
+      '</select>';
+    }
+
+    function countrySelect(selected) {
+      var countries = ['Afghanistan','Albania','Algeria','Argentina','Australia','Austria','Bangladesh','Belgium','Brazil','Canada','Chile','China','Colombia','Croatia','Czech Republic','Denmark','Egypt','Ethiopia','Finland','France','Germany','Ghana','Greece','Hungary','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Japan','Jordan','Kenya','Kuwait','Malaysia','Mexico','Morocco','Netherlands','New Zealand','Nigeria','Norway','Pakistan','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Saudi Arabia','Singapore','South Africa','South Korea','Spain','Sri Lanka','Sweden','Switzerland','Thailand','Turkey','UAE','Ukraine','United Kingdom','United States','Vietnam','Yemen'];
+      return '<select class="prof-input" id="edit-country"><option value="">Select country</option>' +
+        countries.map(function(c){ return '<option value="' + c + '"' + (selected===c?' selected':'') + '>' + c + '</option>'; }).join('') +
+      '</select>';
+    }
+
+    /* ══ EDIT MODE ══ */
+    var editMode = false;
+    var FIELD_KEYS = ['name','email','dob','gender','phone','whatsapp','website','country','city','address','zip'];
+
+    function toggleEditMode() {
+      editMode = !editMode;
+      var editBtn = document.getElementById('prof-edit-toggle-btn');
+
+      FIELD_KEYS.forEach(function(k) {
+        var v = document.getElementById('view-' + k);
+        var e = document.getElementById('edit-' + k + '-wrap');
+        if (v) v.style.display = editMode ? 'none' : 'flex';
+        if (e) e.style.display = editMode ? '' : 'none';
+      });
+
+      var vp = document.getElementById('view-password');
+      var ep = document.getElementById('edit-pw-current-wrap');
+      if (vp) vp.style.display = editMode ? 'none' : 'flex';
+      if (ep) ep.style.display = editMode ? '' : 'none';
+
+      ['new-pw-field','confirm-pw-field'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.style.display = editMode ? '' : 'none';
+      });
+
+      var pwHint = document.getElementById('pw-hint');
+      if (pwHint) pwHint.style.display = editMode ? 'none' : '';
+
+      var bar = document.getElementById('prof-action-bar');
+      if (bar) bar.classList.toggle('visible', editMode);
+
+      if (editBtn) {
+        if (editMode) {
+          editBtn.innerHTML = '<i class="ph ph-x" style="font-size:15px"></i> Cancel edit';
+          editBtn.classList.add('active');
+        } else {
+          editBtn.innerHTML = '<i class="ph ph-pencil-simple" style="font-size:15px"></i> Edit profile';
+          editBtn.classList.remove('active');
+        }
+      }
+      clearAlert();
+    }
+
+    function cancelEdit() { if (editMode) toggleEditMode(); }
+
+    /* ══ SAVE ══ */
+    function saveProfile() {
+      var user = AuthDB.getCurrentUser();
+      if (!user) return;
+      clearAlert();
+
+      var name = (document.getElementById('edit-name-wrap').querySelector('input') || {}).value;
+      if (name) name = name.trim();
+      if (!name) return showAlert('error','Full name cannot be empty.');
+
+      var pwCurrent = (document.getElementById('edit-pw-current') || {}).value || '';
+      var pwNew     = (document.getElementById('edit-pw-new')     || {}).value || '';
+      var pwConfirm = (document.getElementById('edit-pw-confirm') || {}).value || '';
+
+      if (pwCurrent || pwNew || pwConfirm) {
+        if (!pwCurrent)              return showAlert('error','Please enter your current password.');
+        if (pwCurrent !== user.password) return showAlert('error','Current password is incorrect.');
+        if (!pwNew)                  return showAlert('error','Please enter a new password.');
+        if (pwNew.length < 6)        return showAlert('error','New password must be at least 6 characters.');
+        if (pwNew !== pwConfirm)     return showAlert('error','New passwords do not match.');
+      }
+
+      function g(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+      var updated = Object.assign({}, user, {
+        name:     name,
+        dob:      g('edit-dob'),
+        gender:   g('edit-gender'),
+        phone:    g('edit-phone'),
+        whatsapp: g('edit-whatsapp'),
+        website:  g('edit-website'),
+        country:  g('edit-country'),
+        city:     g('edit-city'),
+        address:  g('edit-address'),
+        zip:      g('edit-zip'),
+        password: pwNew || user.password
+      });
+
+      var users = AuthDB.getUsers();
+      var idx = users.findIndex(function(u){ return u.id === user.id; });
+      if (idx !== -1) users[idx] = updated;
+      AuthDB.saveUsers(users);
+
+      /* refresh view fields */
+      function sv(key, v) {
+        var el = document.getElementById('view-' + key);
+        if (!el) return;
+        el.innerHTML = v ? '<span>' + escHtml(v) + '</span>' : '<span class="empty">Not set</span>';
+        el.classList.toggle('empty', !v);
+      }
+      sv('name', updated.name); sv('email', updated.email); sv('dob', updated.dob);
+      sv('gender', updated.gender); sv('phone', updated.phone); sv('whatsapp', updated.whatsapp);
+      sv('website', updated.website); sv('country', updated.country); sv('city', updated.city);
+      sv('address', updated.address); sv('zip', updated.zip);
+
+      var heroName = document.getElementById('prof-hero-name');
+      var avatar   = document.getElementById('prof-avatar');
+      if (heroName) heroName.textContent = updated.name;
+      if (avatar)   avatar.textContent   = updated.name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+
+      updateHeaderForUser(updated);
+
+      ['edit-pw-current','edit-pw-new','edit-pw-confirm'].forEach(function(id){
+        var el = document.getElementById(id); if (el) el.value = '';
+      });
+
+      if (editMode) toggleEditMode();
+      showAlert('success','Profile updated successfully!');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    /* ── Helpers ── */
+    function showAlert(type, msg) {
+      var el = document.getElementById('prof-alert');
+      if (!el) return;
+      el.className = 'prof-alert ' + type;
+      el.innerHTML = '<i class="ph-fill ' + (type==='success'?'ph-check-circle':'ph-warning') + '"></i> ' + escHtml(msg);
+    }
+    function clearAlert() {
+      var el = document.getElementById('prof-alert');
+      if (el) { el.className = 'prof-alert'; el.innerHTML = ''; }
+    }
+    function togglePw(inputId, btn) {
+      var input = document.getElementById(inputId);
+      if (!input) return;
+      var isText = input.type === 'text';
+      input.type = isText ? 'password' : 'text';
+      var icon = btn.querySelector('i');
+      if (icon) icon.className = isText ? 'ph ph-eye' : 'ph ph-eye-slash';
+    }
+    function handleSignOut() {
+      document.getElementById('prof-signout-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function handleDeleteAccount() {
+      document.getElementById('prof-delete-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeProfModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function confirmSignOut() {
+      closeProfModal('prof-signout-modal');
+      AuthDB.logout();
+      window.location.href = 'home.html';
+    }
+    function confirmDeleteAccount() {
+      closeProfModal('prof-delete-modal');
+      var user = AuthDB.getCurrentUser();
+      var users = AuthDB.getUsers().filter(function(u){ return u.id !== user.id; });
+      AuthDB.saveUsers(users);
+      AuthDB.logout();
+      ['orders','messages','cart','savedItems'].forEach(function(k){ AuthDB.removeUserData(k); });
+      window.location.href = 'home.html';
+    }
+
+    /* Close modals on backdrop click */
+    document.addEventListener('DOMContentLoaded', function() {
+      ['prof-signout-modal','prof-delete-modal'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('click', function(e) {
+          if (e.target === this) closeProfModal(id);
+        });
+      });
+    });
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escAttr(str) { return escHtml(str); }
+    function onAuthSuccess(user) { renderProfilePage(user); }
+    </script>
+  </body>
+</html>
