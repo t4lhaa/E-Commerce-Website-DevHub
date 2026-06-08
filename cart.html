@@ -10,6 +10,118 @@
     />
     <link rel="stylesheet" href="index.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
+    <style>
+      /* ── Cart custom modals ── */
+      .cart-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .cart-modal-overlay.open { display: flex; }
+      .cart-modal-box {
+        background: #fff;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+        animation: cartModalIn .2s ease;
+        font-family: Inter, sans-serif;
+        overflow: hidden;
+      }
+      @keyframes cartModalIn {
+        from { transform: scale(.95); opacity: 0; }
+        to   { transform: scale(1);  opacity: 1; }
+      }
+      .cart-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px 14px;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .cart-modal-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1c1c1c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .cart-modal-close {
+        background: none; border: none; cursor: pointer;
+        font-size: 20px; color: #8b96a5; line-height: 1;
+        padding: 2px 6px; border-radius: 4px;
+        transition: background .15s;
+      }
+      .cart-modal-close:hover { background: #f0f0f0; color: #1c1c1c; }
+      .cart-modal-body {
+        padding: 28px 24px 22px;
+        text-align: center;
+      }
+      .cart-modal-icon {
+        width: 64px; height: 64px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 30px;
+      }
+      .cart-modal-icon.success { background: #e8f9ed; }
+      .cart-modal-icon.warning { background: #fff3e0; }
+      .cart-modal-icon.confirm { background: #e3f0ff; }
+      .cart-modal-confirm-summary {
+        background: #f7fafc; border-radius: 8px;
+        padding: 12px 16px; margin: 14px 0 4px;
+        font-size: 13px; color: #1c1c1c;
+        display: flex; justify-content: space-between; align-items: center;
+      }
+      .cart-modal-confirm-summary span { color: #8b96a5; }
+      .cart-modal-confirm-summary strong { font-size: 15px; color: #1c1c1c; }
+      .cart-modal-title {
+        font-size: 18px; font-weight: 700;
+        color: #1c1c1c; margin: 0 0 8px;
+      }
+      .cart-modal-subtitle {
+        font-size: 13px; color: #8b96a5;
+        line-height: 1.6; margin: 0 0 6px;
+      }
+      .cart-modal-order-id {
+        display: inline-block;
+        background: #e3f0ff; color: #0d7dfa;
+        font-size: 12px; font-weight: 600;
+        padding: 4px 10px; border-radius: 4px;
+        margin-top: 8px; letter-spacing: .02em;
+      }
+      .cart-modal-actions {
+        display: flex; gap: 10px; justify-content: center;
+        padding: 0 24px 22px;
+      }
+      .cart-modal-btn-primary {
+        background: #0d7dfa; color: #fff;
+        border: none; border-radius: 6px;
+        padding: 10px 22px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+        text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      }
+      .cart-modal-btn-primary:hover { background: #0b6cd8; }
+      .cart-modal-btn-secondary {
+        background: #fff; color: #1c1c1c;
+        border: 1px solid #dee2e6; border-radius: 6px;
+        padding: 10px 22px; font-size: 13px;
+        font-weight: 500; cursor: pointer;
+        transition: background .15s;
+        font-family: Inter, sans-serif;
+      }
+      .cart-modal-btn-secondary:hover { background: #f7fafc; }
+    </style>
   </head>
   <body style="background: #f7fafc">
     <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
@@ -36,7 +148,7 @@
           <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
         </li>
         <li>
-          <a href="cart.html"><span class="ui-nav-icon">📦</span> My orders</a>
+          <a href="order.html"><span class="ui-nav-icon">📦</span> My orders</a>
         </li>
       </ul>
       <hr class="ui-nav-divider" />
@@ -88,19 +200,14 @@
               /></svg
             ><span class="ui-label">Profile</span>
           </div>
-          <div class="ui-action-item">
-            <span class="ui-icon"
-              ><i
-                class="ph-fill ph-chat-teardrop-dots"
-                style="font-size: 24px"
-              ></i></span
-            ><span class="ui-label">Message</span>
-          </div>
-          <div class="ui-action-item">
-            <span class="ui-icon"
-              ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
-            ><span class="ui-label">Orders</span>
-          </div>
+          <a href="messages.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-chat-teardrop-dots" style="font-size: 24px;"></i></span>
+            <span class="ui-label"">Message</span>
+          </a>
+          <a href="order.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-heart" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Orders</span>
+          </a>
           <a
             href="cart.html"
             class="ui-action-item"
@@ -418,6 +525,89 @@
       </div>
     </footer>
 
+
+    <!-- ═══════════════════════════════════════════
+         CHECKOUT SUCCESS MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="cart-modal-overlay" id="checkout-success-modal">
+      <div class="cart-modal-box">
+        <div class="cart-modal-header">
+          <h3><i class="ph ph-check-circle" style="color:#00b517"></i> Order Confirmed</h3>
+          <button class="cart-modal-close" onclick="closeCartModal('checkout-success-modal')">&#x2715;</button>
+        </div>
+        <div class="cart-modal-body">
+          <div class="cart-modal-icon success">
+            <i class="ph-fill ph-check-circle" style="color:#00b517"></i>
+          </div>
+          <div class="cart-modal-title">Payment Successful! &#x1F389;</div>
+          <div class="cart-modal-subtitle">Thank you for your order. We'll start processing it right away.</div>
+          <div class="cart-modal-order-id" id="checkout-order-id">ORD-000000</div>
+        </div>
+        <div class="cart-modal-actions">
+          <a href="order.html" class="cart-modal-btn-primary">
+            <i class="ph ph-package"></i> View Orders
+          </a>
+          <button class="cart-modal-btn-secondary" onclick="closeCartModal('checkout-success-modal')">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         ORDER CONFIRMATION MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="cart-modal-overlay" id="confirm-checkout-modal">
+      <div class="cart-modal-box">
+        <div class="cart-modal-header">
+          <h3><i class="ph ph-credit-card" style="color:#0d7dfa"></i> Confirm Order</h3>
+          <button class="cart-modal-close" onclick="closeCartModal('confirm-checkout-modal')">&#x2715;</button>
+        </div>
+        <div class="cart-modal-body">
+          <div class="cart-modal-icon confirm">
+            <i class="ph-fill ph-shopping-bag" style="color:#0d7dfa"></i>
+          </div>
+          <div class="cart-modal-title">Ready to place your order?</div>
+          <div class="cart-modal-subtitle">Please review your order total before confirming.</div>
+          <div class="cart-modal-confirm-summary">
+            <span>Order Total</span>
+            <strong id="confirm-order-total">$0.00</strong>
+          </div>
+        </div>
+        <div class="cart-modal-actions">
+          <button class="cart-modal-btn-primary" id="confirm-place-order-btn">
+            <i class="ph ph-check"></i> Yes, Place Order
+          </button>
+          <button class="cart-modal-btn-secondary" onclick="closeCartModal('confirm-checkout-modal')">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         EMPTY CART WARNING MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="cart-modal-overlay" id="empty-cart-modal">
+      <div class="cart-modal-box">
+        <div class="cart-modal-header">
+          <h3><i class="ph ph-shopping-cart" style="color:#fa3434"></i> Cart Empty</h3>
+          <button class="cart-modal-close" onclick="closeCartModal('empty-cart-modal')">&#x2715;</button>
+        </div>
+        <div class="cart-modal-body">
+          <div class="cart-modal-icon warning">
+            <i class="ph-fill ph-shopping-cart" style="color:#fa7d34"></i>
+          </div>
+          <div class="cart-modal-title">Your cart is empty</div>
+          <div class="cart-modal-subtitle">Add some items before checking out.</div>
+        </div>
+        <div class="cart-modal-actions">
+          <a href="products.html?category=All category" class="cart-modal-btn-primary">
+            <i class="ph ph-storefront"></i> Shop Now
+          </a>
+          <button class="cart-modal-btn-secondary" onclick="closeCartModal('empty-cart-modal')">Close</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // FULL DATABASE
       const productsDatabase = [
@@ -657,11 +847,22 @@
         },
       ];
 
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let savedItems = JSON.parse(localStorage.getItem("savedItems")) || [];
+      let cart = AuthDB.getUserData("cart");
+      let savedItems = AuthDB.getUserData("savedItems");
       let discountApplied = false;
 
       document.addEventListener("DOMContentLoaded", () => {
+        // ── Auth gate ──
+        if (!AuthDB.getCurrentUser()) {
+          const main = document.querySelector('main');
+          if (main) main.innerHTML = buildAuthGate(
+            'ph-shopping-cart',
+            'Sign in to view your cart',
+            'Your cart items are saved to your account. Sign in or create an account to continue shopping.'
+          );
+          return;
+        }
+
         renderCart();
         renderSaved();
 
@@ -689,18 +890,56 @@
       if (checkoutBtn) {
         checkoutBtn.addEventListener("click", () => {
           if (cart.length === 0) {
-            alert("Your cart is already empty!");
+            openCartModal("empty-cart-modal");
             return;
           }
-
-          alert("Payment Successful! Thank you for your order. 🎉");
-
-          cart = [];
-
-          saveData();
-          renderCart();
+          // Show confirmation modal with current total
+          const previewSubtotal = cart.reduce((sum, item) => {
+            const p = productsDatabase.find(x => x.id === item.id);
+            return sum + (p ? p.price * item.qty : 0);
+          }, 0);
+          const previewDiscount = discountApplied ? Math.min(60.0, previewSubtotal * 0.1) : 0;
+          const previewTotal = previewSubtotal - previewDiscount + previewSubtotal * 0.05;
+          document.getElementById("confirm-order-total").textContent = "$" + previewTotal.toFixed(2);
+          openCartModal("confirm-checkout-modal");
         });
       }
+
+      // Confirm button — places the actual order
+      document.getElementById("confirm-place-order-btn").addEventListener("click", () => {
+        closeCartModal("confirm-checkout-modal");
+
+        let orders = AuthDB.getUserData("orders") || [];
+
+        let orderTotal = 0;
+        cart.forEach(item => {
+            const product = productsDatabase.find(p => p.id === item.id);
+            if(product) orderTotal += (product.price * item.qty);
+        });
+        orderTotal = orderTotal + (orderTotal * 0.05);
+        if(discountApplied) orderTotal -= Math.min(60.0, (orderTotal / 1.05) * 0.1);
+
+        const _now = new Date();
+        const newOrder = {
+            orderId: "ORD-" + Math.floor(100000 + Math.random() * 900000),
+            date: _now.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
+            timestamp: _now.toISOString(),
+            status: "Processing",
+            total: orderTotal.toFixed(2),
+            items: [...cart]
+        };
+
+        orders.unshift(newOrder);
+        AuthDB.setUserData("orders", orders);
+
+        document.getElementById("checkout-order-id").textContent = newOrder.orderId;
+        openCartModal("checkout-success-modal");
+
+        cart = [];
+        discountApplied = false;
+        saveData();
+        renderCart();
+      });
 
       function renderCart() {
         const container = document.getElementById("ui-cart-items-container");
@@ -869,9 +1108,32 @@
         renderSaved();
       }
       function saveData() {
-        localStorage.setItem("cart", JSON.stringify(cart));
-        localStorage.setItem("savedItems", JSON.stringify(savedItems));
+        AuthDB.setUserData("cart", cart);
+        AuthDB.setUserData("savedItems", savedItems);
       }
+
+      /* ── Cart Modal Helpers ── */
+      function openCartModal(id) {
+        document.getElementById(id).classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeCartModal(id) {
+        document.getElementById(id).classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      // Close on backdrop click
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".cart-modal-overlay").forEach(function(el) {
+          el.addEventListener("click", function(e) {
+            if (e.target === el) closeCartModal(el.id);
+          });
+        });
+      });
+
+      function onAuthSuccess(user) {
+        location.reload();
+      }
+    
     </script>
   </body>
 </html>
