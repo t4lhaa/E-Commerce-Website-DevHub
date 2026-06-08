@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="index.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="auth.js"></script>
   </head>
   <body>
     <div id="ui-filter-overlay" class="ui-nav-overlay"></div>
@@ -37,7 +38,7 @@
           <a href="#"><span class="ui-nav-icon">❤️</span> Favorites</a>
         </li>
         <li>
-          <a href="cart.html"><span class="ui-nav-icon">📦</span> My orders</a>
+          <a href="order.html"><span class="ui-nav-icon">📦</span> My orders</a>
         </li>
       </ul>
       <hr class="ui-nav-divider" />
@@ -131,19 +132,14 @@
                 /></svg
               ><span class="ui-label">Profile</span>
             </div>
-            <div class="ui-action-item">
-              <span class="ui-icon"
-                ><i
-                  class="ph-fill ph-chat-teardrop-dots"
-                  style="font-size: 24px"
-                ></i></span
-              ><span class="ui-label">Message</span>
-            </div>
-            <div class="ui-action-item">
-              <span class="ui-icon"
-                ><i class="ph-fill ph-heart" style="font-size: 24px"></i></span
-              ><span class="ui-label">Orders</span>
-            </div>
+            <a href="messages.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-chat-teardrop-dots" style="font-size: 24px;"></i></span>
+            <span class="ui-label"">Message</span>
+          </a>
+            <a href="order.html" class="ui-action-item" style="text-decoration: none; color: inherit;">
+            <span class="ui-icon"><i class="ph-fill ph-heart" style="font-size: 24px;"></i></span>
+            <span class="ui-label">Orders</span>
+          </a>
             <a
               href="cart.html"
               class="ui-action-item"
@@ -1355,7 +1351,14 @@
             btn.addEventListener("click", (e) => {
               e.preventDefault();
 
-              let cart = JSON.parse(localStorage.getItem("cart")) || [];
+              // ── Auth guard ──
+              if (!AuthDB.getCurrentUser()) {
+                showAuthToast('Sign in to add items to your cart');
+                openLoginModal('login');
+                return;
+              }
+
+              let cart = AuthDB.getUserData("cart");
               let existingItem = cart.find((item) => item.id === productId);
 
               if (existingItem) {
@@ -1364,7 +1367,7 @@
                 cart.push({ id: productId, qty: 1 });
               }
 
-              localStorage.setItem("cart", JSON.stringify(cart));
+              AuthDB.setUserData("cart", cart);
 
               // Visual feedback for whichever button was clicked
               btn.innerText = "✓ Added!";
@@ -1388,11 +1391,19 @@
         saveBtns.forEach((btn) => {
           btn.addEventListener("click", function (e) {
             e.preventDefault();
-            let saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+
+            // ── Auth guard ──
+            if (!AuthDB.getCurrentUser()) {
+              showAuthToast('Sign in to save items');
+              openLoginModal('login');
+              return;
+            }
+
+            let saved = AuthDB.getUserData("savedItems");
 
             if (!saved.includes(productId)) {
               saved.push(productId);
-              localStorage.setItem("savedItems", JSON.stringify(saved));
+              AuthDB.setUserData("savedItems", saved);
             }
 
             // Visual Feedback
@@ -1403,6 +1414,10 @@
             }
           });
         });
+
+        function onAuthSuccess(user) {
+          showAuthToast('Signed in as ' + user.name);
+        }
       });
     </script>
   </body>
